@@ -1,0 +1,1026 @@
+,logEvent,labels
+0,onError(): ERestServiceResourceNotFound: No resource found of type 'Channel' with id '',1
+1,buildFromJson(): Error parsing channelInternalProviderData,3
+2,"onError(): com.android.volley.NoConnectionError: java.net.UnknownHostException: Unable to resolve host ""uhd-traxis-api.quickline.ch"": No address associated with hostname",11
+3,"[AppE               ] Process sleep took ms
+",4
+4,"onError(): java.net.UnknownHostException: Unable to resolve host ""uhd-traxis-api.quickline.ch"": No address associated with hostname",2
+5,  Request: GetChannelsRequest,5
+6,ResourceEvaluationCount=: exceeds . Forbidden in production environment.,6
+7,"[TtxServer.HttpServer] InarisTtxsHttpServerSendTeletextResponse
+",10
+8,"onError(): EInvalidSessionId: Invalid parameter 'SessionId', value ''",7
+9,"[CfgM.Configuration  ] Access to unknown property 'serviceManager.cableSpectrumInversion' failed
+",12
+10,setResult(): failed. Future already finished.,38
+11,setResult(result): failed. Future already finished.,8
+12,setFailure(): failed. Future already finished.,22
+13," [AppE               ] Process sleep took ms
+",4
+14,"[AppE.SM            ] PreStartPlayer() failed: Channel unknown.
+",13
+15,"[Osal.File           ] InarisOsalFileOpen: Illegal path 'scanchannels.xml'
+",39
+16,"[Osal.File           ] InarisOsalFileOpen: Illegal path 'sgrp_default.xml'
+",9
+17,"[SM.UrlParser        ] Error at location: .
+",16
+18,tuneChannels(): SM_GET_TS_ID_RESULT_NO_SIGNAL,30
+19,"[SM.UrlParser        ] Parsing DVB URL was not successful: dvb://.
+",15
+20,Failed to copy channel logo from url  to ,21
+21,Tango is not initialized,25
+22,"droppedFrames [., ]",20
+23,onError(): java.net.NoRouteToHostException: No route to host,19
+24,onError(): com.android.volley.NoConnectionError: java.net.ConnectException: Network is unreachable,28
+25,onError(): HTTP Status Code: ,26
+26,Error parsing Titles,33
+27,onError(): null,23
+28,ERROR,29
+29,onError(): com.android.volley.TimeoutError,35
+30,audioSinkUnderrun [],24
+31,"de.tara_systems.quickline.qluhdutils.api.Failure: HomingChannel not detected.
+	at de.tara_systems.quickline_uhd_tvinput.service_area_discovery.ServiceAreaDiscovery$ServiceAreaDiscoveryHandlerThread.createFailure(ServiceAreaDiscovery.java:)
+	at de.tara_systems.quickline_uhd_tvinput.service_area_discovery.ServiceAreaDiscovery$ServiceAreaDiscoveryHandlerThread.tuneHomingChannels(ServiceAreaDiscovery.java:)
+	at de.tara_systems.quickline_uhd_tvinput.service_area_discovery.ServiceAreaDiscovery$ServiceAreaDiscoveryHandlerThread.access$(ServiceAreaDiscovery.java:)
+	at de.tara_systems.quickline_uhd_tvinput.service_area_discovery.ServiceAreaDiscovery$ServiceAreaDiscoveryHandlerThread$.handleMessage(ServiceAreaDiscovery.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+",27
+32,loadSubscriberToken(): java.lang.NullPointerException: Attempt to invoke virtual method 'int java.lang.String.length()' on a null object reference,14
+33,onError(): ENotAuthorized: Customer '' is not authorized to view channel '' [|||||||||||||||||||||],17
+34,load(): Error loading settings from qmc proxy,42
+35,  Request: GetRecordingStatusesRequest,45
+36,tuneChannels(): Failed.,18
+37,"onError(): com.android.volley.NoConnectionError: java.net.UnknownHostException: Unable to resolve host ""uhd-traxis-api.stage.quickline.ch"": No address associated with hostname",11
+38,"The start time is earlier than the time of availability: {startTime: , availability: ",32
+39,"E  ::, [SM.Service          ] No transponder found for unknown service 
+",44
+40,"E  ::, [CfgM.Configuration  ] Access to unknown property 'serviceManager.cableSpectrumInversion' failed
+",12
+41,createContentStreamingSession: Failed to create request.,31
+42,onError(): com.android.volley.NoConnectionError: java.net.NoRouteToHostException: No route to host,19
+43,"release() called, but Proxies not yet destroyed.",37
+44,"de.tara_systems.quickline.qluhdutils.api.Failure: de.tara_systems.quickline.qluhdutils.api.Failure: Request timeout
+	at de.tara_systems.quickline.traxisclient.impl.channel.ChannelsLoader$ChannelsLoaderHandlerThread$.handleMessage(ChannelsLoader.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: de.tara_systems.quickline.qluhdutils.api.Failure: Request timeout
+	at de.tara_systems.quickline.traxisclient.impl.manager.QueueManager.discardExpiredRequests(QueueManager.java:)
+	at de.tara_systems.quickline.traxisclient.impl.manager.QueueManager.access$(QueueManager.java:)
+	at de.tara_systems.quickline.traxisclient.impl.manager.QueueManager$QueueManagerHandlerThread$.handleMessage(QueueManager.java:)
+	...  more
+",50
+45,"Failed to load Channels trying to tune to the first available channel. Error: getChannel(): not found for id=-
+de.tara_systems.quickline.qluhdutils.api.Failure: getChannel(): not found for id=-
+	at de.tara_systems.quickline.tangoclient.impl.channel.ChannelManagerImpl.getChannel(ChannelManagerImpl.java:)
+	at com.android.tv.MainActivity.onChannelsLoaded(MainActivity.java:)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.greenrobot.eventbus.EventBus.invokeSubscriber(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postToSubscription(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postSingleEventForEventType(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postSingleEvent(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.post(EventBus.java:)
+	at com.android.tv.ChannelTuner.setChannelsLoaded(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.onChannelListChanged(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.onProfileLoaded(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.access$(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$.onSuccess(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$.onSuccess(ChannelTuner.java:)
+	at de.tara_systems.quickline.qluhdutils.api.Future.notifyCallbacks(Future.java:)
+	at de.tara_systems.quickline.qluhdutils.api.Future.addCallback(Future.java:)
+	at com.android.tv.ChannelTuner.loadCurrentProfileAsync(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.access$(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$$.run(ChannelTuner.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.app.ActivityThread.main(ActivityThread.java:)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:)
+",36
+46,"E  ::, [Hal.Tuner           ] NEXUS_Frontend_Release
+",34
+47,ENotAuthorized: Customer '' is not authorized to view channel '' [|||||||||||||||||||||],17
+48,onPlayerError(): sourceException=com.google.android.exoplayer.upstream.HttpDataSource$HttpDataSourceException: Unable to connect to  msg=null,41
+49,  Request: GetRecordingsRequest,48
+50,ExoPlayer onLoadError():,43
+51,onBehindLiveWindowException(),47
+52,Error parsing Channel,29
+53,"requestPage(): null, ",23
+54,loadCustomer(): de.tara_systems.quickline.qluhdutils.api.Failure: Request timeout,49
+55,setIsReplayEnabled() not enabled,49
+56,onError(): ENotAuthorized: Customer '' is not authorized to view rollingbuffer '' [InitialStartDateTime=EOutsidePlayableWindow],17
+57,loadSubscriberToken(): java.lang.Throwable: java.lang.NullPointerException: Attempt to invoke virtual method 'int java.lang.String.length()' on a null object reference,14
+58,play() Failed to get customer,49
+59,log(): [SingleSignOn] Error: java.lang.Throwable: java.lang.NullPointerException: Attempt to invoke virtual method 'int java.lang.String.length()' on a null object reference,14
+60,"The start time is earlier than the time of availability: {startTime: -, availability: ",32
+61,"Failed to load Channels trying to tune to the first available channel. Error: getChannel(): not found for id=-
+java.lang.Throwable: getChannel(): not found for id=-
+	at de.tara_systems.quickline.tangoclient.impl.channel.ChannelManagerImpl.getChannel(ChannelManagerImpl.java:)
+	at com.android.tv.MainActivity.onChannelsLoaded(MainActivity.java:)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.greenrobot.eventbus.EventBus.invokeSubscriber(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postToSubscription(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postSingleEventForEventType(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postSingleEvent(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.post(EventBus.java:)
+	at com.android.tv.ChannelTuner.setChannelsLoaded(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.onChannelListChanged(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.onProfileLoaded(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.access$(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$.onSuccess(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$.onSuccess(ChannelTuner.java:)
+	at de.tara_systems.quickline.qluhdutils.api.Future.notifyCallbacks(Future.java:)
+	at de.tara_systems.quickline.qluhdutils.api.Future.addCallback(Future.java:)
+	at com.android.tv.ChannelTuner.loadCurrentProfileAsync(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.access$(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$$.run(ChannelTuner.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.app.ActivityThread.main(ActivityThread.java:)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:)
+",36
+62,"E  ::, [Osal.File           ] InarisOsalFileOpen: Illegal path 'sgrp_default.xml'
+",9
+63,"E  ::, [AppE.SM            ] PreStartPlayer() failed: Channel unknown.
+",13
+64,onError(): java.net.ConnectException: Network is unreachable,28
+65,jsonToTraxisColor(): Color not parsable (blue),49
+66,"E  ::, [Osal.File           ] InarisOsalFileOpen: Illegal path 'scanchannels.xml'
+",39
+67,onPlayerError(): sourceException=com.google.android.exoplayer.upstream.HttpDataSource$InvalidResponseCodeException: Response code:  msg=null,41
+68,log(): [SingleSignOn] Error: de.tara_systems.quickline.qluhdutils.api.Failure: java.lang.Throwable: java.lang.NullPointerException: Attempt to invoke virtual method 'int java.lang.String.length()' on a null object reference,14
+69,loadSettingFromQmcProxy(): com.android.volley.NoConnectionError: javax.net.ssl.SSLHandshakeException: java.security.cert.CertPathValidatorException: Trust anchor for certification path not found.,46
+70,"java.lang.Throwable: Error setting homing channel
+	at de.tara_systems.quickline_uhd_tvinput.service_area_discovery.ServiceAreaDiscovery$ServiceAreaDiscoveryHandlerThread.finishFailure(ServiceAreaDiscovery.java:)
+	at de.tara_systems.quickline_uhd_tvinput.service_area_discovery.ServiceAreaDiscovery$ServiceAreaDiscoveryHandlerThread.access$(ServiceAreaDiscovery.java:)
+	at de.tara_systems.quickline_uhd_tvinput.service_area_discovery.ServiceAreaDiscovery$ServiceAreaDiscoveryHandlerThread$.handleMessage(ServiceAreaDiscovery.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+",27
+71,Uri= wasCanceled=false,49
+72,"Expected empty response body, but body is not empty.",40
+73,Media: elapsedRealTimeMs= loadDurationMs= bytesLoaded=,49
+74,onPlayerError(): sourceException=com.google.android.exoplayer.source.BehindLiveWindowException msg=null,41
+75,onError(): ENotAuthorized: Customer '' is not authorized to view channel '' [||||||],17
+76,ENotAuthorized: Customer '' is not authorized to view rollingbuffer '' [InitialStartDateTime=EOutsidePlayableWindow],17
+77,onError(): com.android.volley.NoConnectionError: javax.net.ssl.SSLHandshakeException: Handshake failed,46
+78,loadChannelsOttPaged(): Request timeout,49
+79,loadCustomer(): java.lang.Throwable: Request timeout,49
+80,"E  ::, [Hal.Tuner           ] InarisHalTunerBroadcomDestroy
+",34
+81,"de.tara_systems.quickline.qluhdutils.api.Failure
+	at de.tara_systems.quickline.qluhdutils.api.SyncedFuture.awaitCountDownLatch(SyncedFuture.java:)
+	at de.tara_systems.quickline.qluhdutils.api.SyncedFuture.awaitSeconds(SyncedFuture.java:)
+	at de.tara_systems.quickline_uhd_tvinput.traxis_content_manager.ChannelManager.manageChannels(ChannelManager.java:)
+	at de.tara_systems.quickline_uhd_tvinput.traxis_content_manager.ChannelProgramUpdater.manageChannels(ChannelProgramUpdater.java:)
+	at de.tara_systems.quickline_uhd_tvinput.traxis_content_manager.ChannelProgramUpdater.update(ChannelProgramUpdater.java:)
+	at de.tara_systems.quickline_uhd_tvinput.traxis_content_manager.ChannelProgramUpdaterThread$ChannelProgramUpdaterRunnable.run(ChannelProgramUpdaterThread.java:)
+	at java.lang.Thread.run(Thread.java:)
+",50
+82,onError(): java.net.SocketException: Network is unreachable,28
+83,loadSettingFromQmcProxy(): null,23
+84,ENotAuthorized: Customer '' is not authorized to view channel '' [||||||],17
+85,selectComponent(): Could not getCurrentTrackGroups,49
+86,log(): [SingleSignOn] Error: de.tara_systems.quickline.qluhdutils.api.Failure: java.lang.Throwable: [invalid_request] Zu viele anmeldeversuche,49
+87,Error while loading ssoProfiles,49
+88,Error while updating profile,49
+89,loadSubscriberToken(): [invalid_request] Zu viele anmeldeversuche,49
+90,setHomingChannel(): Error setting homing channel at backend,49
+91,loadSettingFromQmcProxy(): com.android.volley.ClientError,46
+92,"onPlayerError(): sourceException=com.google.android.exoplayer.ParserException: Couldn't match NAME=""(.+?)"" in #EXT-X-MEDIA:URI=""(start=_stop=).mu"",TYPE=AUDIO,GROUP-ID=""MPEG- AAC -  kbps -  kHz - "",LANGUAGE=""en"",NAME="""",DEFAULT=YES,DEFAULT=YES msg=null",41
+93,loadTraxisProfileData(): Request timeout,49
+94,loadSubscriberToken(): java.lang.Throwable: [invalid_request] Zu viele anmeldeversuche,49
+95,onError(): ENotAuthorized: Customer '' is not authorized to view channel '' [|||],17
+96,onError(): com.android.volley.NoConnectionError: java.net.SocketException: Software caused connection abort,46
+97,loadSubscriberToken(): Error receiving subscriber token,49
+98,log(): [SingleSignOn] Error: java.lang.Throwable: [invalid_grant] Falscher PIN. Bitte versuchen Sie es erneut.,49
+99,playerFailed [.]com.google.android.exoplayer.ExoPlaybackException,41
+100,onError(): com.android.volley.ClientError,46
+101,onError(): ERecordingManagement: Event '' is already recorded with id '',49
+102,ENotAuthorized: Customer '' is not authorized to view channel '' [|||],17
+103,"[SM.Recorder         ] Cannot start timeshift recording: Sink is missing
+",49
+104,onError(): ENotAuthorized: Customer '' is not authorized to view channel '' [||],17
+105,"loadSettingFromQmcProxy(): com.android.volley.NoConnectionError: java.net.UnknownHostException: Unable to resolve host ""geneva.ambrite.ch"": No address associated with hostname",46
+106,"failed to save profile
+de.tara_systems.quickline.qluhdutils.api.Failure: Error while updating profile
+	at de.tara_systems.quickline.traxisclient.impl.profile.ProfileUpdater$ProfileUpdaterHandlerThread$.handleMessage(ProfileUpdater.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+",50
+107,log(): [SingleSignOn] Error: de.tara_systems.quickline.qluhdutils.api.Failure: java.lang.Throwable: [invalid_grant] Die Anmeldung ist fehlgeschlagen (Benutzername oder Passwort falsch),49
+108,parseSettingsFromJsonString(),49
+109,loadSubscriberToken(): [invalid_grant] Die Anmeldung ist fehlgeschlagen (Benutzername oder Passwort falsch),49
+110,"de.tara_systems.quickline.qluhdutils.api.Failure: Error while loading ssoProfiles
+	at de.tara_systems.quickline.traxisclient.impl.profile.ProfilesLoader$ProfilesLoaderHandlerThread$.handleMessage(ProfilesLoader.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+",50
+111,ENotAuthorized: Customer '' is not authorized to view channel '' [|||||||],17
+112,loadSubscriberToken(): java.lang.Throwable: [invalid_grant] Die Anmeldung ist fehlgeschlagen (Benutzername oder Passwort falsch),49
+113,onError(): ENotAuthorized: Customer '' is not authorized to view channel '' [|||||||],17
+114,"java.lang.Throwable: Error while loading ssoProfiles
+	at de.tara_systems.quickline.traxisclient.impl.profile.ProfilesLoader$ProfilesLoaderHandlerThread$.handleMessage(ProfilesLoader.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+",50
+115,ENotAuthorized: Customer '' is not authorized to view channel '' [||],17
+116,resume() ignored. Called in state: PLAYING,49
+117,smPlayer.start() failed,49
+118,"onError(): com.android.volley.NoConnectionError: java.net.UnknownHostException: Unable to resolve host ""login-api-trust.quickline.ch"": No address associated with hostname",11
+119,"onFailure() com.android.volley.NoConnectionError: java.net.UnknownHostException: Unable to resolve host ""login-api-trust.quickline.ch"": No address associated with hostname",11
+120,onError(): java.net.SocketException: Software caused connection abort,46
+121,"failed to save profile
+java.lang.Throwable: Error while updating profile
+	at de.tara_systems.quickline.traxisclient.impl.profile.ProfileUpdater$ProfileUpdaterHandlerThread$.handleMessage(ProfileUpdater.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+",50
+122,loadSettingFromQmcProxy(): com.android.volley.ServerError,46
+123,"java.net.UnknownHostException: Unable to resolve host ""uhd-traxis-api.quickline.ch"": No address associated with hostname",2
+124,"de.tara_systems.quickline.qluhdutils.api.Failure: com.android.volley.NoConnectionError: java.net.UnknownHostException: Unable to resolve host ""login-api-trust.quickline.ch"": No address associated with hostname",11
+125,"onError(): com.android.volley.NoConnectionError: javax.net.ssl.SSLException: Read error: ssl: I/O error during system call, Software caused connection abort",46
+126,"onError(): javax.net.ssl.SSLException: Read error: ssl: I/O error during system call, Connection reset by peer",46
+127,Uri= wasCanceled=true,49
+128,onError(): EQuotaExceeded: Recording quota of customer '' exceeded,49
+129,"log(): [SingleSignOn] Error: java.lang.Throwable: java.net.UnknownHostException: Unable to resolve host ""login-api.quickline.ch"": No address associated with hostname",49
+130,"log(): [SingleSignOn] Error: de.tara_systems.quickline.qluhdutils.api.Failure: java.net.UnknownHostException: Unable to resolve host ""login-api.quickline.ch"": No address associated with hostname",49
+131,jsonToTraxisColor(): Color not parsable (turkis),49
+132,"[Hal.Tuner           ] Can not find tuner
+",34
+133,Cannot manage channels. A list is null.,49
+134,onFailure() com.android.volley.NoConnectionError: javax.net.ssl.SSLHandshakeException: Handshake failed,46
+135,getPositionInLive() live: position!=null && resumeTimeLiveStream==null and player is playing... ,49
+136,de.tara_systems.quickline.qluhdutils.api.Failure: com.android.volley.NoConnectionError: javax.net.ssl.SSLHandshakeException: Handshake failed,46
+137,"de.tara_systems.quickline.qluhdutils.api.Failure: Error while loading ssoProfiles
+	at de.tara_systems.quickline.traxisclient.impl.profile.StbProfilesLoader$ProfilesLoaderHandlerThread$.handleMessage(StbProfilesLoader.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+",50
+138,"[TtxServer.HttpServer] Connection not alive
+
+",49
+139,"[Hal.Tuner           ] InarisHalTunerBroadcomDestroy
+",34
+140,"[Hal                 ] Cannot open BroadcomTuner 
+",49
+141,"E  ::, [AppE               ] Process sleep took ms
+",4
+142,onError(): ENotAuthorized: Customer '' is not authorized to view channel '' [||||],17
+143,de.tara_systems.quickline.qluhdutils.api.Failure: com.android.volley.TimeoutError,35
+144,ENotAuthorized: Customer '' is not authorized to view channel '' [||||],17
+145,"Booking recording failed for Love and Hate Crime
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+146,onTimeShiftPlay(): contentId is null ,49
+147,jsonToTraxisColor(): Color not parsable (gold),49
+148,com.android.volley.TimeoutError,35
+149,Request timeout,49
+150,"Failed to load Channels trying to tune to the first available channel. Error: getChannel(): not found for id=
+java.lang.Throwable: getChannel(): not found for id=
+	at de.tara_systems.quickline.tangoclient.impl.channel.ChannelManagerImpl.getChannel(ChannelManagerImpl.java:)
+	at com.android.tv.MainActivity.onChannelsLoaded(MainActivity.java:)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.greenrobot.eventbus.EventBus.invokeSubscriber(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postToSubscription(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postSingleEventForEventType(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postSingleEvent(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.post(EventBus.java:)
+	at com.android.tv.ChannelTuner.setChannelsLoaded(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.onChannelListChanged(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.onProfileLoaded(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.access$(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$.onSuccess(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$.onSuccess(ChannelTuner.java:)
+	at de.tara_systems.quickline.qluhdutils.api.Future.notifyCallbacks(Future.java:)
+	at de.tara_systems.quickline.qluhdutils.api.Future.addCallback(Future.java:)
+	at com.android.tv.ChannelTuner.loadCurrentProfileAsync(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.access$(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$$.run(ChannelTuner.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.app.ActivityThread.main(ActivityThread.java:)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:)
+",36
+151,"onPlayerError(): sourceException=com.google.android.exoplayer.ParserException: Couldn't match NAME=""(.+?)"" in #EXT-X-MEDIA:URI=""_HLS(start=_stop=)_(start=_stop=).mu"",TYPE=AUDIO,GROUP-ID=""MPEG- AAC -  kbps -  kHz - "",LANGUAGE=""en"",NAME="""",DEFAULT=YES,DEFAULT=YES msg=null",41
+152,onFailure() com.android.volley.VolleyError: java.lang.NullPointerException: Attempt to invoke virtual method 'int java.lang.String.length()' on a null object reference,14
+153,onError(): com.android.volley.VolleyError: java.lang.NullPointerException: Attempt to invoke virtual method 'int java.lang.String.length()' on a null object reference,14
+154,onError(): ERecordingManagement: Unable to cancel a network recording of type Event,49
+155,"onError(): EInvalidSTBId: Invalid parameter 'StbId', value 'BBFFFFFF'",49
+156,"loadTraxisProfiles(): EInvalidSTBId: Invalid parameter 'StbId', value 'ACFC'",49
+157,loadSubscriberToken(): com.android.volley.VolleyError: java.lang.NullPointerException: Attempt to invoke virtual method 'int java.lang.String.length()' on a null object reference,14
+158,de.tara_systems.quickline.ssoclient.impl.requests.SsoError: [invalid_request] Ein Fehler ist aufgetreten,49
+159,"de.tara_systems.quickline.qluhdutils.api.Failure: de.tara_systems.quickline.qluhdutils.api.Failure: com.android.volley.TimeoutError
+	at de.tara_systems.quickline.traxisclient.impl.channel.ChannelsLoader$ChannelsLoaderHandlerThread$.handleMessage(ChannelsLoader.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: de.tara_systems.quickline.qluhdutils.api.Failure: com.android.volley.TimeoutError
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	...  more
+Caused by: com.android.volley.TimeoutError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+160,"com.android.volley.NoConnectionError: java.net.UnknownHostException: Unable to resolve host ""uhd-traxis-api.quickline.ch"": No address associated with hostname",11
+161,"[Hal.Tuner           ] NEXUS_Frontend_Release
+",34
+162,"Booking recording failed for Rote Rosen
+java.lang.Throwable: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ServerError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+163,onPlayerError(): sourceException=com.google.android.exoplayer.upstream.HttpDataSource$HttpDataSourceException: java.net.SocketTimeoutException: timeout msg=null,41
+164,onFailure() com.android.volley.TimeoutError,35
+165,onError(): invalid_grant:  [invalid_token],49
+166,"onError(): com.android.volley.NoConnectionError: javax.net.ssl.SSLException: Read error: ssl: I/O error during system call, Connection reset by peer",46
+167,onError(): ENotAuthorized: Profile '' does not belong to customer '',49
+168,onError(): ENotAuthorized: Customer '' is not authorized to view channel '' [||||||||||||||||||||],17
+169,onError(): ENotAuthorized: Customer '' is not authorized to view channel '' [||||||||],17
+170,"onError(): EInvalidSTBId: Invalid parameter 'StbId', value 'ACFC'",49
+171,log(): [SingleSignOn] Error: de.tara_systems.quickline.qluhdutils.api.Failure: javax.net.ssl.SSLHandshakeException: Handshake failed,46
+172,log(): [SingleSignOn] Error: de.tara_systems.quickline.qluhdutils.api.Failure: java.lang.Throwable: javax.net.ssl.SSLHandshakeException: Handshake failed,46
+173,loadProfileToken(): Error receiving profile token,49
+174,loadCustomer(): java.lang.Throwable: ENotAuthorized: Profile '' does not belong to customer '',49
+175,loadChannelLocations(): de.tara_systems.quickline.qluhdutils.api.Failure: Request timeout,49
+176,"[SM.Service          ] No transponder found for unknown service 
+",44
+177,"Booking recording failed for Schätze des Südwestens
+java.lang.Throwable: EQuotaExceeded: Recording quota of customer '' exceeded
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ServerError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+178,onFailure() invalid_grant:  [invalid_token],49
+179,onError(): com.android.volley.VolleyError: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String de.tara_systems.quickline_uhd_tvinput.tv_provider_adapter.Channel.getSeaChangeId()' on a null object reference,14
+180,onError(): com.android.volley.NetworkError,49
+181,"onError(): EInvalidParameter: Invalid parameter 'RollingBufferInitialStartDateTime', value '---T::Z'",49
+182,"onError(): EInvalidEventId: Invalid parameter 'EventId', value ''",49
+183,log(): [SingleSignOn] Error: java.lang.Throwable: java.net.NoRouteToHostException: No route to host,19
+184,"loadTraxisProfiles(): EInvalidSTBId: Invalid parameter 'StbId', value 'BBFFFFFF'",49
+185,loadSubscriberToken(): javax.net.ssl.SSLHandshakeException: Handshake failed,46
+186,loadSubscriberProfiles(): Error receiving ssoProfiles(),49
+187,"loadChannelsOttPaged(): com.android.volley.NoConnectionError: javax.net.ssl.SSLException: Read error: ssl: I/O error during system call, Software caused connection abort",46
+188,"java.net.BindException: Address already in use
+	at java.net.PlainDatagramSocketImpl.bind(Native Method)
+	at java.net.AbstractPlainDatagramSocketImpl.bind(AbstractPlainDatagramSocketImpl.java:)
+	at java.net.DatagramSocket.bind(DatagramSocket.java:)
+	at java.net.DatagramSocket.<init>(DatagramSocket.java:)
+	at java.net.DatagramSocket.<init>(DatagramSocket.java:)
+	at de.tara_systems.quickline_uhd_dvbserver.DvbServerLogReceiver$DvbServerLogReceiverRunnable.run(DvbServerLogReceiver.java:)
+	at java.lang.Thread.run(Thread.java:)
+",49
+189,deleteRecordings(filter): Failed to create request.,49
+190,de.tara_systems.quickline.qluhdutils.api.Failure: invalid_grant:  [invalid_token],49
+191,"de.tara_systems.quickline.qluhdutils.api.Failure: de.tara_systems.quickline.qluhdutils.api.Failure: com.android.volley.NoConnectionError: javax.net.ssl.SSLException: Read error: ssl: I/O error during system call, Software caused connection abort
+	at de.tara_systems.quickline.traxisclient.impl.channel.ChannelsLoader$ChannelsLoaderHandlerThread$.handleMessage(ChannelsLoader.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: de.tara_systems.quickline.qluhdutils.api.Failure: com.android.volley.NoConnectionError: javax.net.ssl.SSLException: Read error: ssl: I/O error during system call, Software caused connection abort
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	...  more
+Caused by: com.android.volley.NoConnectionError: javax.net.ssl.SSLException: Read error: ssl: I/O error during system call, Software caused connection abort
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+Caused by: javax.net.ssl.SSLException: Read error: ssl: I/O error during system call, Software caused connection abort
+	at com.android.org.conscrypt.NativeCrypto.SSL_read(Native Method)
+	at com.android.org.conscrypt.OpenSSLSocketImpl$SSLInputStream.read(OpenSSLSocketImpl.java:)
+	at com.android.okhttp.okio.Okio$.read(Okio.java:)
+	at com.android.okhttp.okio.AsyncTimeout$.read(AsyncTimeout.java:)
+	at com.android.okhttp.okio.RealBufferedSource.indexOf(RealBufferedSource.java:)
+	at com.android.okhttp.okio.RealBufferedSource.indexOf(RealBufferedSource.java:)
+	at com.android.okhttp.okio.RealBufferedSource.readUtfLineStrict(RealBufferedSource.java:)
+	at com.android.okhttp.internal.http.HttpConnection.readResponse(HttpConnection.java:)
+	at com.android.okhttp.internal.http.HttpTransport.readResponseHeaders(HttpTransport.java:)
+	at com.android.okhttp.internal.http.HttpEngine.readNetworkResponse(HttpEngine.java:)
+	at com.android.okhttp.internal.http.HttpEngine.readResponse(HttpEngine.java:)
+	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.execute(HttpURLConnectionImpl.java:)
+	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getResponse(HttpURLConnectionImpl.java:)
+	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getResponseCode(HttpURLConnectionImpl.java:)
+	at com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getResponseCode(DelegatingHttpsURLConnection.java:)
+	at com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java)
+	at com.google.firebase.perf.network.zze.getResponseCode(Unknown Source)
+	at com.google.firebase.perf.network.zzd.getResponseCode(Unknown Source)
+	at com.android.volley.toolbox.HurlStack.executeRequest(HurlStack.java:)
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	...  more
+",50
+192,"[TtxServer           ] InarisTtxsMwExtensionInit(): failed
+",49
+193,"Failed to load Channels trying to tune to the first available channel. Error: getChannel(): not found for id=
+de.tara_systems.quickline.qluhdutils.api.Failure: getChannel(): not found for id=
+	at de.tara_systems.quickline.tangoclient.impl.channel.ChannelManagerImpl.getChannel(ChannelManagerImpl.java:)
+	at com.android.tv.MainActivity.onChannelsLoaded(MainActivity.java:)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.greenrobot.eventbus.EventBus.invokeSubscriber(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postToSubscription(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postSingleEventForEventType(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.postSingleEvent(EventBus.java:)
+	at org.greenrobot.eventbus.EventBus.post(EventBus.java:)
+	at com.android.tv.ChannelTuner.setChannelsLoaded(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.onChannelListChanged(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.onProfileLoaded(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.access$(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$.onSuccess(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$.onSuccess(ChannelTuner.java:)
+	at de.tara_systems.quickline.qluhdutils.api.Future.notifyCallbacks(Future.java:)
+	at de.tara_systems.quickline.qluhdutils.api.Future.addCallback(Future.java:)
+	at com.android.tv.ChannelTuner.loadCurrentProfileAsync(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner.access$(ChannelTuner.java:)
+	at com.android.tv.ChannelTuner$$.run(ChannelTuner.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.app.ActivityThread.main(ActivityThread.java:)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:)
+",36
+194,"Booking recording failed for Olympische Winterspiele Pyeongchang 
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+195,"Booking recording failed for Olympische Winterspiele Pyeongchang 
+de.tara_systems.quickline.qluhdutils.api.Failure: EInvalidEventId: Invalid parameter 'EventId', value ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+196,"Booking recording failed for Mediashop
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+197,"Booking recording failed for Der Darß – Küste der Kraniche
+java.lang.Throwable: EQuotaExceeded: Recording quota of customer '' exceeded
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ServerError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+198,onPlayerError(): sourceException=com.google.android.exoplayer.source.hls.playlist.HlsPlaylistTracker$PlaylistStuckException msg=null,41
+199,"onPlayerError(): sourceException=com.google.android.exoplayer.ParserException: Couldn't match NAME=""(.+?)"" in #EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID=""MPEG- AAC -  kbps -  kHz - "",NAME="""",DEFAULT=YES,DEFAULT=YES msg=null",41
+200,onFailure() invalid_request:  [Ein Fehler ist aufgetreten],49
+201,onFailure() com.android.volley.NoConnectionError: java.net.ConnectException: Network is unreachable,28
+202,onError(): invalid_request:  [Ein Fehler ist aufgetreten],49
+203,"onError(): com.android.volley.NoConnectionError: javax.net.ssl.SSLProtocolException: Read error: ssl: Failure in SSL library, usually a protocol error
+error::SSL routines:OPENSSL_internal:SSLV_ALERT_HANDSHAKE_FAILURE (external/boringssl/src/ssl/s_pkt.c: xcfe:x)
+error:a:SSL routines:OPENSSL_internal:HANDSHAKE_FAILURE_ON_CLIENT_HELLO (external/boringssl/src/ssl/s_clnt.c: xaa:x)
+error:d:SSL routines:OPENSSL_internal:SSL_HANDSHAKE_FAILURE (external/boringssl/src/ssl/s_pkt.c: xaa:x)",49
+204,"onError(): com.android.volley.NoConnectionError: java.net.UnknownHostException: Unable to resolve host ""login-api.quickline.ch"": No address associated with hostname",11
+205,"onError(): Error:  [one or more of the properties are not valid. Check  property errors dictionary for Details. Fields with Error: Username - Falsches Format. Der Benutzername darf nur Kleinbuchstaben, Zahlen, ""."", ""-"" u. ""\"" enthalten. Errors, Nickname - Falsches Format. Der Nickname darf nur Klein-, Grossbuchstaben, Zahlen und ""-"" enthalten. Errors]",49
+206,onError(): Error:  [one or more of the properties are not valid. Check  property errors dictionary for Details. Fields with Error:  - Ungültiges Mobile-Nummerformat Errors],49
+207,onError(): ERestServiceResourceNotFound: No resource found of type 'Recording' with id '',49
+208,log(): [SingleSignOn] Error: java.lang.Throwable: javax.net.ssl.SSLHandshakeException: Handshake failed,46
+209,"log(): [SingleSignOn] Error: de.tara_systems.quickline.qluhdutils.api.Failure: java.net.UnknownHostException: Unable to resolve host ""login-api.stage.quickline.ch"": No address associated with hostname",49
+210,log(): [SingleSignOn] Error: de.tara_systems.quickline.qluhdutils.api.Failure: java.net.ConnectException: Network is unreachable,28
+211,log(): [SingleSignOn] Error: de.tara_systems.quickline.qluhdutils.api.Failure: [invalid_grant] Falscher PIN. Bitte versuchen Sie es erneut.,49
+212,log(): [SingleSignOn] Error: de.tara_systems.quickline.qluhdutils.api.Failure,49
+213,loadSubscriberToken(): java.lang.Throwable: javax.net.ssl.SSLHandshakeException: Handshake failed,46
+214,loadProfileManagementToken(): null,49
+215,loadCustomer(): de.tara_systems.quickline.qluhdutils.api.Failure: com.android.volley.TimeoutError,49
+216,loadChannelsOttPaged(): null,23
+217,loadChannelsOttPaged(): com.android.volley.TimeoutError,35
+218,loadChannelsOttPaged(): com.android.volley.NoConnectionError: java.net.ConnectException: Network is unreachable,28
+219,loadChannelLocations(): java.lang.Throwable: Request timeout,49
+220,java.net.ConnectException: Network is unreachable,28
+221,de.tara_systems.quickline.qluhdutils.api.Failure: invalid_request:  [Ein Fehler ist aufgetreten],49
+222,de.tara_systems.quickline.qluhdutils.api.Failure: com.android.volley.NoConnectionError: java.net.ConnectException: Network is unreachable,28
+223,"de.tara_systems.quickline.qluhdutils.api.Failure: Failed to set homing channel at the backend.
+	at de.tara_systems.quickline_uhd_tvinput.service_area_discovery.ServiceAreaDiscovery$ServiceAreaDiscoveryHandlerThread.createFailure(ServiceAreaDiscovery.java:)
+	at de.tara_systems.quickline_uhd_tvinput.service_area_discovery.ServiceAreaDiscovery$ServiceAreaDiscoveryHandlerThread.tuneHomingChannels(ServiceAreaDiscovery.java:)
+	at de.tara_systems.quickline_uhd_tvinput.service_area_discovery.ServiceAreaDiscovery$ServiceAreaDiscoveryHandlerThread.access$(ServiceAreaDiscovery.java:)
+	at de.tara_systems.quickline_uhd_tvinput.service_area_discovery.ServiceAreaDiscovery$ServiceAreaDiscoveryHandlerThread$.handleMessage(ServiceAreaDiscovery.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+",27
+224,"de.tara_systems.quickline.qluhdutils.api.Failure
+	at de.tara_systems.quickline.qluhdutils.api.SyncedFuture.awaitCountDownLatch(SyncedFuture.java:)
+	at de.tara_systems.quickline.qluhdutils.api.SyncedFuture.awaitSeconds(SyncedFuture.java:)
+	at de.tara_systems.quickline_uhd_tvinput.traxis_content_manager.ChannelManager.manageTraxisChannels(ChannelManager.java:)
+	at de.tara_systems.quickline_uhd_tvinput.traxis_content_manager.ChannelManager.manageChannels(ChannelManager.java:)
+	at de.tara_systems.quickline_uhd_tvinput.traxis_content_manager.ChannelProgramUpdater.manageChannels(ChannelProgramUpdater.java:)
+	at de.tara_systems.quickline_uhd_tvinput.traxis_content_manager.ChannelProgramUpdater.update(ChannelProgramUpdater.java:)
+	at de.tara_systems.quickline_uhd_tvinput.traxis_content_manager.ChannelProgramUpdaterThread$ChannelProgramUpdaterRunnable.run(ChannelProgramUpdaterThread.java:)
+	at java.lang.Thread.run(Thread.java:)
+",50
+225,"[Osal.Socket         ] InarisOsalSocketOsBind error: 
+
+",49
+226,"[Osal.Memory         ] The given item was already freed
+",49
+227,"[Osal.Memory         ] Cannot free memory block. Freed twice? Freed: ../../../Source/InarisTIpcDispatcher.c(Line )
+",49
+228,"[MwIpcServer.SmServic] IpcReplyFromComponentList(): error
+",49
+229,"[MwIpcServer         ] InarisIpcServerStart() failed
+",49
+230,"[Ipc.Server          ] Failed to bind server socket  to InarisMwIpc
+",49
+231,Failed to applyBatch data. Transaction failed on small parcel; remote process probably died,49
+232,ENotAuthorized: Customer '' is not authorized to view channel '' [||||||||||||||||||||],17
+233,ENotAuthorized: Customer '' is not authorized to view channel '' [||||||||],17
+234,"E  ::, [Hal.Tuner           ] Can not find tuner
+",34
+235,"E  ::, [Hal                 ] Cannot open BroadcomTuner 
+",49
+236,"Booking recording failed for Westpol
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+237,"Booking recording failed for Verrückt nach Meer
+java.lang.Throwable: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ServerError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+238,"Booking recording failed for The Transporter Refueled
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+239,"Booking recording failed for Tatort
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+240,"Booking recording failed for Suits
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+241,"Booking recording failed for Sturm der Liebe
+java.lang.Throwable: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ServerError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+242,"Booking recording failed for Steve Jobs
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+243,"Booking recording failed for Snap
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+244,"Booking recording failed for Shutter Island
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+245,"Booking recording failed for Schloss Einstein
+java.lang.Throwable: EQuotaExceeded: Recording quota of customer '' exceeded
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ServerError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+246,"Booking recording failed for SOKO Leipzig
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+247,"Booking recording failed for Rote Rosen
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+248,"Booking recording failed for Mise au point
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+249,"Booking recording failed for McLeods Töchter
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+250,"Booking recording failed for Kiss & Kill
+java.lang.Throwable: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ServerError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+251,"Booking recording failed for Hubert und Staller
+java.lang.Throwable: EQuotaExceeded: Recording quota of customer '' exceeded
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ServerError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+252,"Booking recording failed for How I Met Your Mother
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+253,"Booking recording failed for Fußball: Bundesliga - Live!
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+254,"Booking recording failed for Eishockey: Svenska Hockeyligan - Live!
+de.tara_systems.quickline.qluhdutils.api.Failure: EQuotaExceeded: Recording quota of customer '' exceeded
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+255,"Booking recording failed for Eishockey: National League - Wiederholung
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+256,"Booking recording failed for Cuochi d'artificio
+java.lang.Throwable: EQuotaExceeded: Recording quota of customer '' exceeded
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ServerError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+257,"Booking recording failed for CH Musik – Ein ganzer Tag
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+258,"Booking recording failed for ARD-Buffet
+de.tara_systems.quickline.qluhdutils.api.Failure: ERecordingManagement: Event '' is already recorded with id ''
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisErrorParser.parse(TraxisErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.ResponseErrorParser.parse(ResponseErrorParser.java:)
+	at de.tara_systems.quickline.traxisclient.impl.requests.TraxisRequestNew.onError(TraxisRequestNew.java:)
+	at de.tara_systems.quickline.ssoclient.http_client.impl.VolleyRequest$HttpRequestAdapter.onErrorResponse(VolleyRequest.java:)
+	at com.android.volley.Request.deliverError(Request.java:)
+	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:)
+	at android.os.Handler.handleCallback(Handler.java:)
+	at android.os.Handler.dispatchMessage(Handler.java:)
+	at android.os.Looper.loop(Looper.java:)
+	at android.os.HandlerThread.run(HandlerThread.java:)
+Caused by: com.android.volley.ClientError
+	at com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:)
+	at com.android.volley.NetworkDispatcher.processRequest(NetworkDispatcher.java:)
+	at com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:)
+",50
+259," [SM.Recorder         ] Cannot start timeshift recording: Sink is missing
+",49

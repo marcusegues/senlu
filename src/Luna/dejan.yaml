@@ -1,0 +1,179 @@
+openapi: "3.0.0"
+info:
+  version: 0.1-alpha
+  title: Dumbledore
+  description: |
+    This is the documentation of the interface service to the Sentinel Knowledge Graph.
+    # Introduction
+    This API is documented in **OpenAPI format**.
+    # Graph Browser
+    An interactive browser for directly accessing the graph database is available [here](https://dumbledore-dot-ql-sen-stag.appspot.com/browser).
+    # Cross-Origin Resource Sharing
+    This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with  [W3C spec](https://www.w3.org/TR/cors/).
+    And that allows cross-domain communication from the browser.
+    All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.
+    # Authentication
+    Dumbledore offers two forms of authentication:
+      - API Key
+      - OAuth2
+    OAuth2 - an open protocol to allow secure authorization in a simple
+    and standard method from web, mobile and desktop applications.
+    <!-- ReDoc-Inject: <security-definitions> -->
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: ambrite AG
+    email: dejan@ambrite.ch
+    url: http://ambrite.ch
+  x-logo:
+    url: https://dumbledore-dot-ql-sen-stag.appspot.com/doc/dumbledore.png
+servers:
+  - url: dumbledore-dot-ql-sen-stag.appspot.com
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+security:
+  - api_key: []
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: key
+    in: query
+paths:
+  /deviceList/{function}:
+    get:
+      description: Retrieves a back-end device list for a specified function
+      operationId: deviceList
+      tags:
+        - System (TV Head-end)
+      parameters:
+        - name: function
+          in: path
+          required: true
+          description: The name of the function/user service
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success.
+          schema:
+            type: array
+            items:
+              type: string
+        '404':
+          description: Missing parameter.
+  /customerDegradation:
+    get:
+      description: List all customer degradations currently being experienced (ongoing problems)
+      operationId: customerDegradation
+      tags:
+        - Customer facing
+      parameters:
+        -
+          name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/components/schemas/function"
+      responses:
+        '200':
+          description: Success.
+          schema:
+            $ref: "#/components/schemas/deviceList"
+        '404':
+          description: Missing parameter.
+#    post:
+#      description: Attach a degradation to a customer
+#      operationId: customerDegradation
+#      tags:
+#        - Customer facing
+#      parameters:
+#        -
+#          name: body
+#          in: body
+#          required: true
+#          schema:
+#            $ref: "#/components/schemas/function"
+#      responses:
+#        '200':
+#          description: Success.
+#          schema:
+#            $ref: "#/components/schemas/deviceList"
+#        '404':
+#          description: Missing parameter.
+  /customerDegradation{MACAddress}:
+    get:
+      description: Retrieves a list of degradations currently affecting the specified customer
+      operationId: customerDegradation
+      tags:
+        - Customer facing
+      parameters:
+        -
+          name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/components/schemas/function"
+      responses:
+        '200':
+          description: Success.
+          schema:
+            $ref: "#/components/schemas/deviceList"
+        '404':
+          description: Missing parameter.
+  /systemDegradation:
+#    get:
+#      description: Retrieves a list of ongoing degradations in the TV head end.
+#      operationId: systemDegradation
+#      tags:
+#        - System (TV Head-end)
+#      parameters:
+#        -
+#          name: body
+#          in: body
+#          required: true
+#          schema:
+#            $ref: "#/components/schemas/function"
+#      responses:
+#        '200':
+#          description: Success.
+#          schema:
+#            $ref: "#/components/schemas/deviceList"
+#        '404':
+#          description: Missing parameter.
+    post:
+      description: Store a degradation in the TV head end
+      operationId: systemDegradation
+      tags:
+        - System (TV Head-end)
+      requestBody:
+        description: Degradation to add to the system
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/degradation'
+      responses:
+        '200':
+          description: Success.
+          schema:
+            $ref: "#/components/schemas/deviceList"
+        '404':
+          description: Missing parameter.
+components:
+  schemas:
+    function:
+      type: string
+    deviceList:
+      type: array
+      items:
+        type: string
+    degradation:
+      required:
+        - label
+      properties:
+        label:
+          type: string

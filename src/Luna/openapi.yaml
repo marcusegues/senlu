@@ -1,0 +1,86 @@
+openapi: "3.0.0"
+info:
+  version: 0.1-alpha
+  title: hermione
+  description: |
+    This is the documentation of the interface service to the UHD log error classifier.
+    # Introduction
+    This API is documented in **OpenAPI format**.
+    <!-- ReDoc-Inject: <security-definitions> -->
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: ambrite AG
+    email: francois@ambrite.ch
+    url: http://ambrite.ch
+servers:
+  - url: hermione-dot-ql-sen-stag.appspot.com
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+security:
+  - api_key: []
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: key
+    in: query
+
+paths:
+  /get_incident_probs:
+    post:
+      description: Assign probabilities to corresponding JIRA incidents in the system.
+      operationId: get_incident_probs
+      tags:
+        - UHD Error Logs
+      parameters:
+      - name: free_text
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The given input text by the user.
+      - name: error_code
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The corresponding Error code identified by TED.
+      - name: mac
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The MAC address of the affected client device.
+      - name: timespan_start
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The start of the relevant timespan of the QoE degradation.
+      - name: timespan_end
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The end of the relevant timespan of the QoE degradation.
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        '200':
+          description: Probabilities to corresponding JIRA incidents in the system.
+          schema:
+            $ref: "#/components/schemas/probs"
+        '404':
+          description: Something went wrong.
+
+components:
+  schemas:
+    probs:
+      type: string
+
