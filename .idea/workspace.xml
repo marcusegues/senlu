@@ -3,6 +3,43 @@
   <component name="ChangeListManager">
     <list default="true" id="19565ba3-e45a-4378-88b6-cc91f99b8204" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.circleci/config.yml" afterPath="$PROJECT_DIR$/.circleci/config.yml" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/README.md" afterPath="$PROJECT_DIR$/hermione_files/README.md" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/notebooks/UHD Log Clustering and Classification.ipynb" afterPath="$PROJECT_DIR$/hermione_files/notebooks/UHD Log Clustering and Classification.ipynb" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/notebooks/UHD device log analysis.ipynb" afterPath="$PROJECT_DIR$/hermione_files/notebooks/UHD device log analysis.ipynb" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/notebooks/errors.txt" afterPath="$PROJECT_DIR$/hermione_files/notebooks/errors.txt" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/notebooks/mapping.csv" afterPath="$PROJECT_DIR$/hermione_files/notebooks/mapping.csv" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/notebooks/mapping.pickle" afterPath="$PROJECT_DIR$/hermione_files/notebooks/mapping.pickle" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/notebooks/svm.pickle" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/svm.pickle" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/.plan.swp" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/.plan.swp" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/.project" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/.project" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/.pydevproject" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/.pydevproject" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/app.yaml" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/app.yaml" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/appengine_config.py" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/appengine_config.py" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/dejan.yaml" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/dejan.yaml" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/doc/dumbledore.png" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/doc/dumbledore.png" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/doc/index.html" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/doc/index.html" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/favicon-16x16.png" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/favicon-16x16.png" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/favicon-32x32.png" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/favicon-32x32.png" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/index.html" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/index.html" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/oauth2-redirect.html" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/oauth2-redirect.html" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/swagger-ui-bundle.js" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/swagger-ui-bundle.js" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/swagger-ui-bundle.js.map" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/swagger-ui-bundle.js.map" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/swagger-ui-standalone-preset.js" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/swagger-ui-standalone-preset.js" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/swagger-ui-standalone-preset.js.map" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/swagger-ui-standalone-preset.js.map" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/swagger-ui.css" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/swagger-ui.css" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/swagger-ui.css.map" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/swagger-ui.css.map" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/swagger-ui.js" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/swagger-ui.js" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/docs/dist/swagger-ui.js.map" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/docs/dist/swagger-ui.js.map" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/index.yaml" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/index.yaml" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/luna.py" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/luna.py" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/luna_classifier.py" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/luna_classifier.py" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/mapping.csv" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/mapping.csv" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/mapping.pickle" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/mapping.pickle" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/openapi.yaml" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/openapi.yaml" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/requirements.txt" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/requirements.txt" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/svm.pickle" afterPath="$PROJECT_DIR$/hermione_files/notebooks/svm.pickle" />
+      <change beforePath="$PROJECT_DIR$/hermioneFiles/src/Luna/trainer.py" afterPath="$PROJECT_DIR$/hermione_files/src/Luna/trainer.py" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,11 +53,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="config.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="7" lean-forward="false" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+            <state relative-caret-position="-35">
+              <caret line="17" column="73" lean-forward="false" selection-start-line="17" selection-start-column="73" selection-end-line="17" selection-end-column="73" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="47" column="9" lean-forward="true" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -35,6 +92,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.circleci/config.yml" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -120,12 +178,12 @@
       <option name="presentableId" value="Default" />
       <updated>1522311893232</updated>
       <workItem from="1522311895250" duration="708000" />
-      <workItem from="1522602608326" duration="9333000" />
+      <workItem from="1522602608326" duration="9889000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10041000" />
+    <option name="totallyTimeSpent" value="10597000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -163,8 +221,24 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="7" lean-forward="false" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+        <state relative-caret-position="-35">
+          <caret line="17" column="73" lean-forward="false" selection-start-line="17" selection-start-column="73" selection-end-line="17" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="47" column="9" lean-forward="true" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
           <folding />
         </state>
       </provider>

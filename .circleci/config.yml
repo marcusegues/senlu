@@ -9,9 +9,8 @@ jobs:
     <<: *luna_defaults
     steps:
       - checkout
+
       - run: echo "CircleCI started --- luna"
-      # If we need private stuff:
-      # - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 
       - restore_cache:
           keys:
@@ -52,43 +51,3 @@ jobs:
       #- run:
       #   name: Build!
       #   command: npm run build
-#  deploy:
-#    <<: *luna_defaults
-#    steps:
-#      - checkout
-#      - run: echo "CircleCI deploy --- luna"
-#
-#      - attach_workspace:
-#          at: ~/project
-#
-#      - run:
-#          name: Install documentation.js
-#          command: sudo npm install -g documentation
-#
-#      - run:
-#          name: DocJS
-#          command: npm run doc:html
-#
-#      - store_artifacts:
-#          path: ~/project/docs
-#          destination: docs
-#
-#
-#workflows:
-#  version: 2
-#  test_and_deploy:
-#    jobs:
-#      - test:
-#          filters:
-#            tags:
-#              only: /\d+\.\d+\.\d+/
-#      - deploy:
-#          requires:
-#            - test
-#          filters:
-#            tags:
-#              only: /\d+\.\d+\.\d+/
-#            branches:
-#              only:
-#                - develop
-#                - /release-.*/
