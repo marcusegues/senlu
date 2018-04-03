@@ -5,7 +5,7 @@ defaults: &luna_defaults
 
 version: 2
 jobs:
-  test:
+  build:
     <<: *luna_defaults
     steps:
       - checkout
