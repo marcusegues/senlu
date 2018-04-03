@@ -15,6 +15,7 @@ Icon
 *.ipr
 *.iws
 .idea/
+.idea/workspace.xml
 
 
 # --------------------
