@@ -1,5 +1,3 @@
-# Starter pack for React-Native -> next up:
-# https://hiddentao.com/archives/2017/02/17/continuous-integration-for-react-native-with-testfairy-testflight-deploy/
 defaults: &luna_defaults
   working_directory: ~/project
   docker:
