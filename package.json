@@ -16,15 +16,21 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-standard": "^3.0.1",
+    "flow-bin": "^0.69.0",
     "prettier": "1.11.1",
     "react-scripts": "1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=node",
+    "test:debug": "react-scripts --inspect-brk test --runInBand --env=node",
+    "test:coverage": "react-scripts test --coverage",
+    "test:coverage:watch": "react-scripts test --watchAll --coverage",
     "lint": "eslint src",
     "lint:tough": "eslint src --max-warnings=0",
+    "flow": "flow",
+    "flow:coverage": "flow-coverage-report -i 'src/**/*.js' -x 'src/**/__tests__/**' -t html -t json -t text --threshold 90",
     "eject": "react-scripts eject"
   }
 }
