@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "material-ui": "^0.20.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0"
   },
@@ -27,6 +28,7 @@
     "test:debug": "react-scripts --inspect-brk test --runInBand --env=node",
     "test:coverage": "react-scripts test --coverage",
     "test:coverage:watch": "react-scripts test --watchAll --coverage",
+    "test:coverage:ci": "jest --coverage --maxWorkers 2",
     "lint": "eslint src",
     "lint:tough": "eslint src --max-warnings=0",
     "flow": "flow",
