@@ -32,7 +32,7 @@ const initialState = {
   'Linear TV FttH': 'closed',
 };
 
-class ErrorCardList extends React.Component<null, ErrorCardListState> {
+export class ErrorCardList extends React.Component<{}, ErrorCardListState> {
   state = initialState;
 
   render() {
@@ -51,9 +51,9 @@ class ErrorCardList extends React.Component<null, ErrorCardListState> {
         >
           <List>
             <ListItem
-              primaryText={'Linear TV DVB'}
+              primaryText="Linear TV DVB"
               initiallyOpen={false}
-              primaryTogglesNestedList={true}
+              primaryTogglesNestedList
               nestedItems={[
                 <Table>
                   <TableHeader>
@@ -76,14 +76,14 @@ class ErrorCardList extends React.Component<null, ErrorCardListState> {
               ]}
             />
             <ListItem
-              primaryText={'Linear TV OTT'}
+              primaryText="Linear TV OTT"
               initiallyOpen={false}
-              primaryTogglesNestedList={true}
+              primaryTogglesNestedList
             />
             <ListItem
-              primaryText={'Linear TV FttH'}
+              primaryText="Linear TV FttH"
               initiallyOpen={false}
-              primaryTogglesNestedList={true}
+              primaryTogglesNestedList
               nestedItems={[
                 <Table>
                   <TableHeader>
@@ -111,5 +111,3 @@ class ErrorCardList extends React.Component<null, ErrorCardListState> {
     );
   }
 }
-
-export { ErrorCardList };
