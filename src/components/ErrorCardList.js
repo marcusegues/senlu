@@ -1,103 +1,113 @@
+// @flow
 import React from 'react';
-import CircularProgress from 'material-ui/CircularProgress';
 import { List, ListItem } from 'material-ui/List';
-import ActionGrade from 'material-ui/svg-icons/action/grade';
-import ContentInbox from 'material-ui/svg-icons/content/inbox';
-import ContentDrafts from 'material-ui/svg-icons/content/drafts';
-import ContentSend from 'material-ui/svg-icons/content/send';
-import Subheader from 'material-ui/Subheader';
-import Toggle from 'material-ui/Toggle';
-import { getError, listErrors } from '../api/harry';
+import { Card } from 'material-ui/Card';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 
-class ErrorCardList extends React.Component {
-  state = {
-    errors: [],
-  };
+type Service =
+  | 'Linear TV DVB'
+  | 'Linear TV OTT'
+  | 'Linear TV FttH'
+  | 'Replay'
+  | 'Recording'
+  | 'VoD'
+  | 'Pay TV Linear';
 
-  componentDidMount() {
-    listErrors().then(data => {
-      console.log(data);
-      Object.keys(data)
-        .slice(0, 5)
-        .forEach(errorId => {
-          getError(errorId).then(result => {
-            const { create_date, id, label } = result;
-            const { reason, time_detected, times_occurred } = JSON.parse(
-              result.params
-            );
-            this.setState({
-              errors: [
-                ...this.state.errors,
-                {
-                  createDate: create_date,
-                  id,
-                  label,
-                  reason,
-                  timeDetected: time_detected,
-                  timesOccurred: times_occurred,
-                },
-              ],
-            });
-            console.log(result);
-            console.log(JSON.parse(result.params));
-          });
-        });
-    });
-  }
+type ListItemState = 'open' | 'closed';
+
+type ErrorCardListState = {
+  [Service]: ListItemState,
+};
+
+const initialState = {
+  'Linear TV DVB': 'closed',
+  'Linear TV OTT': 'closed',
+  'Linear TV FttH': 'closed',
+};
+
+class ErrorCardList extends React.Component<null, ErrorCardListState> {
+  state = initialState;
 
   render() {
-    const { errors } = this.state;
-    console.log('Render errors', errors);
-    if (!errors.length) {
-      return <CircularProgress />;
-    }
-
     return (
-      <List>
-        <Subheader>Nested List Items</Subheader>
-        <ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
-        <ListItem primaryText="Drafts" leftIcon={<ContentDrafts />} />
-        <ListItem
-          primaryText="Inbox"
-          leftIcon={<ContentInbox />}
-          initiallyOpen={true}
-          primaryTogglesNestedList={true}
-          nestedItems={[
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Card
+          style={{
+            width: '70%',
+          }}
+        >
+          <List>
             <ListItem
-              key={1}
-              primaryText="Starred"
-              leftIcon={<ActionGrade />}
-            />,
-            <ListItem
-              key={2}
-              primaryText="Sent Mail"
-              leftIcon={<ContentSend />}
-              disabled={true}
+              primaryText={'Linear TV DVB'}
+              initiallyOpen={false}
+              primaryTogglesNestedList={true}
               nestedItems={[
-                <ListItem
-                  key={1}
-                  primaryText="Drafts"
-                  leftIcon={<ContentDrafts />}
-                />,
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHeaderColumn>Error Code</TableHeaderColumn>
+                      <TableHeaderColumn>Info</TableHeaderColumn>
+                      <TableHeaderColumn>Time</TableHeaderColumn>
+                      <TableHeaderColumn>Count</TableHeaderColumn>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableRowColumn>Replay Abort</TableRowColumn>
+                      <TableRowColumn>SRF1 - 10 vor 10</TableRowColumn>
+                      <TableRowColumn>19:42-19:52</TableRowColumn>
+                      <TableRowColumn>251</TableRowColumn>
+                    </TableRow>
+                  </TableBody>
+                </Table>,
               ]}
-            />,
+            />
             <ListItem
-              key={3}
-              primaryText="Inbox"
-              leftIcon={<ContentInbox />}
-              open={this.state.open}
-              onNestedListToggle={this.handleNestedListToggle}
+              primaryText={'Linear TV OTT'}
+              initiallyOpen={false}
+              primaryTogglesNestedList={true}
+            />
+            <ListItem
+              primaryText={'Linear TV FttH'}
+              initiallyOpen={false}
+              primaryTogglesNestedList={true}
               nestedItems={[
-                <ListItem
-                  key={1}
-                  primaryText="Drafts"
-                  leftIcon={<ContentDrafts />}
-                />,
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHeaderColumn>Error Code</TableHeaderColumn>
+                      <TableHeaderColumn>Info</TableHeaderColumn>
+                      <TableHeaderColumn>Time</TableHeaderColumn>
+                      <TableHeaderColumn>Count</TableHeaderColumn>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableRowColumn>Picture Freeze</TableRowColumn>
+                      <TableRowColumn>ARD - Tagesschau</TableRowColumn>
+                      <TableRowColumn>19:54 - 20:05</TableRowColumn>
+                      <TableRowColumn>1337</TableRowColumn>
+                    </TableRow>
+                  </TableBody>
+                </Table>,
               ]}
-            />,
-          ]}
-        />
-      </List>
+            />
+          </List>
+        </Card>
+      </div>
     );
   }
 }
