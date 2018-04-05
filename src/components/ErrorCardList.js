@@ -55,24 +55,26 @@ export class ErrorCardList extends React.Component<{}, ErrorCardListState> {
               initiallyOpen={false}
               primaryTogglesNestedList
               nestedItems={[
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHeaderColumn>Error Code</TableHeaderColumn>
-                      <TableHeaderColumn>Info</TableHeaderColumn>
-                      <TableHeaderColumn>Time</TableHeaderColumn>
-                      <TableHeaderColumn>Count</TableHeaderColumn>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableRowColumn>Replay Abort</TableRowColumn>
-                      <TableRowColumn>SRF1 - 10 vor 10</TableRowColumn>
-                      <TableRowColumn>19:42-19:52</TableRowColumn>
-                      <TableRowColumn>251</TableRowColumn>
-                    </TableRow>
-                  </TableBody>
-                </Table>,
+                <ListItem key={1} style={{ marginLeft: 10, marginRight: 10 }}>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHeaderColumn>Error Code</TableHeaderColumn>
+                        <TableHeaderColumn>Info</TableHeaderColumn>
+                        <TableHeaderColumn>Time</TableHeaderColumn>
+                        <TableHeaderColumn>Count</TableHeaderColumn>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableRowColumn>Replay Abort</TableRowColumn>
+                        <TableRowColumn>SRF1 - 10 vor 10</TableRowColumn>
+                        <TableRowColumn>19:42-19:52</TableRowColumn>
+                        <TableRowColumn>251</TableRowColumn>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </ListItem>,
               ]}
             />
             <ListItem
@@ -85,24 +87,26 @@ export class ErrorCardList extends React.Component<{}, ErrorCardListState> {
               initiallyOpen={false}
               primaryTogglesNestedList
               nestedItems={[
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHeaderColumn>Error Code</TableHeaderColumn>
-                      <TableHeaderColumn>Info</TableHeaderColumn>
-                      <TableHeaderColumn>Time</TableHeaderColumn>
-                      <TableHeaderColumn>Count</TableHeaderColumn>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableRowColumn>Picture Freeze</TableRowColumn>
-                      <TableRowColumn>ARD - Tagesschau</TableRowColumn>
-                      <TableRowColumn>19:54 - 20:05</TableRowColumn>
-                      <TableRowColumn>1337</TableRowColumn>
-                    </TableRow>
-                  </TableBody>
-                </Table>,
+                <ListItem key={1} style={{ marginLeft: 10, marginRight: 10 }}>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHeaderColumn>Error Code</TableHeaderColumn>
+                        <TableHeaderColumn>Info</TableHeaderColumn>
+                        <TableHeaderColumn>Time</TableHeaderColumn>
+                        <TableHeaderColumn>Count</TableHeaderColumn>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableRowColumn>Picture Freeze</TableRowColumn>
+                        <TableRowColumn>ARD - Tagesschau</TableRowColumn>
+                        <TableRowColumn>19:54 - 20:05</TableRowColumn>
+                        <TableRowColumn>1337</TableRowColumn>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </ListItem>,
               ]}
             />
             <ListItem
