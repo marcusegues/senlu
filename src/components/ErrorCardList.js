@@ -105,6 +105,26 @@ export class ErrorCardList extends React.Component<{}, ErrorCardListState> {
                 </Table>,
               ]}
             />
+            <ListItem
+              primaryText="Replay"
+              initiallyOpen={false}
+              primaryTogglesNestedList
+            />
+            <ListItem
+              primaryText="Recording"
+              initiallyOpen={false}
+              primaryTogglesNestedList
+            />
+            <ListItem
+              primaryText="VoD"
+              initiallyOpen={false}
+              primaryTogglesNestedList
+            />
+            <ListItem
+              primaryText="Pay TV Linear"
+              initiallyOpen={false}
+              primaryTogglesNestedList
+            />
           </List>
         </Card>
       </div>
