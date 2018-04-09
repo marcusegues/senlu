@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
@@ -31,6 +31,10 @@ const initialState = {
   'Linear TV DVB': false,
   'Linear TV OTT': false,
   'Linear TV FttH': false,
+  Replay: false,
+  Recording: false,
+  VoD: false,
+  'Pay TV Linear': false,
 };
 
 export class ErrorCardList extends React.Component<{}, ErrorCardListState> {
@@ -55,11 +59,7 @@ export class ErrorCardList extends React.Component<{}, ErrorCardListState> {
               <ListItemText primary="Linear TV DVB" />
               {this.state['Linear TV DVB'] ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
-            <Collapse
-              in={this.state['Linear TV DVB']}
-              timeout="auto"
-              unmountOnExit
-            >
+            <Collapse in={this.state['Linear TV DVB']} timeout="auto">
               <div key={1} style={{ marginLeft: 10, marginRight: 10 }}>
                 <Table>
                   <TableHead>
@@ -82,34 +82,28 @@ export class ErrorCardList extends React.Component<{}, ErrorCardListState> {
               </div>
             </Collapse>
             <ListItem button onClick={() => this.handleClick('Linear TV OTT')}>
-              <ListItemText primary="Linear TV DVB" />
+              <ListItemText primary="Linear TV OTT" />
             </ListItem>
 
-            <ListItem
-              primaryText="Linear TV FttH"
-              initiallyOpen={false}
-              primaryTogglesNestedList
-            />
-            <ListItem
-              primaryText="Replay"
-              initiallyOpen={false}
-              primaryTogglesNestedList
-            />
-            <ListItem
-              primaryText="Recording"
-              initiallyOpen={false}
-              primaryTogglesNestedList
-            />
-            <ListItem
-              primaryText="VoD"
-              initiallyOpen={false}
-              primaryTogglesNestedList
-            />
-            <ListItem
-              primaryText="Pay TV Linear"
-              initiallyOpen={false}
-              primaryTogglesNestedList
-            />
+            <ListItem button onClick={() => this.handleClick('Linear TV FttH')}>
+              <ListItemText primary="Linear TV FttH" />
+            </ListItem>
+
+            <ListItem button onClick={() => this.handleClick('Replay')}>
+              <ListItemText primary="Replay" />
+            </ListItem>
+
+            <ListItem button onClick={() => this.handleClick('Recording')}>
+              <ListItemText primary="Recording" />
+            </ListItem>
+
+            <ListItem button onClick={() => this.handleClick('VoD')}>
+              <ListItemText primary="VoD" />
+            </ListItem>
+
+            <ListItem button onClick={() => this.handleClick('Pay TV Linear')}>
+              <ListItemText primary="Pay TV Linear" />
+            </ListItem>
           </List>
         </Paper>
       </div>
