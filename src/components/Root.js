@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { ErrorCardList } from './ErrorCardList';
+import { App } from './App';
 
-const Root = () => <ErrorCardList />;
+const Root = () => <App />;
 
 export default Root;
