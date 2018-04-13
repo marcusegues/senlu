@@ -1,66 +1,35 @@
 // @flow
 import React from 'react';
+import { connect } from 'react-redux';
 import List, { ListSubheader } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import { CircularProgress } from 'material-ui/Progress';
-import * as hermioneApi from '../../api/hermione';
-import * as harryApi from '../../api/harry';
 import * as dumbledoreApi from '../../api/dumbledore';
 import { ServiceRow } from './subcomponents/ServiceRow/ServiceRow';
 import { DateTimeInput } from '../Input/DateTimeInput';
 import { TextInput } from '../Input/TextInput';
+import { fetchHermioneDegradations } from '../../actions/hermione';
 
-type ErrorListCardState = {
-  data: any,
+type ErrorListCardProps = {
+  setCustomerId: () => void,
+  setTimespanStart: () => void,
+  setTimespanEnd: () => void,
+  timespanStart: any,
+  timespanEnd: any,
   customerId: number,
-  timespanStart: { date: string, time: string },
-  timespanEnd: { date: string, time: string },
-  fetchingHermione: boolean,
+  sessionId: number,
 };
 
-// hardcoded defaults
-const CUSTOMER_ID = 100360253;
-const SESSION_ID = 1130344;
-const TIME_PERIOD_START = { date: '2018-02-27', time: '00:00' };
-const TIME_PERIOD_END = { date: '2018-02-27', time: '22:00' };
-
-
-
-
-export class ErrorListCard extends React.Component<{}, ErrorListCardState> {
-  state = {
-    data: {},
-    customerId: CUSTOMER_ID,
-    timespanStart: TIME_PERIOD_START,
-    timespanEnd: TIME_PERIOD_END,
-    fetchingHermione: false,
-  };
-
+class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
   componentDidMount() {
-    this.fetchHermioneDegradations();
-    // harryApi.getDeviceDegradations().then(data => console.log('harry', data));
-  }
-
-  fetchHermioneDegradations() {
-    const { timespanStart, timespanEnd } = this.state;
-    this.setState({ fetchingHermione: true });
-    return hermioneApi
-      .getDegradationsByCustomerId(
-        CUSTOMER_ID,
-        `${timespanStart.date} ${timespanStart.time}:00`, // Hermione requires the two 00 at the end
-        `${timespanEnd.date} ${timespanEnd.time}:00`
-      )
-      .then(data => {
-        console.log('Hermione', data);
-        this.setState({ data, fetchingHermione: false });
-      });
+    this.props.getHermioneDegradations();
   }
 
   handleSelectError(userService, errorCode) {
-    const { timespanStart, timespanEnd } = this.state;
+    const { timespanStart, timespanEnd, customerId, sessionId } = this.props;
     return dumbledoreApi.selectCustomerDegradation(
-      CUSTOMER_ID,
-      SESSION_ID,
+      customerId,
+      sessionId,
       `${timespanStart.date} ${timespanStart.time}, ${timespanEnd.date} ${
         timespanEnd.time
       }`,
@@ -69,23 +38,20 @@ export class ErrorListCard extends React.Component<{}, ErrorListCardState> {
     );
   }
 
-  handleChangeTimespan = name => event => {
+  handleChangeTimespanStart = event => {
     const [date, time] = event.target.value.split('T');
-    this.setState(
-      {
-        [name]: { date, time },
-      },
-      () => this.fetchHermioneDegradations()
-    );
+    this.props.setTimespanStart({ date, time });
+    this.props.getHermioneDegradations();
+  };
+
+  handleChangeTimespanEnd = event => {
+    const [date, time] = event.target.value.split('T');
+    this.props.setTimespanEnd({ date, time });
+    this.props.getHermioneDegradations();
   };
 
   handleChangeCustomerId = event => {
-    this.setState(
-      {
-        customerId: event.target.value,
-      },
-      () => this.fetchHermioneDegradations()
-    );
+    this.props.setCustomerId(event.target.value);
   };
 
   render() {
@@ -95,7 +61,7 @@ export class ErrorListCard extends React.Component<{}, ErrorListCardState> {
       timespanEnd,
       customerId,
       fetchingHermione,
-    } = this.state;
+    } = this.props;
     return (
       <Paper
         style={{
@@ -113,11 +79,11 @@ export class ErrorListCard extends React.Component<{}, ErrorListCardState> {
         />
         <DateTimeInput
           value={`${timespanStart.date}T${timespanStart.time}`}
-          onChange={this.handleChangeTimespan('timespanStart')}
+          onChange={event => this.handleChangeTimespanStart(event)}
         />
         <DateTimeInput
           value={`${timespanEnd.date}T${timespanEnd.time}`}
-          onChange={this.handleChangeTimespan('timespanEnd')}
+          onChange={event => this.handleChangeTimespanEnd(event)}
         />
         {fetchingHermione ? (
           <CircularProgress style={{ margin: 10 }} />
@@ -143,3 +109,26 @@ export class ErrorListCard extends React.Component<{}, ErrorListCardState> {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  customerId: state.api.customerId,
+  timespanStart: state.api.timespanStart,
+  timespanEnd: state.api.timespanEnd,
+  fetchingHermione: state.api.fetchingHermione,
+  data: state.api.data,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setCustomerId: customerId =>
+    dispatch({ type: 'SET_CUSTOMER_ID', customerId }),
+  setTimespanStart: timespanStart =>
+    dispatch({ type: 'SET_TIMESPAN_START', timespanStart }),
+  setTimespanEnd: timespanEnd =>
+    dispatch({ type: 'SET_TIMESPAN_END', timespanEnd }),
+  getHermioneDegradations: () => dispatch(fetchHermioneDegradations()),
+});
+
+export const HermioneErrorListCard = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ErrorListCard);

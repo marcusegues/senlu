@@ -1,12 +1,12 @@
 import React from 'react';
 import CssBaseline from 'material-ui/CssBaseline';
-import { ErrorListCard } from './ErrorList/HermioneErrorListCard';
+import { HermioneErrorListCard } from './ErrorList/HermioneErrorListCard';
 import NavBar from './NavBar/NavBar';
 
 export const App = () => (
   <React.Fragment>
     <CssBaseline />
     <NavBar />
-    <ErrorListCard />
+    <HermioneErrorListCard />
   </React.Fragment>
 );
