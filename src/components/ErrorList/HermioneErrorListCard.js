@@ -1,23 +1,38 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { withStyles } from 'material-ui/styles';
 import List, { ListSubheader } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import { CircularProgress } from 'material-ui/Progress';
 import * as dumbledoreApi from '../../api/dumbledore';
 import { ServiceRow } from './subcomponents/ServiceRow/ServiceRow';
 import { DateTimeInput } from '../Input/DateTimeInput';
-import { TextInput } from '../Input/TextInput';
+import { TextInputField } from '../Input/TextInputField';
 import { fetchHermioneDegradations } from '../../actions/hermione';
 
 type ErrorListCardProps = {
   setCustomerId: () => void,
   setTimespanStart: () => void,
   setTimespanEnd: () => void,
+  getHermioneDegradations: () => void,
+  data: any,
+  fetchingHermione: boolean,
   timespanStart: any,
   timespanEnd: any,
   customerId: number,
   sessionId: number,
+};
+
+const styles = {
+  root: {
+    width: '100%',
+    overFlow: 'hidden',
+  },
+};
+
+const CardHeader = () => {
+  return <div style={{ width: '100%' }}> Hello</div>;
 };
 
 class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
@@ -30,81 +45,60 @@ class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
     return dumbledoreApi.selectCustomerDegradation(
       customerId,
       sessionId,
-      `${timespanStart.date} ${timespanStart.time}, ${timespanEnd.date} ${
-        timespanEnd.time
-      }`,
+      `${timespanStart.date} ${timespanStart.time}`,
+      `${timespanEnd.date} ${timespanEnd.time}`,
       userService,
       errorCode
     );
   }
 
-  handleChangeTimespanStart = event => {
-    const [date, time] = event.target.value.split('T');
-    this.props.setTimespanStart({ date, time });
-    this.props.getHermioneDegradations();
-  };
-
-  handleChangeTimespanEnd = event => {
-    const [date, time] = event.target.value.split('T');
-    this.props.setTimespanEnd({ date, time });
-    this.props.getHermioneDegradations();
-  };
-
-  handleChangeCustomerId = event => {
-    this.props.setCustomerId(event.target.value);
-  };
-
   render() {
-    const {
-      data,
-      timespanStart,
-      timespanEnd,
-      customerId,
-      fetchingHermione,
-    } = this.props;
+    const { data, fetchingHermione, classes } = this.props;
     return (
       <Paper
         style={{
           width: 400,
+          height: '100%',
+          overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           margin: 15,
         }}
       >
-        <TextInput
-          label={'Customer Id'}
-          value={customerId}
-          onChange={this.handleChangeCustomerId}
-        />
-        <DateTimeInput
-          value={`${timespanStart.date}T${timespanStart.time}`}
-          onChange={event => this.handleChangeTimespanStart(event)}
-        />
-        <DateTimeInput
-          value={`${timespanEnd.date}T${timespanEnd.time}`}
-          onChange={event => this.handleChangeTimespanEnd(event)}
-        />
-        {fetchingHermione ? (
-          <CircularProgress style={{ margin: 10 }} />
-        ) : (
-          <List
-            subheader={
-              <ListSubheader component="div">Nested List Items</ListSubheader>
-            }
-          >
-            {Object.keys(data).map(service => (
-              <ServiceRow
-                key={service}
-                service={service}
-                errors={data[service]}
-                onSelectError={(userService, errorCode) =>
-                  this.handleSelectError(userService, errorCode)
-                }
-              />
-            ))}
-          </List>
-        )}
+        <List
+          classes={{
+            root: classes.root,
+          }}
+          subheader={
+            <ListSubheader component="div">
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                Frontend Errors
+                {fetchingHermione ? (
+                  <CircularProgress style={{ margin: 10 }} />
+                ) : null}
+              </div>
+            </ListSubheader>
+          }
+        >
+          {Object.keys(data).map(service => (
+            <ServiceRow
+              key={service}
+              service={service}
+              errors={data[service]}
+              onSelectError={(userService, errorCode) =>
+                this.handleSelectError(userService, errorCode)
+              }
+            />
+          ))}
+        </List>
       </Paper>
     );
   }
@@ -112,6 +106,7 @@ class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
 
 const mapStateToProps = state => ({
   customerId: state.api.customerId,
+  sessionId: state.api.sessionId,
   timespanStart: state.api.timespanStart,
   timespanEnd: state.api.timespanEnd,
   fetchingHermione: state.api.fetchingHermione,
@@ -131,4 +126,4 @@ const mapDispatchToProps = dispatch => ({
 export const HermioneErrorListCard = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ErrorListCard);
+)(withStyles(styles)(ErrorListCard));

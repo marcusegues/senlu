@@ -1,18 +1,17 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 
-export const DateTimeInput = ({ value, onChange }) => {
+export const DateTimeInput = ({ value, label, onChange }) => {
   return (
-    <form noValidate style={{ margin: 10, alignSelf: 'flex-start' }}>
+    <form noValidate style={{ margin: 10 }}>
       <TextField
-        id="datetime-local"
-        label="Timespan Start"
-        type="datetime-local"
+        label={label}
         value={value}
         InputLabelProps={{
           shrink: true,
         }}
         onChange={onChange}
+        type="datetime-local"
       />
     </form>
   );

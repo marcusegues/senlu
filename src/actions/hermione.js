@@ -16,6 +16,7 @@ export const fetchHermioneDegradations = () => {
     const state = getState();
     const { customerId, timespanStart, timespanEnd } = state.api;
     dispatch(setFetchingHermione(true));
+    dispatch(setData({}));
     return hermioneApi
       .getDegradationsByCustomerId(
         customerId,
