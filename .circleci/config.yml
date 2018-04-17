@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
 
-      - run: echo "CircleCI started --- luna"
+      - run: echo "CircleCI started"
 
       - restore_cache:
           keys:
@@ -32,22 +32,21 @@ jobs:
             - node_modules
           key: v25-dependencies-{{ checksum "package.json" }}
 
-#      - run:
-#          name: Lint!
-#          command: npm run lint:tough
-#
-#      - run:
-#          name: Flow!
-#          command: npm run flow
-#
-#      - run:
-#          name: Jest
-#          command: npm run test:coverage:ci
-#
-#      - store_artifacts:
-#          path: ~/project/coverage/lcov-report
-#          destination: coverage
+      - run:
+          name: Lint!
+          command: npm run lint:tough
+      - run:
+          name: Flow!
+          command: npm run flow
 
-      #- run:
-      #   name: Build!
-      #   command: npm run build
+      - run:
+          name: Jest
+          command: npm run test:coverage:ci
+
+      - store_artifacts:
+          path: ~/project/coverage/lcov-report
+          destination: coverage
+
+      - run:
+         name: Build!
+         command: npm run build

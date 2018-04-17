@@ -23,10 +23,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=node",
-    "test:debug": "react-scripts --inspect-brk test --runInBand --env=node",
+    "test": "react-scripts test --env=jsdom",
+    "test:debug": "react-scripts --inspect-brk test --runInBand --env=jsdom",
     "test:coverage": "react-scripts test --coverage",
     "test:coverage:watch": "react-scripts test --watchAll --coverage",
+    "test:coverage:ci": "react-scripts test --coverage --maxWorkers 2",
     "lint": "eslint src",
     "lint:tough": "eslint src --max-warnings=0",
     "flow": "flow",
