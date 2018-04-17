@@ -1,16 +1,15 @@
 // @flow
 import React from 'react';
 import { TableBody, TableCell, TableRow } from 'material-ui/Table';
-import { SquareBox } from '../../../../Icons/SquareBox';
-import { SquareBoxChecked } from '../../../../Icons/SquareBoxChecked';
 import { CircularProgress } from 'material-ui/Progress';
 import Checkbox from 'material-ui/Checkbox';
+import type {DumbledoreApi} from "../../../../../api/dumbledore";
 
 type CheckBoxState = 'notSelected' | 'selected' | 'pending';
 
 type ErrorRowProps = {
   checkbox: CheckBoxState,
-  onSelectError: () => Promise<>,
+  onSelectError: () => DumbledoreApi,
 };
 
 type ErrorRowState = {

@@ -7,14 +7,11 @@ import Paper from 'material-ui/Paper';
 import { CircularProgress } from 'material-ui/Progress';
 import * as dumbledoreApi from '../../api/dumbledore';
 import { ServiceRow } from './subcomponents/ServiceRow/ServiceRow';
-import { DateTimeInput } from '../Input/DateTimeInput';
-import { TextInputField } from '../Input/TextInputField';
 import { fetchHermioneDegradations } from '../../actions/hermione';
 
+
+
 type ErrorListCardProps = {
-  setCustomerId: () => void,
-  setTimespanStart: () => void,
-  setTimespanEnd: () => void,
   getHermioneDegradations: () => void,
   data: any,
   fetchingHermione: boolean,
@@ -22,6 +19,7 @@ type ErrorListCardProps = {
   timespanEnd: any,
   customerId: number,
   sessionId: number,
+  classes: Object,
 };
 
 const styles = {
@@ -29,10 +27,6 @@ const styles = {
     width: '100%',
     overFlow: 'hidden',
   },
-};
-
-const CardHeader = () => {
-  return <div style={{ width: '100%' }}> Hello</div>;
 };
 
 class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
@@ -114,12 +108,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCustomerId: customerId =>
-    dispatch({ type: 'SET_CUSTOMER_ID', customerId }),
-  setTimespanStart: timespanStart =>
-    dispatch({ type: 'SET_TIMESPAN_START', timespanStart }),
-  setTimespanEnd: timespanEnd =>
-    dispatch({ type: 'SET_TIMESPAN_END', timespanEnd }),
   getHermioneDegradations: () => dispatch(fetchHermioneDegradations()),
 });
 

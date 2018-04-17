@@ -1,3 +1,5 @@
+// @flow
+
 export const addParamsToUrl = (url: string, params: Object) => {
   const urlObj = new URL(url);
   Object.keys(params).forEach(key =>

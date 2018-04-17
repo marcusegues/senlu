@@ -14,10 +14,7 @@ export const getDegradationsByCustomerId = (
         timespan_end: timespanEnd,
       }
     )
-  ).then(response => {
-    console.log('Hermione response', response);
-    return response.json();
-  });
+  ).then(response => response.json());
 
 export const getDegradationsByMac = (mac, timespanStart, timespanEnd) =>
   fetch(
@@ -29,8 +26,4 @@ export const getDegradationsByMac = (mac, timespanStart, timespanEnd) =>
         timespan_end: timespanEnd,
       }
     )
-  ).then(response => {
-    console.log('Hermione response', response);
-    return response.json();
-  });
-
+  ).then(response => response.json());

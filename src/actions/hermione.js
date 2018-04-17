@@ -11,22 +11,19 @@ export const setData = data => ({
   data,
 });
 
-export const fetchHermioneDegradations = () => {
-  return (dispatch, getState) => {
-    const state = getState();
-    const { customerId, timespanStart, timespanEnd } = state.api;
-    dispatch(setFetchingHermione(true));
-    dispatch(setData({}));
-    return hermioneApi
-      .getDegradationsByCustomerId(
-        customerId,
-        getHermioneTimespanFormat(timespanStart),
-        getHermioneTimespanFormat(timespanEnd)
-      )
-      .then(data => {
-        console.log('Hermione Degradations: ', data);
-        dispatch(setData(data));
-        dispatch(setFetchingHermione(false));
-      });
-  };
+export const fetchHermioneDegradations = () => (dispatch, getState) => {
+  const state = getState();
+  const { customerId, timespanStart, timespanEnd } = state.api;
+  dispatch(setFetchingHermione(true));
+  dispatch(setData({}));
+  return hermioneApi
+    .getDegradationsByCustomerId(
+      customerId,
+      getHermioneTimespanFormat(timespanStart),
+      getHermioneTimespanFormat(timespanEnd)
+    )
+    .then(data => {
+      dispatch(setData(data));
+      dispatch(setFetchingHermione(false));
+    });
 };

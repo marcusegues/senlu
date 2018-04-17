@@ -1,3 +1,1 @@
-export const getHermioneTimespanFormat = timespan => {
-  return `${timespan.date} ${timespan.time}:00`;
-};
+export const getHermioneTimespanFormat = timespan => `${timespan.date} ${timespan.time}:00`;

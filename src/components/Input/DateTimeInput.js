@@ -1,8 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 
-export const DateTimeInput = ({ value, label, onChange }) => {
-  return (
+export const DateTimeInput = ({ value, label, onChange }) => (
     <form noValidate style={{ margin: 10 }}>
       <TextField
         label={label}
@@ -15,4 +14,3 @@ export const DateTimeInput = ({ value, label, onChange }) => {
       />
     </form>
   );
-};

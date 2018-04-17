@@ -43,7 +43,7 @@ class NavBarInner extends React.Component {
   };
 
   render() {
-    const { customerId, timespanStart, timespanEnd, classes } = this.props;
+    const { timespanStart, timespanEnd, classes } = this.props;
     return (
       <AppBar
         position="sticky"
@@ -67,7 +67,7 @@ class NavBarInner extends React.Component {
           }}
         >
           <TextInputField
-            label={'Customer Id'}
+            label="Customer Id"
             value={this.state.customerId}
             onChange={event => this.handleChangeCustomerId(event)}
           />
@@ -75,14 +75,14 @@ class NavBarInner extends React.Component {
             Ok
           </Button>
           <TextInputField
-            label={'Timespan start'}
-            type={'datetime-local'}
+            label="Timespan start"
+            type="datetime-local"
             value={`${timespanStart.date}T${timespanStart.time}`}
             onChange={event => this.handleChangeTimespanStart(event)}
           />
           <TextInputField
-            label={'Timespan end'}
-            type={'datetime-local'}
+            label="Timespan end"
+            type="datetime-local"
             value={`${timespanEnd.date}T${timespanEnd.time}`}
             onChange={event => this.handleChangeTimespanEnd(event)}
           />

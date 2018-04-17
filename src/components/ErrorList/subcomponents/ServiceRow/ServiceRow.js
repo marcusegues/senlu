@@ -7,6 +7,7 @@ import Collapse from 'material-ui/transitions/Collapse';
 import { ErrorRow } from './subcomponents/ErrorRow';
 
 const uuidv4 = require('uuid/v4');
+
 export class ServiceRow extends React.Component {
   state = {
     expanded: false,
@@ -22,7 +23,7 @@ export class ServiceRow extends React.Component {
       // when there are no errors, errors is '"No logs for timespan."
       return (
         <ListItem>
-          <ListItemText primary={'No results.'} />
+          <ListItemText primary="No results." />
         </ListItem>
       );
     }
