@@ -1,0 +1,52 @@
+defaults: &luna_defaults
+  working_directory: ~/project
+  docker:
+    - image: circleci/node:8
+
+version: 2
+jobs:
+  build:
+    <<: *luna_defaults
+    steps:
+      - checkout
+
+      - run: echo "CircleCI started"
+
+      - restore_cache:
+          keys:
+          - v25-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v25-dependencies-
+
+      - run:
+          name: Install!
+          command: npm install
+
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - node_modules
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v25-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Lint!
+          command: npm run lint:tough
+      - run:
+          name: Flow!
+          command: npm run flow
+
+      - run:
+          name: Jest
+          command: npm run test:coverage:ci
+
+      - store_artifacts:
+          path: ~/project/coverage/lcov-report
+          destination: coverage
+
+      - run:
+         name: Build!
+         command: npm run build

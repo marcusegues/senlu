@@ -1,0 +1,37 @@
+{
+  "name": "luna",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-flowtype": "^2.46.1",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "flow-bin": "^0.69.0",
+    "prettier": "1.11.1",
+    "react-scripts": "^1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "test:debug": "react-scripts --inspect-brk test --runInBand --env=jsdom",
+    "test:coverage": "react-scripts test --coverage",
+    "test:coverage:watch": "react-scripts test --watchAll --coverage",
+    "test:coverage:ci": "react-scripts test --coverage --maxWorkers 2",
+    "lint": "eslint src",
+    "lint:tough": "eslint src --max-warnings=0",
+    "flow": "flow",
+    "flow:coverage": "flow-coverage-report -i 'src/**/*.js' -x 'src/**/__tests__/**' -t html -t json -t text --threshold 90",
+    "eject": "react-scripts eject"
+  }
+}
