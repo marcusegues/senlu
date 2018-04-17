@@ -14,8 +14,8 @@ Icon
 # --------------------
 *.ipr
 *.iws
-.idea/
-
+.idea/workspace.xml
+.idea/tasks.xml
 
 # --------------------
 # Node Files
