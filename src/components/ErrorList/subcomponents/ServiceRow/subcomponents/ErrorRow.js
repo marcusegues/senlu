@@ -3,13 +3,16 @@ import React from 'react';
 import { TableBody, TableCell, TableRow } from 'material-ui/Table';
 import { CircularProgress } from 'material-ui/Progress';
 import Checkbox from 'material-ui/Checkbox';
-import type {DumbledoreApi} from "../../../../../api/dumbledore";
+import type { DumbledoreApi } from '../../../../../api/dumbledore';
+import type { ErrorCode } from '../../../../../types/api';
 
 type CheckBoxState = 'notSelected' | 'selected' | 'pending';
 
 type ErrorRowProps = {
   checkbox: CheckBoxState,
   onSelectError: () => DumbledoreApi,
+  errorCode: ErrorCode,
+  count: number,
 };
 
 type ErrorRowState = {
@@ -28,8 +31,8 @@ export class ErrorRow extends React.Component<ErrorRowProps, ErrorRowState> {
     this.setState({
       checkbox: 'pending',
     });
-    this.props.onSelectError().then(response => {
-      if (response.status === 200) {
+    this.props.onSelectError().then(success => {
+      if (success) {
         this.setState({
           checkbox: 'selected',
         });

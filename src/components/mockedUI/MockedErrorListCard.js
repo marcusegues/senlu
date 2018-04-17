@@ -5,18 +5,21 @@ import { withStyles } from 'material-ui/styles';
 import List, { ListSubheader } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import { CircularProgress } from 'material-ui/Progress';
-import * as dumbledoreApi from '../../api/dumbledore';
-import { ServiceRow } from './subcomponents/ServiceRow/ServiceRow';
-import { fetchHermioneDegradations } from '../../actions/hermione';
+import { ServiceRow } from '../ErrorList/subcomponents/ServiceRow/ServiceRow';
+import { userServices } from '../../types/index';
+
+// mock data
+const data = {};
+// eslint-disable-next-line no-return-assign
+userServices.map(service => (data[service] = null));
+// add errors on some services
+data['Linear TV OTT'] = [];
+// data['VoD'].errors = [];
+// data['Linear TV DVB'].errors = [];
+// data['Trick modes'].errors = [];
 
 type ErrorListCardProps = {
-  getHermioneDegradations: () => void,
-  data: any,
   fetchingHermione: boolean,
-  timespanStart: any,
-  timespanEnd: any,
-  customerId: number,
-  sessionId: number,
   classes: Object,
 };
 
@@ -28,27 +31,12 @@ const styles = {
 };
 
 class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
-  componentDidMount() {
-    this.props.getHermioneDegradations();
-    dumbledoreApi.userServices(this.props.customerId);
-  }
-
-  handleSelectError(userService, errorCode) {
-    const { timespanStart, timespanEnd, customerId, sessionId } = this.props;
-    return dumbledoreApi
-      .selectCustomerDegradation(
-        customerId,
-        sessionId,
-        timespanStart,
-        timespanEnd,
-        userService,
-        errorCode
-      )
-      .then(response => response && response.status === 200);
+  static handleSelectError() {
+    return Promise.resolve(true);
   }
 
   render() {
-    const { data, fetchingHermione, classes } = this.props;
+    const { fetchingHermione, classes } = this.props;
     return (
       <Paper
         style={{
@@ -88,9 +76,7 @@ class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
               key={service}
               service={service}
               errors={data[service]}
-              onSelectError={(userService, errorCode) =>
-                this.handleSelectError(userService, errorCode)
-              }
+              onSelectError={() => ErrorListCard.handleSelectError()}
             />
           ))}
         </List>
@@ -100,19 +86,10 @@ class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
 }
 
 const mapStateToProps = state => ({
-  customerId: state.api.customerId,
-  sessionId: state.api.sessionId,
-  timespanStart: state.api.timespanStart,
-  timespanEnd: state.api.timespanEnd,
   fetchingHermione: state.api.fetchingHermione,
   data: state.api.data,
 });
 
-const mapDispatchToProps = dispatch => ({
-  getHermioneDegradations: () => dispatch(fetchHermioneDegradations()),
-});
-
-export const HermioneErrorListCard = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(ErrorListCard));
+export const MockedErrorListCard = connect(mapStateToProps, null)(
+  withStyles(styles)(ErrorListCard)
+);

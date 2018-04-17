@@ -31,30 +31,39 @@ export class ServiceRow extends React.Component {
       <React.Fragment>
         <ListItem button onClick={() => this.handleToggleExpand()}>
           <ListItemText primary={service} />
-          {this.state.expanded ? <ExpandLess /> : <ExpandMore />}
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {errors ? (
+            this.state.expanded ? (
+              <ExpandLess />
+            ) : (
+              <ExpandMore />
+            )
+          ) : null}
         </ListItem>
-        <Collapse in={this.state.expanded} timeout="auto">
-          <div style={{ marginLeft: 10, marginRight: 10 }}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell />
-                  <TableCell>Error Code</TableCell>
-                  <TableCell numeric>Count</TableCell>
-                </TableRow>
-              </TableHead>
-              {errors &&
-                errors.map(([errorCode, count]) => (
-                  <ErrorRow
-                    key={uuidv4()}
-                    errorCode={errorCode}
-                    count={count}
-                    onSelectError={() => onSelectError(service, errorCode)}
-                  />
-                ))}
-            </Table>
-          </div>
-        </Collapse>
+        {errors ? (
+          <Collapse in={this.state.expanded} timeout="auto">
+            <div style={{ marginLeft: 10, marginRight: 10 }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell />
+                    <TableCell>Error Code</TableCell>
+                    <TableCell numeric>Count</TableCell>
+                  </TableRow>
+                </TableHead>
+                {errors &&
+                  errors.map(([errorCode, count]) => (
+                    <ErrorRow
+                      key={uuidv4()}
+                      errorCode={errorCode}
+                      count={count}
+                      onSelectError={() => onSelectError(service, errorCode)}
+                    />
+                  ))}
+              </Table>
+            </div>
+          </Collapse>
+        ) : null}
       </React.Fragment>
     );
   }

@@ -1,4 +1,7 @@
-const initialState = {
+// @flow
+import type { ApiState } from '../types/reducers/api';
+
+const initialState: ApiState = {
   timespanStart: { date: '2018-02-27', time: '00:00' },
   timespanEnd: { date: '2018-02-27', time: '22:00' },
   customerId: 100360253,
@@ -7,7 +10,7 @@ const initialState = {
   data: {},
 };
 
-export const api = (state = initialState, action) => {
+export const api = (state: ApiState = initialState, action: any) => {
   switch (action.type) {
     case 'SET_TIMESPAN_START': {
       return {
