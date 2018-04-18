@@ -7,14 +7,12 @@ import Paper from 'material-ui/Paper';
 import { CircularProgress } from 'material-ui/Progress';
 import * as dumbledoreApi from '../../api/dumbledore';
 import { ServiceRow } from './subcomponents/ServiceRow/ServiceRow';
-import { fetchHermioneDegradations } from '../../actions/hermione';
-import { fetchDumbledoreUserServices } from '../../actions/dumbledore';
+import { updateUIData } from '../../actions/ui';
 
 type ErrorListCardProps = {
-  getHermioneDegradations: () => void,
-  getDumbledoreUserServices: () => void,
   hermioneErrorsByService: Object,
   dumbledoreUserServices: Array<any>,
+  updateUIData: () => void,
   fetchingHermione: boolean,
   fetchingDumbledore: boolean,
   timespanStart: any,
@@ -33,8 +31,7 @@ const styles = {
 
 class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
   componentDidMount() {
-    this.props.getHermioneDegradations();
-    this.props.getDumbledoreUserServices();
+    this.props.updateUIData();
   }
 
   formatData() {
@@ -131,8 +128,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getHermioneDegradations: () => dispatch(fetchHermioneDegradations()),
-  getDumbledoreUserServices: () => dispatch(fetchDumbledoreUserServices()),
+  updateUIData: () => dispatch(updateUIData()),
 });
 
 export const HermioneErrorListCard = connect(

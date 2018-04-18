@@ -6,7 +6,7 @@ import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import { TextInputField } from '../Input/TextInputField';
-import { fetchHermioneDegradations } from '../../actions/hermione';
+import { updateUIData } from '../../actions/ui';
 
 const styles = {
   root: {
@@ -27,19 +27,19 @@ class NavBarInner extends React.Component {
 
   handleSetCustomerId() {
     this.props.setCustomerId(this.state.customerId);
-    this.props.getHermioneDegradations();
+    this.props.updateUIData();
   }
 
   handleChangeTimespanStart = event => {
     const [date, time] = event.target.value.split('T');
     this.props.setTimespanStart({ date, time });
-    this.props.getHermioneDegradations();
+    this.props.updateUIData();
   };
 
   handleChangeTimespanEnd = event => {
     const [date, time] = event.target.value.split('T');
     this.props.setTimespanEnd({ date, time });
-    this.props.getHermioneDegradations();
+    this.props.updateUIData();
   };
 
   render() {
@@ -106,7 +106,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: 'SET_TIMESPAN_START', timespanStart }),
   setTimespanEnd: timespanEnd =>
     dispatch({ type: 'SET_TIMESPAN_END', timespanEnd }),
-  getHermioneDegradations: () => dispatch(fetchHermioneDegradations()),
+  updateUIData: () => dispatch(updateUIData()),
 });
 
 export const NavBar = connect(mapStateToProps, mapDispatchToProps)(
