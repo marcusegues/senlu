@@ -2,7 +2,7 @@
 
 import type {
   CustomerId,
-  FetchingHermione,
+  Fetching,
   SessionId,
   TimespanDelimiter,
 } from '../api';
@@ -12,6 +12,8 @@ export type ApiState = {
   timespanEnd: TimespanDelimiter,
   customerId: CustomerId,
   sessionId: SessionId,
-  fetchingHermione: FetchingHermione,
-  data: {},
+  fetchingHermione: Fetching,
+  fetchingDumbledore: Fetching,
+  hermioneErrorsByService: {},
+  dumbledoreUserServices: [],
 };

@@ -6,8 +6,8 @@ export const setFetchingHermione = fetching => ({
   fetching,
 });
 
-export const setData = data => ({
-  type: 'SET_DATA',
+export const setHermioneErrorsByService = data => ({
+  type: 'SET_HERMIONE_ERRORS_BY_SERVICE',
   data,
 });
 
@@ -15,7 +15,6 @@ export const fetchHermioneDegradations = () => (dispatch, getState) => {
   const state = getState();
   const { customerId, timespanStart, timespanEnd } = state.api;
   dispatch(setFetchingHermione(true));
-  dispatch(setData({}));
   return hermioneApi
     .getDegradationsByCustomerId(
       customerId,
@@ -23,7 +22,7 @@ export const fetchHermioneDegradations = () => (dispatch, getState) => {
       getHermioneTimespanFormat(timespanEnd)
     )
     .then(data => {
-      dispatch(setData(data));
+      dispatch(setHermioneErrorsByService(data));
       dispatch(setFetchingHermione(false));
     });
 };

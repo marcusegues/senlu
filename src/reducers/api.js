@@ -7,7 +7,9 @@ const initialState: ApiState = {
   customerId: 100360253,
   sessionId: 1130344,
   fetchingHermione: false,
-  data: {},
+  fetchingDumbledore: false,
+  hermioneErrorsByService: {},
+  dumbledoreUserServices: [],
 };
 
 export const api = (state: ApiState = initialState, action: any) => {
@@ -43,10 +45,16 @@ export const api = (state: ApiState = initialState, action: any) => {
         fetchingHermione: action.fetching,
       };
     }
-    case 'SET_DATA': {
+    case 'SET_HERMIONE_ERRORS_BY_SERVICE': {
       return {
         ...state,
-        data: action.data,
+        hermioneErrorsByService: action.data,
+      };
+    }
+    case 'SET_DUMBLEDORE_USER_SERVICES': {
+      return {
+        ...state,
+        dumbledoreUserServices: action.data,
       };
     }
     default: {

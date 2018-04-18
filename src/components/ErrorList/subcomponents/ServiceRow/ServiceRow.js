@@ -32,7 +32,7 @@ export class ServiceRow extends React.Component {
         <ListItem button onClick={() => this.handleToggleExpand()}>
           <ListItemText primary={service} />
           {/* eslint-disable-next-line no-nested-ternary */}
-          {errors ? (
+          {errors.length ? (
             this.state.expanded ? (
               <ExpandLess />
             ) : (

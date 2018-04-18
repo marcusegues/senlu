@@ -86,6 +86,7 @@ class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
 }
 
 const mapStateToProps = state => ({
+  customerId: state.api.customerId,
   fetchingHermione: state.api.fetchingHermione,
   data: state.api.data,
 });
