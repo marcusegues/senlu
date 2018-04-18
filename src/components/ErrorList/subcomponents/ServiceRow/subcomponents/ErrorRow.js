@@ -45,7 +45,7 @@ export class ErrorRow extends React.Component<ErrorRowProps, ErrorRowState> {
   }
 
   render() {
-    const { errorCode, count } = this.props;
+    const { errorCode, count, timeStart, timeEnd, info } = this.props;
     const { checkbox } = this.state;
     return (
       <TableBody>
@@ -63,6 +63,9 @@ export class ErrorRow extends React.Component<ErrorRowProps, ErrorRowState> {
           </TableCell>
           <TableCell>{errorCode}</TableCell>
           <TableCell>{count}</TableCell>
+          <TableCell>{timeStart}</TableCell>
+          <TableCell>{timeEnd}</TableCell>
+          <TableCell>{info}</TableCell>
         </TableRow>
       </TableBody>
     );

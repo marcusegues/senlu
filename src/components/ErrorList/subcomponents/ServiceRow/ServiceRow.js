@@ -5,6 +5,7 @@ import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import Collapse from 'material-ui/transitions/Collapse';
 import { ErrorRow } from './subcomponents/ErrorRow';
+import { TrafficLightGreen } from '../../../../icons/svg/trafficLightGreen';
 
 const uuidv4 = require('uuid/v4');
 
@@ -40,7 +41,7 @@ export class ServiceRow extends React.Component {
             )
           ) : null}
         </ListItem>
-        {errors ? (
+        {errors.length ? (
           <Collapse in={this.state.expanded} timeout="auto">
             <div style={{ marginLeft: 10, marginRight: 10 }}>
               <Table>
@@ -49,14 +50,20 @@ export class ServiceRow extends React.Component {
                     <TableCell />
                     <TableCell>Error Code</TableCell>
                     <TableCell numeric>Count</TableCell>
+                    <TableCell>Time Start</TableCell>
+                    <TableCell>Time End</TableCell>
+                    <TableCell>Info</TableCell>
                   </TableRow>
                 </TableHead>
                 {errors &&
-                  errors.map(([errorCode, count]) => (
+                  errors.map(([errorCode, count, timeStart, timeEnd, info]) => (
                     <ErrorRow
                       key={uuidv4()}
                       errorCode={errorCode}
                       count={count}
+                      timeStart={timeStart}
+                      timeEnd={timeEnd}
+                      info={info}
                       onSelectError={() => onSelectError(service, errorCode)}
                     />
                   ))}
