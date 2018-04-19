@@ -8,7 +8,7 @@ import type { DumbledoreApi } from '../../../../../api/dumbledore';
 import type { ErrorCode } from '../../../../../types/api';
 
 const styles = theme => ({
-  checkboxRoot: { height: 30, width: 30, paddingLeft: 30 },
+  checkboxRoot: { height: 30, width: 30 },
   row: {
     height: 40,
     '&:nth-of-type(odd)': {
@@ -91,14 +91,16 @@ class ErrorRowInner extends React.Component<ErrorRowProps, ErrorRowState> {
             {checkbox === 'pending' ? (
               <CircularProgress size={20} />
             ) : (
-              <Checkbox
-                classes={{
-                  root: classes.checkboxRoot,
-                }}
-                checked={checkbox === 'selected'}
-                onChange={() => this.handleSelect()}
-                color="primary"
-              />
+              <div style={{ paddingLeft: 30 }}>
+                <Checkbox
+                  classes={{
+                    root: classes.checkboxRoot,
+                  }}
+                  checked={checkbox === 'selected'}
+                  onChange={() => this.handleSelect()}
+                  color="primary"
+                />
+              </div>
             )}
           </div>
         </TableCell>
