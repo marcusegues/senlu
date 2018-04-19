@@ -67,12 +67,13 @@ class NavBarInner extends React.Component {
           }}
         >
           <TextInputField
+            style={{ marginRight: 0 }}
             label="Customer Id"
             value={this.state.customerId}
             onChange={event => this.handleChangeCustomerId(event)}
           />
           <Button color="primary" onClick={() => this.handleSetCustomerId()}>
-            Ok
+            Update
           </Button>
           <TextInputField
             label="Timespan start"
