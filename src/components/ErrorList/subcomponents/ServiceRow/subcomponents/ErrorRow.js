@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
-import { TableBody, TableCell, TableRow } from 'material-ui/Table';
+import { TableCell, TableRow } from 'material-ui/Table';
 import { CircularProgress } from 'material-ui/Progress';
 import Checkbox from 'material-ui/Checkbox';
 import type { DumbledoreApi } from '../../../../../api/dumbledore';

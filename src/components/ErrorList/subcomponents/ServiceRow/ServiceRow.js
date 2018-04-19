@@ -1,12 +1,7 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import { ListItem, ListItemText } from 'material-ui/List';
-import Table, {
-  TableCell,
-  TableHead,
-  TableRow,
-  TableBody,
-} from 'material-ui/Table';
+import Table, { TableHead, TableRow, TableBody } from 'material-ui/Table';
 import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import Collapse from 'material-ui/transitions/Collapse';
@@ -16,7 +11,7 @@ import { CustomTableCell } from '../../../Table/CustomTableCell';
 
 const uuidv4 = require('uuid/v4');
 
-const styles = theme => ({
+const styles = () => ({
   row: {
     height: 40,
   },
@@ -88,7 +83,7 @@ export class ServiceRowInner extends React.Component {
                 <TableBody>
                   {errors &&
                     errors.map(
-                      ([errorCode, count, timeStart, timeEnd, info], idx) => (
+                      ([errorCode, count, timeStart, timeEnd, info]) => (
                         <ErrorRow
                           key={uuidv4()}
                           errorCode={errorCode}
