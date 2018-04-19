@@ -9,16 +9,23 @@ import * as dumbledoreApi from '../../api/dumbledore';
 import { ServiceRow } from './subcomponents/ServiceRow/ServiceRow';
 import { updateUIData } from '../../actions/ui';
 
+import type {
+  Fetching,
+  TimespanDelimiter,
+  CustomerId,
+  SessionId,
+} from '../../types/api';
+
 type ErrorListCardProps = {
   hermioneErrorsByService: Object,
   dumbledoreUserServices: Array<any>,
   updateUIData: () => void,
-  fetchingHermione: boolean,
-  fetchingDumbledore: boolean,
-  timespanStart: any,
-  timespanEnd: any,
-  customerId: number,
-  sessionId: number,
+  fetchingHermione: Fetching,
+  fetchingDumbledore: Fetching,
+  timespanStart: TimespanDelimiter,
+  timespanEnd: TimespanDelimiter,
+  customerId: CustomerId,
+  sessionId: SessionId,
   classes: Object,
 };
 

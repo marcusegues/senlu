@@ -1,12 +1,12 @@
 import React from 'react';
-import SvgIcon from 'material-ui/SvgIcon';
 
-export const TrafficLight = ({ onClick, color }) => (
+export const TrafficLight = ({ onClick = () => {}, color }) => (
   <svg
     viewBox="0 0 125 62"
     width="50"
     height="25"
     style={{ display: 'flex', alignItems: 'center' }}
+    onClick={onClick}
   >
     <g>
       <rect

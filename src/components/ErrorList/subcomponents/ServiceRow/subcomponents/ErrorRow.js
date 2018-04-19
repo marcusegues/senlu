@@ -20,6 +20,10 @@ type ErrorRowProps = {
   onSelectError: () => DumbledoreApi,
   errorCode: ErrorCode,
   count: number,
+  timeStart: string,
+  timeEnd: string,
+  info: string,
+  classes: Object,
 };
 
 type ErrorRowState = {
