@@ -9,8 +9,9 @@ import type { ErrorCode } from '../../../../../types/api';
 
 const styles = {
   root: {
-    height: 60,
+    height: 40,
   },
+  root2: { height: 30, width: 30 },
 };
 
 type CheckBoxState = 'notSelected' | 'selected' | 'pending';
@@ -75,16 +76,29 @@ class ErrorRowInner extends React.Component<ErrorRowProps, ErrorRowState> {
             root: classes.root,
           }}
         >
-          <TableCell>
-            {checkbox === 'pending' ? (
-              <CircularProgress />
-            ) : (
-              <Checkbox
-                checked={checkbox === 'selected'}
-                onChange={() => this.handleSelect()}
-                color="primary"
-              />
-            )}
+          <TableCell padding="checkbox">
+            <div
+              style={{
+                display: 'flex',
+                height: 40,
+                width: 40,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {checkbox === 'pending' ? (
+                <CircularProgress size={20} />
+              ) : (
+                <Checkbox
+                  classes={{
+                    root: classes.root2,
+                  }}
+                  checked={checkbox === 'selected'}
+                  onChange={() => this.handleSelect()}
+                  color="primary"
+                />
+              )}
+            </div>
           </TableCell>
           <TableCell>{errorCode}</TableCell>
           <TableCell>{count}</TableCell>

@@ -28,6 +28,7 @@ export class ServiceRow extends React.Component {
         </ListItem>
       );
     }
+
     return (
       <React.Fragment>
         <ListItem button onClick={() => this.handleToggleExpand()}>
