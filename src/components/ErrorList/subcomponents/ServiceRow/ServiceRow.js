@@ -1,15 +1,25 @@
 import React from 'react';
+import { withStyles } from 'material-ui/styles';
 import { ListItem, ListItemText } from 'material-ui/List';
 import Table, { TableCell, TableHead, TableRow } from 'material-ui/Table';
 import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import Collapse from 'material-ui/transitions/Collapse';
 import { ErrorRow } from './subcomponents/ErrorRow';
-import { TrafficLightGreen } from '../../../../icons/svg/trafficLightGreen';
+import { TrafficLightGreen } from '../../../../svg/TrafficLightGreen';
 
 const uuidv4 = require('uuid/v4');
 
-export class ServiceRow extends React.Component {
+const styles = {
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+};
+
+class ServiceRowInner extends React.Component {
   state = {
     expanded: false,
   };
@@ -30,8 +40,21 @@ export class ServiceRow extends React.Component {
     }
     return (
       <React.Fragment>
-        <ListItem button onClick={() => this.handleToggleExpand()}>
-          <ListItemText primary={service} />
+        <ListItem
+          button
+          onClick={() => this.handleToggleExpand()}
+          classes={{
+            root: this.props.classes.root,
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ flex: 0.9 }}>
+              <ListItemText primary={service} />
+            </div>
+            <div style={{ flex: 0.1 }}>
+              <TrafficLightGreen />
+            </div>
+          </div>
           {/* eslint-disable-next-line no-nested-ternary */}
           {errors.length ? (
             this.state.expanded ? (
@@ -75,3 +98,5 @@ export class ServiceRow extends React.Component {
     );
   }
 }
+
+export const ServiceRow = withStyles(styles)(ServiceRowInner);
