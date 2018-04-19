@@ -1,25 +1,15 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
 import { ListItem, ListItemText } from 'material-ui/List';
 import Table, { TableCell, TableHead, TableRow } from 'material-ui/Table';
 import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import Collapse from 'material-ui/transitions/Collapse';
 import { ErrorRow } from './subcomponents/ErrorRow';
-import { TrafficLightGreen } from '../../../../svg/TrafficLightGreen';
+import { TrafficLight } from '../../../../svg/TrafficLight';
 
 const uuidv4 = require('uuid/v4');
 
-const styles = {
-  root: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-};
-
-class ServiceRowInner extends React.Component {
+export class ServiceRow extends React.Component {
   state = {
     expanded: false,
   };
@@ -40,21 +30,20 @@ class ServiceRowInner extends React.Component {
     }
     return (
       <React.Fragment>
-        <ListItem
-          button
-          onClick={() => this.handleToggleExpand()}
-          classes={{
-            root: this.props.classes.root,
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ flex: 0.9 }}>
-              <ListItemText primary={service} />
-            </div>
-            <div style={{ flex: 0.1 }}>
-              <TrafficLightGreen />
-            </div>
-          </div>
+        <ListItem button onClick={() => this.handleToggleExpand()}>
+          {(() => {
+            const len = errors.length;
+            switch (true) {
+              case len === 0:
+                return <TrafficLight color="green" />;
+              case len < 10:
+                return <TrafficLight color="yellow" />;
+              default:
+                return <TrafficLight color="red" />;
+            }
+          })()}
+          <ListItemText primary={service} />
+
           {/* eslint-disable-next-line no-nested-ternary */}
           {errors.length ? (
             this.state.expanded ? (
@@ -98,5 +87,3 @@ class ServiceRowInner extends React.Component {
     );
   }
 }
-
-export const ServiceRow = withStyles(styles)(ServiceRowInner);
