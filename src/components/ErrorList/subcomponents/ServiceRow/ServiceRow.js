@@ -1,15 +1,28 @@
 import React from 'react';
+import { withStyles } from 'material-ui/styles';
 import { ListItem, ListItemText } from 'material-ui/List';
-import Table, { TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Table, {
+  TableCell,
+  TableHead,
+  TableRow,
+  TableBody,
+} from 'material-ui/Table';
 import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import Collapse from 'material-ui/transitions/Collapse';
 import { ErrorRow } from './subcomponents/ErrorRow';
 import { TrafficLight } from '../../../../svg/TrafficLight';
+import { CustomTableCell } from '../../../Table/CustomTableCell';
 
 const uuidv4 = require('uuid/v4');
 
-export class ServiceRow extends React.Component {
+const styles = theme => ({
+  row: {
+    height: 40,
+  },
+});
+
+export class ServiceRowInner extends React.Component {
   state = {
     expanded: false,
   };
@@ -19,7 +32,7 @@ export class ServiceRow extends React.Component {
   }
 
   render() {
-    const { service, errors, onSelectError } = this.props;
+    const { service, errors, onSelectError, classes } = this.props;
     if (typeof errors === 'string') {
       // when there are no errors, errors is '"No logs for timespan."
       return (
@@ -59,27 +72,37 @@ export class ServiceRow extends React.Component {
             <div style={{ marginLeft: 10, marginRight: 10 }}>
               <Table>
                 <TableHead>
-                  <TableRow>
-                    <TableCell />
-                    <TableCell>Error Code</TableCell>
-                    <TableCell numeric>Count</TableCell>
-                    <TableCell>Time Start</TableCell>
-                    <TableCell>Time End</TableCell>
-                    <TableCell>Info</TableCell>
+                  <TableRow
+                    classes={{
+                      root: classes.row,
+                    }}
+                  >
+                    <CustomTableCell>Select Degradation</CustomTableCell>
+                    <CustomTableCell>Error Code</CustomTableCell>
+                    <CustomTableCell numeric>Count</CustomTableCell>
+                    <CustomTableCell>Time Start</CustomTableCell>
+                    <CustomTableCell>Time End</CustomTableCell>
+                    <CustomTableCell>Info</CustomTableCell>
                   </TableRow>
                 </TableHead>
-                {errors &&
-                  errors.map(([errorCode, count, timeStart, timeEnd, info]) => (
-                    <ErrorRow
-                      key={uuidv4()}
-                      errorCode={errorCode}
-                      count={count}
-                      timeStart={timeStart}
-                      timeEnd={timeEnd}
-                      info={info}
-                      onSelectError={() => onSelectError(service, errorCode)}
-                    />
-                  ))}
+                <TableBody>
+                  {errors &&
+                    errors.map(
+                      ([errorCode, count, timeStart, timeEnd, info], idx) => (
+                        <ErrorRow
+                          key={uuidv4()}
+                          errorCode={errorCode}
+                          count={count}
+                          timeStart={timeStart}
+                          timeEnd={timeEnd}
+                          info={info}
+                          onSelectError={() =>
+                            onSelectError(service, errorCode)
+                          }
+                        />
+                      )
+                    )}
+                </TableBody>
               </Table>
             </div>
           </Collapse>
@@ -88,3 +111,5 @@ export class ServiceRow extends React.Component {
     );
   }
 }
+
+export const ServiceRow = withStyles(styles)(ServiceRowInner);

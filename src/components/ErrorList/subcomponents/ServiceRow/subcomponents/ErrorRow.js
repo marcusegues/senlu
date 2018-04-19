@@ -7,12 +7,15 @@ import Checkbox from 'material-ui/Checkbox';
 import type { DumbledoreApi } from '../../../../../api/dumbledore';
 import type { ErrorCode } from '../../../../../types/api';
 
-const styles = {
-  root: {
+const styles = theme => ({
+  checkboxRoot: { height: 30, width: 30, paddingLeft: 30 },
+  row: {
     height: 40,
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
   },
-  root2: { height: 30, width: 30 },
-};
+});
 
 type CheckBoxState = 'notSelected' | 'selected' | 'pending';
 
@@ -70,43 +73,41 @@ class ErrorRowInner extends React.Component<ErrorRowProps, ErrorRowState> {
     const { errorCode, count, timeStart, timeEnd, info, classes } = this.props;
     const { checkbox } = this.state;
     return (
-      <TableBody>
-        <TableRow
-          classes={{
-            root: classes.root,
-          }}
-        >
-          <TableCell padding="checkbox">
-            <div
-              style={{
-                display: 'flex',
-                height: 40,
-                width: 40,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              {checkbox === 'pending' ? (
-                <CircularProgress size={20} />
-              ) : (
-                <Checkbox
-                  classes={{
-                    root: classes.root2,
-                  }}
-                  checked={checkbox === 'selected'}
-                  onChange={() => this.handleSelect()}
-                  color="primary"
-                />
-              )}
-            </div>
-          </TableCell>
-          <TableCell>{errorCode}</TableCell>
-          <TableCell>{count}</TableCell>
-          <TableCell>{timeStart}</TableCell>
-          <TableCell>{timeEnd}</TableCell>
-          <TableCell>{info}</TableCell>
-        </TableRow>
-      </TableBody>
+      <TableRow
+        classes={{
+          root: classes.row,
+        }}
+      >
+        <TableCell padding="checkbox">
+          <div
+            style={{
+              display: 'flex',
+              height: 40,
+              width: 40,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {checkbox === 'pending' ? (
+              <CircularProgress size={20} />
+            ) : (
+              <Checkbox
+                classes={{
+                  root: classes.checkboxRoot,
+                }}
+                checked={checkbox === 'selected'}
+                onChange={() => this.handleSelect()}
+                color="primary"
+              />
+            )}
+          </div>
+        </TableCell>
+        <TableCell>{errorCode}</TableCell>
+        <TableCell>{count}</TableCell>
+        <TableCell>{timeStart}</TableCell>
+        <TableCell>{timeEnd}</TableCell>
+        <TableCell>{info}</TableCell>
+      </TableRow>
     );
   }
 }
