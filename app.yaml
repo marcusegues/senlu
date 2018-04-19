@@ -4,3 +4,7 @@ service: luna
 
 manual_scaling:
   instances: 1
+
+endpoints_api_service:
+  name: luna-dot-ql-sen-stag.appspot.com
+  rollout_strategy: managed
