@@ -1,5 +1,6 @@
 // @flow
 import type { ApiState } from '../types/reducers/api';
+import { formatServiceName } from '../utils';
 
 const initialState: ApiState = {
   timespanStart: { date: '2018-02-27', time: '00:00' },
@@ -54,7 +55,7 @@ export const api = (state: ApiState = initialState, action: any) => {
     case 'SET_DUMBLEDORE_USER_SERVICES': {
       return {
         ...state,
-        dumbledoreUserServices: action.data,
+        dumbledoreUserServices: action.data.map(formatServiceName),
       };
     }
     default: {
