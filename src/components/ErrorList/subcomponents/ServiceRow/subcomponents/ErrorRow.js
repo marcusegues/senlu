@@ -91,16 +91,14 @@ class ErrorRowInner extends React.Component<ErrorRowProps, ErrorRowState> {
             {checkbox === 'pending' ? (
               <CircularProgress size={20} />
             ) : (
-              <div style={{ paddingLeft: 30 }}>
-                <Checkbox
-                  classes={{
-                    root: classes.checkboxRoot,
-                  }}
-                  checked={checkbox === 'selected'}
-                  onChange={() => this.handleSelect()}
-                  color="primary"
-                />
-              </div>
+              <Checkbox
+                classes={{
+                  root: classes.checkboxRoot,
+                }}
+                checked={checkbox === 'selected'}
+                onChange={() => this.handleSelect()}
+                color="primary"
+              />
             )}
           </div>
         </TableCell>

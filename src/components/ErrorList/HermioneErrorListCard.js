@@ -74,7 +74,7 @@ class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
     return (
       <Paper
         style={{
-          width: 800,
+          width: 900,
           height: '100%',
           overflow: 'hidden',
           display: 'flex',
