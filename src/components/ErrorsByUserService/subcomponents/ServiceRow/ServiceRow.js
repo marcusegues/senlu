@@ -5,9 +5,9 @@ import Table, { TableHead, TableRow, TableBody } from 'material-ui/Table';
 import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import Collapse from 'material-ui/transitions/Collapse';
-import { ErrorRow } from './subcomponents/ErrorRow';
+import { ErrorRow } from './subcomponents/ErrorList/subcomponents/ErrorRow';
 import { TrafficLight } from '../../../../svg/TrafficLight';
-import { CustomTableCell } from '../../../Table/CustomTableCell';
+import { ErrorList } from './subcomponents/ErrorList/ErrorList';
 
 const uuidv4 = require('uuid/v4');
 
@@ -64,42 +64,11 @@ export class ServiceRowInner extends React.Component {
         </ListItem>
         {errors.length ? (
           <Collapse in={this.state.expanded} timeout="auto">
-            <div style={{ marginLeft: 10, marginRight: 10 }}>
-              <Table>
-                <TableHead>
-                  <TableRow
-                    classes={{
-                      root: classes.row,
-                    }}
-                  >
-                    <CustomTableCell>Select Degradation</CustomTableCell>
-                    <CustomTableCell>Error Code</CustomTableCell>
-                    <CustomTableCell numeric>Count</CustomTableCell>
-                    <CustomTableCell>Time Start</CustomTableCell>
-                    <CustomTableCell>Time End</CustomTableCell>
-                    <CustomTableCell>Info</CustomTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {errors &&
-                    errors.map(
-                      ([errorCode, count, timeStart, timeEnd, info]) => (
-                        <ErrorRow
-                          key={uuidv4()}
-                          errorCode={errorCode}
-                          count={count}
-                          timeStart={timeStart}
-                          timeEnd={timeEnd}
-                          info={info}
-                          onSelectError={() =>
-                            onSelectError(service, errorCode)
-                          }
-                        />
-                      )
-                    )}
-                </TableBody>
-              </Table>
-            </div>
+            <ErrorList
+              errors={errors}
+              onSelectError={onSelectError}
+              service={service}
+            />
           </Collapse>
         ) : null}
       </React.Fragment>

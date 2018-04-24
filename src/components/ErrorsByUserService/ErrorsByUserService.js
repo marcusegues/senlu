@@ -46,7 +46,7 @@ const styles = {
   },
 };
 
-class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
+class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
   componentDidMount() {
     this.props.updateUIData();
   }
@@ -149,7 +149,6 @@ const mapDispatchToProps = dispatch => ({
   updateUIData: () => dispatch(updateUIData()),
 });
 
-export const HermioneErrorListCard = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(ErrorListCard));
+export const ErrorsByUserService = connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(ErrorsByUserServiceInner)
+);
