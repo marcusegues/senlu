@@ -30,8 +30,8 @@ type ErrorListCardProps = {
   errorsByService: Object,
   userServices: Array<any>,
   updateUIData: () => void,
-  fetchingHermione: Fetching,
-  fetchingDumbledore: Fetching,
+  fetchingUserServices: Fetching,
+  fetchingErrorsByService: Fetching,
   timeSpanStart: TimeSpanDelimiter,
   timeSpanEnd: TimeSpanDelimiter,
   customerId: CustomerId,
@@ -74,7 +74,9 @@ class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
   }
 
   fetchingData() {
-    return this.props.fetchingHermione || this.props.fetchingDumbledore;
+    return (
+      this.props.fetchingUserServices || this.props.fetchingErrorsByService
+    );
   }
 
   render() {

@@ -6,8 +6,8 @@ export const setFetchingUserServices = fetching => ({
   fetching,
 });
 
-export const setDumbledoreUserServices = data => ({
-  type: 'SET_DUMBLEDORE_USER_SERVICES',
+export const setUserServices = data => ({
+  type: 'SET_USER_SERVICES',
   data,
 });
 
@@ -16,7 +16,7 @@ export const fetchDumbledoreUserServices = () => (dispatch, getState) => {
   const customerId = getCustomerId(state);
   dispatch(setFetchingUserServices(true));
   return dumbledoreApi.userServices(customerId).then(data => {
-    dispatch(setDumbledoreUserServices(data.services));
+    dispatch(setUserServices(data.services));
     dispatch(setFetchingUserServices(false));
   });
 };

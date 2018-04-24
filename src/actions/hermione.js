@@ -3,7 +3,7 @@ import * as hermioneApi from '../api/hermione';
 import { getCustomerId, getTimeSpanEnd, getTimeSpanStart } from '../selectors';
 
 export const setFetchingErrorsByService = fetching => ({
-  type: 'SET_FETCHING_HERMIONE',
+  type: 'SET_FETCHING_ERRORS_BY_SERVICE',
   fetching,
 });
 
