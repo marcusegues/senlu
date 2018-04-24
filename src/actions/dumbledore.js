@@ -1,7 +1,8 @@
 import * as dumbledoreApi from '../api/dumbledore';
+import { getCustomerId } from '../selectors';
 
-export const setFetchingDumbledore = fetching => ({
-  type: 'SET_FETCHING_DUMBLEDORE',
+export const setFetchingUserServices = fetching => ({
+  type: 'SET_FETCHING_USER_SERVICES',
   fetching,
 });
 
@@ -12,10 +13,11 @@ export const setDumbledoreUserServices = data => ({
 
 export const fetchDumbledoreUserServices = () => (dispatch, getState) => {
   const state = getState();
-  const { customerId } = state.api;
-  dispatch(setFetchingDumbledore(true));
+  const customerId = getCustomerId(state);
+  dispatch(setFetchingUserServices(true));
   return dumbledoreApi.userServices(customerId).then(data => {
+    console.log('Dumbledore data is', data);
     dispatch(setDumbledoreUserServices(data.services));
-    dispatch(setFetchingDumbledore(false));
+    dispatch(setFetchingUserServices(false));
   });
 };

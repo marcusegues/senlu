@@ -11,19 +11,29 @@ import { updateUIData } from '../../actions/ui';
 
 import type {
   Fetching,
-  TimespanDelimiter,
+  TimeSpanDelimiter,
   CustomerId,
   SessionId,
-} from '../../types/api';
+} from '../../types/reducers/query';
+import {
+  getCustomerId,
+  getErrorsByService,
+  getFetchingErrorsByService,
+  getFetchingUserServices,
+  getSessionId,
+  getTimeSpanEnd,
+  getTimeSpanStart,
+  getUserServices,
+} from '../../selectors';
 
 type ErrorListCardProps = {
-  hermioneErrorsByService: Object,
-  dumbledoreUserServices: Array<any>,
+  errorsByService: Object,
+  userServices: Array<any>,
   updateUIData: () => void,
   fetchingHermione: Fetching,
   fetchingDumbledore: Fetching,
-  timespanStart: TimespanDelimiter,
-  timespanEnd: TimespanDelimiter,
+  timeSpanStart: TimeSpanDelimiter,
+  timeSpanEnd: TimeSpanDelimiter,
   customerId: CustomerId,
   sessionId: SessionId,
   classes: Object,
@@ -43,20 +53,20 @@ class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
 
   formatData() {
     const data = {};
-    this.props.dumbledoreUserServices.forEach(service => {
-      data[service] = this.props.hermioneErrorsByService[service] || [];
+    this.props.userServices.forEach(service => {
+      data[service] = this.props.errorsByService[service] || [];
     });
     return data;
   }
 
   handleSelectError(userService, errorCode) {
-    const { timespanStart, timespanEnd, customerId, sessionId } = this.props;
+    const { timeSpanStart, timeSpanEnd, customerId, sessionId } = this.props;
     return dumbledoreApi
       .selectCustomerDegradation(
         customerId,
         sessionId,
-        timespanStart,
-        timespanEnd,
+        timeSpanStart,
+        timeSpanEnd,
         userService,
         errorCode
       )
@@ -74,7 +84,6 @@ class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
     return (
       <Paper
         style={{
-          width: 900,
           height: '100%',
           overflow: 'hidden',
           display: 'flex',
@@ -124,14 +133,14 @@ class ErrorListCard extends React.Component<ErrorListCardProps, {}> {
 }
 
 const mapStateToProps = state => ({
-  customerId: state.api.customerId,
-  sessionId: state.api.sessionId,
-  timespanStart: state.api.timespanStart,
-  timespanEnd: state.api.timespanEnd,
-  fetchingHermione: state.api.fetchingHermione,
-  fetchingDumbledore: state.api.fetchingDumbledore,
-  hermioneErrorsByService: state.api.hermioneErrorsByService,
-  dumbledoreUserServices: state.api.dumbledoreUserServices,
+  customerId: getCustomerId(state),
+  sessionId: getSessionId(state),
+  timeSpanStart: getTimeSpanStart(state),
+  timeSpanEnd: getTimeSpanEnd(state),
+  fetchingErrorsByService: getFetchingErrorsByService(state),
+  fetchingUserServices: getFetchingUserServices(state),
+  errorsByService: getErrorsByService(state),
+  userServices: getUserServices(state),
 });
 
 const mapDispatchToProps = dispatch => ({

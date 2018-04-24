@@ -5,7 +5,7 @@ import { TableCell, TableRow } from 'material-ui/Table';
 import { CircularProgress } from 'material-ui/Progress';
 import Checkbox from 'material-ui/Checkbox';
 import type { DumbledoreApi } from '../../../../../api/dumbledore';
-import type { ErrorCode } from '../../../../../types/api';
+import type { ErrorCode } from '../../../../../types/reducers/query';
 
 const styles = theme => ({
   checkboxRoot: { height: 30, width: 30 },

@@ -7,6 +7,12 @@ import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import { TextInputField } from '../Input/TextInputField';
 import { updateUIData } from '../../actions/ui';
+import {
+  getCustomerId,
+  getFetchingErrorsByService,
+  getTimeSpanEnd,
+  getTimeSpanStart,
+} from '../../selectors';
 
 const styles = {
   root: {
@@ -43,7 +49,7 @@ class NavBarInner extends React.Component {
   };
 
   render() {
-    const { timespanStart, timespanEnd, classes } = this.props;
+    const { timeSpanStart, timeSpanEnd, classes } = this.props;
     return (
       <AppBar
         position="sticky"
@@ -78,13 +84,13 @@ class NavBarInner extends React.Component {
           <TextInputField
             label="Timespan start"
             type="datetime-local"
-            value={`${timespanStart.date}T${timespanStart.time}`}
+            value={`${timeSpanStart.date}T${timeSpanStart.time}`}
             onChange={event => this.handleChangeTimespanStart(event)}
           />
           <TextInputField
             label="Timespan end"
             type="datetime-local"
-            value={`${timespanEnd.date}T${timespanEnd.time}`}
+            value={`${timeSpanEnd.date}T${timeSpanEnd.time}`}
             onChange={event => this.handleChangeTimespanEnd(event)}
           />
         </div>
@@ -94,19 +100,19 @@ class NavBarInner extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  customerId: state.api.customerId,
-  timespanStart: state.api.timespanStart,
-  timespanEnd: state.api.timespanEnd,
-  fetchingHermione: state.api.fetchingHermione,
+  customerId: getCustomerId(state),
+  timeSpanStart: getTimeSpanStart(state),
+  timeSpanEnd: getTimeSpanEnd(state),
+  fetchingErrorsByService: getFetchingErrorsByService(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   setCustomerId: customerId =>
     dispatch({ type: 'SET_CUSTOMER_ID', customerId }),
-  setTimespanStart: timespanStart =>
-    dispatch({ type: 'SET_TIMESPAN_START', timespanStart }),
-  setTimespanEnd: timespanEnd =>
-    dispatch({ type: 'SET_TIMESPAN_END', timespanEnd }),
+  setTimeSpanStart: timeSpanStart =>
+    dispatch({ type: 'SET_TIMESPAN_START', timeSpanStart }),
+  setTimeSpanEnd: timeSpanEnd =>
+    dispatch({ type: 'SET_TIMESPAN_END', timeSpanEnd }),
   updateUIData: () => dispatch(updateUIData()),
 });
 

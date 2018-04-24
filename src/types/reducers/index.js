@@ -1,5 +1,6 @@
-import { ApiState } from './api';
+// @flow
+import type { QueryState } from './query';
 
-export const AppState = {
-  api: ApiState,
+export type AppState = {
+  query: QueryState,
 };

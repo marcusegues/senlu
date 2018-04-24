@@ -1,4 +1,7 @@
 // @flow
+import type { ParametersState } from './parameters';
+import type { HermioneState } from './hermione';
+import type { DumbledoreState } from './dumbledore';
 
 export type UserService =
   | 'Linear TV OTT'
@@ -86,3 +89,24 @@ export const userServices: UserServices = [
   'GMS Playstore',
   'Live Tv App',
 ];
+
+// Parameters
+export type CustomerId = number;
+export type SessionId = number;
+export type TimeSpanDelimiter = { date: string, time: string };
+
+// UI flags
+export type Fetching = boolean;
+
+// API response
+export type ErrorCode = any;
+export type Count = number;
+export type Error = [ErrorCode, number, string, string, string];
+export type ErrorArray = Array<Error>;
+export type ErrorsByService = { [UserService]: ErrorArray };
+
+export type QueryState = {
+  parameters: ParametersState,
+  hermione: HermioneState,
+  dumbledore: DumbledoreState,
+};

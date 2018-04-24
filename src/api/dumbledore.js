@@ -3,9 +3,9 @@ import type {
   CustomerId,
   ErrorCode,
   SessionId,
-  TimespanDelimiter,
-} from '../types/api';
-import type { UserService } from '../types';
+  TimeSpanDelimiter,
+  UserService,
+} from '../types/reducers/query';
 
 export type DumbledoreApi = Promise<?Object>;
 
@@ -17,7 +17,10 @@ export const allUserServices = (): DumbledoreApi =>
 export const userServices = (customerId: CustomerId): DumbledoreApi =>
   fetch(
     `https://dumbledore-dot-ql-sen-stag.appspot.com/userServices/${customerId}`
-  ).then(response => response.json());
+  ).then(response => {
+    console.log('Dumbledore response', response);
+    return response.json();
+  });
 
 // export const customerDegradationByCustomerId = (
 //   customerId: CustomerId,
@@ -38,8 +41,8 @@ export const userServices = (customerId: CustomerId): DumbledoreApi =>
 export const selectCustomerDegradation = (
   customerId: CustomerId,
   sessionId: SessionId,
-  timespanStart: TimespanDelimiter,
-  timespanEnd: TimespanDelimiter,
+  timeSpanStart: TimeSpanDelimiter,
+  timeSpanEnd: TimeSpanDelimiter,
   userService: UserService,
   errorCode: ErrorCode
 ): DumbledoreApi =>
@@ -51,8 +54,8 @@ export const selectCustomerDegradation = (
     body: JSON.stringify({
       customer_id: customerId,
       session_id: sessionId,
-      time_start: `${timespanStart.date} ${timespanStart.time}`,
-      time_end: `${timespanEnd.date} ${timespanEnd.time}`,
+      time_start: `${timeSpanStart.date} ${timeSpanStart.time}`,
+      time_end: `${timeSpanEnd.date} ${timeSpanEnd.time}`,
       user_service: userService,
       error_code: errorCode,
     }),
