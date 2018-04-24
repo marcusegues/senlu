@@ -15,6 +15,7 @@ export const getDegradationsByCustomerId = (
       }
     )
   ).then(response => {
+    // eslint-disable-next-line no-console
     console.log('Hermione response is', response);
     return response.json();
   });

@@ -26,6 +26,7 @@ export const fetchHermioneDegradations = () => (dispatch, getState) => {
       getHermioneTimespanFormat(timeSpanEnd)
     )
     .then(data => {
+      // eslint-disable-next-line no-console
       console.log('Hermione data is', data);
       dispatch(setErrorsByService(data));
       dispatch(setFetchingErrorsByService(false));

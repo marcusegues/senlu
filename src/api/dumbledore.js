@@ -18,6 +18,7 @@ export const userServices = (customerId: CustomerId): DumbledoreApi =>
   fetch(
     `https://dumbledore-dot-ql-sen-stag.appspot.com/userServices/${customerId}`
   ).then(response => {
+    // eslint-disable-next-line no-console
     console.log('Dumbledore response', response);
     return response.json();
   });

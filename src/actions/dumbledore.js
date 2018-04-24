@@ -16,7 +16,6 @@ export const fetchDumbledoreUserServices = () => (dispatch, getState) => {
   const customerId = getCustomerId(state);
   dispatch(setFetchingUserServices(true));
   return dumbledoreApi.userServices(customerId).then(data => {
-    console.log('Dumbledore data is', data);
     dispatch(setDumbledoreUserServices(data.services));
     dispatch(setFetchingUserServices(false));
   });
