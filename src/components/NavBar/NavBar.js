@@ -38,13 +38,13 @@ class NavBarInner extends React.Component {
 
   handleChangeTimespanStart = event => {
     const [date, time] = event.target.value.split('T');
-    this.props.setTimespanStart({ date, time });
+    this.props.setTimeSpanStart({ date, time });
     this.props.updateUIData();
   };
 
   handleChangeTimespanEnd = event => {
     const [date, time] = event.target.value.split('T');
-    this.props.setTimespanEnd({ date, time });
+    this.props.setTimeSpanEnd({ date, time });
     this.props.updateUIData();
   };
 

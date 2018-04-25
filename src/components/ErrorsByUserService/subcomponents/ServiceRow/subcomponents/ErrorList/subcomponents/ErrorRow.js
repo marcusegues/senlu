@@ -14,7 +14,6 @@ import type {
 import { Version } from '../../../../../../../types/reducers/query';
 
 const styles = theme => ({
-  checkboxRoot: { height: 30, width: 30 },
   row: {
     height: 40,
     '&:nth-of-type(odd)': {
@@ -86,35 +85,7 @@ class ErrorRowInner extends React.Component<ErrorRowProps, ErrorRowState> {
     } = this.props;
     const { checkbox } = this.state;
     return (
-      <TableRow
-        classes={{
-          root: classes.row,
-        }}
-      >
-        <TableCell padding="checkbox">
-          <div
-            style={{
-              display: 'flex',
-              height: 40,
-              width: 40,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            {checkbox === 'pending' ? (
-              <CircularProgress size={20} />
-            ) : (
-              <Checkbox
-                classes={{
-                  root: classes.checkboxRoot,
-                }}
-                checked={checkbox === 'selected'}
-                onChange={() => this.handleSelect()}
-                color="primary"
-              />
-            )}
-          </div>
-        </TableCell>
+      <TableRow>
         <TableCell>{degradation}</TableCell>
         <TableCell>{count}</TableCell>
         <TableCell>{timeStart}</TableCell>
