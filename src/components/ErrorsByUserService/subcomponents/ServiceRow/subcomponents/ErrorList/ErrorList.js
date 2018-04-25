@@ -23,15 +23,15 @@ export const ErrorList = ({ errors, onSelectError, service }) => {
       </TableHead>
       <TableBody>
         {errors &&
-          errors.map(([errorCode, count, timeStart, timeEnd, info]) => (
+          errors.map(error => (
             <ErrorRow
               key={uuidv4()}
-              errorCode={errorCode}
-              count={count}
-              timeStart={timeStart}
-              timeEnd={timeEnd}
-              info={info}
-              onSelectError={() => onSelectError(service, errorCode)}
+              degradation={error.degradation}
+              count={error.count}
+              timeStart={error.timeStart}
+              timeEnd={error.timeEnd}
+              version={error.version}
+              onSelectError={() => onSelectError(service, error.degradation)}
             />
           ))}
       </TableBody>

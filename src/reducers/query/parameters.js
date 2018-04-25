@@ -4,7 +4,7 @@ import type { ParametersState } from '../../types/reducers/query/parameters';
 const initialState: ParametersState = {
   timeSpanStart: { date: '2018-02-27', time: '00:00' },
   timeSpanEnd: { date: '2018-02-27', time: '22:00' },
-  customerId: 100360253,
+  customerId: '3ACFC5000020',
   sessionId: 1130344,
 };
 

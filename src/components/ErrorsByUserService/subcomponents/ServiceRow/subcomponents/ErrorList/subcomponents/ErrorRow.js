@@ -6,6 +6,12 @@ import { CircularProgress } from 'material-ui/Progress';
 import Checkbox from 'material-ui/Checkbox';
 import type { DumbledoreApi } from '../../../../../../../api/dumbledore';
 import type { ErrorCode } from '../../../../../../../types/reducers/query/index';
+import type {
+  Count,
+  Degradation,
+  TimeString,
+} from '../../../../../../../types/reducers/query';
+import { Version } from '../../../../../../../types/reducers/query';
 
 const styles = theme => ({
   checkboxRoot: { height: 30, width: 30 },
@@ -22,11 +28,11 @@ type CheckBoxState = 'notSelected' | 'selected' | 'pending';
 type ErrorRowProps = {
   checkbox: CheckBoxState,
   onSelectError: () => DumbledoreApi,
-  errorCode: ErrorCode,
-  count: number,
-  timeStart: string,
-  timeEnd: string,
-  info: string,
+  degradation: Degradation,
+  count: Count,
+  timeStart: TimeString,
+  timeEnd: TimeString,
+  version: Version,
   classes: Object,
 };
 
@@ -70,7 +76,14 @@ class ErrorRowInner extends React.Component<ErrorRowProps, ErrorRowState> {
   }
 
   render() {
-    const { errorCode, count, timeStart, timeEnd, info, classes } = this.props;
+    const {
+      degradation,
+      count,
+      timeStart,
+      timeEnd,
+      version,
+      classes,
+    } = this.props;
     const { checkbox } = this.state;
     return (
       <TableRow
@@ -102,11 +115,11 @@ class ErrorRowInner extends React.Component<ErrorRowProps, ErrorRowState> {
             )}
           </div>
         </TableCell>
-        <TableCell>{errorCode}</TableCell>
+        <TableCell>{degradation}</TableCell>
         <TableCell>{count}</TableCell>
         <TableCell>{timeStart}</TableCell>
         <TableCell>{timeEnd}</TableCell>
-        <TableCell>{info}</TableCell>
+        <TableCell>{version}</TableCell>
       </TableRow>
     );
   }

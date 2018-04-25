@@ -20,7 +20,7 @@ export const fetchHermioneDegradations = () => (dispatch, getState) => {
   dispatch(setFetchingErrorsByService(true));
   dispatch(setErrorsByService({})); // reset the data so UI does not show stale data
   return hermioneApi
-    .getDegradationsByCustomerId(
+    .getDegradationsByMac(
       customerId,
       getHermioneTimespanFormat(timeSpanStart),
       getHermioneTimespanFormat(timeSpanEnd)

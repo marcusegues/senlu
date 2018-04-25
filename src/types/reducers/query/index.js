@@ -99,9 +99,17 @@ export type TimeSpanDelimiter = { date: string, time: string };
 export type Fetching = boolean;
 
 // API response
-export type ErrorCode = any;
+export type Degradation = string;
 export type Count = number;
-export type Error = [ErrorCode, number, string, string, string];
+export type TimeString = string;
+export type Version = string;
+export type Error = {
+  degradation: Degradation,
+  count: Count,
+  timeStart: TimeString,
+  timeEnd: TimeString,
+  version: Version,
+};
 export type ErrorArray = Array<Error>;
 export type ErrorsByService = { [UserService]: ErrorArray };
 

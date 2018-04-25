@@ -74,7 +74,7 @@ class NavBarInner extends React.Component {
         >
           <TextInputField
             style={{ marginRight: 0 }}
-            label="Customer Id"
+            label="MAC Address"
             value={this.state.customerId}
             onChange={event => this.handleChangeCustomerId(event)}
           />
