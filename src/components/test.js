@@ -30,6 +30,10 @@ export default class Demo extends React.PureComponent {
           name: 'marcus',
           title: 'progr',
         },
+        {
+          name: 'mary',
+          title: 'progr',
+        },
       ],
       selection: [],
     };

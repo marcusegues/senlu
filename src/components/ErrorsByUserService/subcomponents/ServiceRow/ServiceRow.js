@@ -38,7 +38,7 @@ export class ServiceRowInner extends React.Component {
     }
 
     return (
-      <React.Fragment>
+      <div>
         <ListItem button onClick={() => this.handleToggleExpand()}>
           {(() => {
             const len = errors.length;
@@ -69,7 +69,7 @@ export class ServiceRowInner extends React.Component {
             service={service}
           />
         ) : null}
-      </React.Fragment>
+      </div>
     );
   }
 }
