@@ -6,7 +6,7 @@ export const setFetchingUserServices = fetching => ({
   fetching,
 });
 
-export const setUserServices = data => ({
+export const setServices = data => ({
   type: 'SET_SERVICES',
   data,
 });
@@ -15,8 +15,12 @@ export const fetchDumbledoreUserServices = () => (dispatch, getState) => {
   const state = getState();
   const macAddress = getMacAddress(state);
   dispatch(setFetchingUserServices(true));
+  dispatch(setServices([]));
   return dumbledoreApi.userServices(macAddress).then(data => {
-    dispatch(setUserServices(data.services));
     dispatch(setFetchingUserServices(false));
+    if (data[0]) {  // currently this is the only way of knowing a response was an error, need to improve this in the backend
+      throw new Error(data[0]);
+    }
+    return data
   });
 };

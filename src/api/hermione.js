@@ -35,5 +35,8 @@ export const getDegradationsByMac = (
         timespan_end: timeSpanEnd,
       }
     )
-  ).then(response => response.json());
+  ).then(response => {
+    console.log('Hermione response is', response);
+    return response.json();
+  });
 };

@@ -12,37 +12,37 @@ export const fetchErrors = (
   action: any
 ) => {
   switch (action.type) {
-    case 'SET_FETCH_MAC_ADDRESS_ERROR': {
+    case 'SET_ERROR_FETCH_MAC_ADDRESS': {
       return {
         ...state,
         errorFetchMacAddress: action.error,
       };
     }
-    case 'RESET_FETCH_MAC_ADDRESS_ERROR': {
+    case 'RESET_ERROR_FETCH_MAC_ADDRESS': {
       return {
         ...state,
         errorFetchMacAddress: null,
       };
     }
-    case 'SET_FETCH_SERVICES_ERROR': {
+    case 'SET_ERROR_FETCH_SERVICES': {
       return {
         ...state,
         errorFetchServices: action.error,
       };
     }
-    case 'RESET_FETCH_SERVICES_ERROR': {
+    case 'RESET_ERROR_FETCH_SERVICES': {
       return {
         ...state,
         errorFetchServices: null,
       };
     }
-    case 'SET_FETCH_ERRORS_BY_SERVICE_ERROR': {
+    case 'SET_ERROR_FETCH_ERRORS_BY_SERVICE': {
       return {
         ...state,
         errorFetchErrorsByService: action.error,
       };
     }
-    case 'RESET_FETCH_ERRORS_BY_SERVICE_ERROR': {
+    case 'RESET_ERROR_FETCH_ERRORS_BY_SERVICE': {
       return {
         ...state,
         errorFetchErrorsByService: null,

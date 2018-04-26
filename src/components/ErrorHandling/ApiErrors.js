@@ -50,7 +50,6 @@ class ApiErrorsInner extends React.Component {
       return null;
     }
     const {
-      classes,
       errorFetchMacAddress,
       errorFetchErrorsByService,
       errorFetchServices,
@@ -72,12 +71,17 @@ class ApiErrorsInner extends React.Component {
           <div>
             {errorFetchMacAddress ? (
               <div>
-                <span id="message-id">{errorFetchMacAddress}</span>
+                <span>{errorFetchMacAddress}</span>
               </div>
             ) : null}
             {errorFetchServices ? (
               <div>
-                <span id="message-id">{errorFetchServices}</span>
+                <span>{errorFetchServices}</span>
+              </div>
+            ) : null}
+            {errorFetchErrorsByService ? (
+              <div>
+                <span>{errorFetchErrorsByService}</span>
               </div>
             ) : null}
           </div>

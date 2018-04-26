@@ -44,7 +44,7 @@ const mapDispatchToProps = dispatch => ({
   setMacAddress: macAddress =>
     dispatch({ type: 'SET_MAC_ADDRESS', macAddress }),
   setFetchMacAddressError: error =>
-    dispatch({ type: 'SET_FETCH_MAC_ADDRESS_ERROR', error }),
+    dispatch({ type: 'SET_ERROR_FETCH_MAC_ADDRESS', error }),
 });
 
 export const App = connect(mapStateToProps, mapDispatchToProps)(AppInner);

@@ -26,9 +26,13 @@ export const fetchHermioneDegradations = () => (dispatch, getState) => {
       getHermioneTimespanFormat(timeSpanEnd)
     )
     .then(data => {
+      dispatch(setFetchingErrorsByService(false));
       // eslint-disable-next-line no-console
       console.log('Hermione data is', data);
-      dispatch(setErrorsByService(data));
-      dispatch(setFetchingErrorsByService(false));
+      if (data[0]) {
+        // currently this is the only way of knowing a response was an error, need to improve this in the backend
+        throw new Error(data[0]);
+      }
+      return data;
     });
 };
