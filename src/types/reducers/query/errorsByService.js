@@ -1,7 +1,7 @@
 // @flow
 import type { Fetching, ErrorsByService } from './index';
 
-export type HermioneState = {
+export type ErrorsByServiceState = {
   fetchingErrorsByService: Fetching,
   errorsByService: ErrorsByService,
 };

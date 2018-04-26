@@ -10,10 +10,16 @@ import { getMacAddress } from '../selectors';
 
 class AppInner extends React.Component {
   componentDidMount() {
-    const customerId = getQueryStringValue('customerid');
-    getMacAddressByCustomerId(customerId).then(data => {
-      this.props.setMacAddress(data.deviceAddress);
-    });
+    const customerId = getQueryStringValue('customer_id');
+    this.props.setCustomerId(customerId);
+    getMacAddressByCustomerId(customerId)
+      .then(data => {
+        this.props.setMacAddress(data.deviceAddress);
+      })
+      .catch(e => {
+        // eslint-disable-next-line no-console
+        console.log(e);
+      });
   }
 
   render() {
@@ -32,6 +38,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  setCustomerId: customerId =>
+    dispatch({ type: 'SET_CUSTOMER_ID', customerId }),
   setMacAddress: macAddress =>
     dispatch({ type: 'SET_MAC_ADDRESS', macAddress }),
 });

@@ -1,11 +1,11 @@
 // @flow
 import type {
   CustomerId,
-  ErrorCode,
   MacAddress,
   SessionId,
   TimeSpanDelimiter,
-  UserService,
+  Service,
+  Degradation,
 } from '../types/reducers/query';
 
 export type DumbledoreApi = Promise<?Object>;
@@ -32,38 +32,36 @@ export const getMacAddressByCustomerId = (
   ).then(response => {
     // eslint-disable-next-line no-console
     console.log('Dumbledore response device mac', response);
+    if (response.status !== 200) {
+      throw new Error('Invalid response');
+    }
+
     return response.json();
   });
 
 export const selectCustomerDegradation = (
-  macAddress: MacAddress,
+  customerId: CustomerId,
   sessionId: SessionId,
   timeSpanStart: TimeSpanDelimiter,
   timeSpanEnd: TimeSpanDelimiter,
-  userService: UserService,
-  errorCode: ErrorCode
-): DumbledoreApi => {
-  debugger;
-
-  return fetch(
-    'https://dumbledore-dot-ql-sen-stag.appspot.com/customerDegradation',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        customer_id: macAddress,
-        session_id: sessionId,
-        time_start: `${timeSpanStart.date} ${timeSpanStart.time}`,
-        time_end: `${timeSpanEnd.date} ${timeSpanEnd.time}`,
-        user_service: userService,
-        error_code: errorCode,
-      }),
-    }
-  ).catch(e => {
+  service: Service,
+  degradation: Degradation
+): DumbledoreApi =>
+  fetch('https://dumbledore-dot-ql-sen-stag.appspot.com/customerDegradation', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      customer_id: customerId,
+      session_id: sessionId,
+      time_start: `${timeSpanStart.date} ${timeSpanStart.time}`,
+      time_end: `${timeSpanEnd.date} ${timeSpanEnd.time}`,
+      user_service: service,
+      error_code: degradation,
+    }),
+  }).catch(e => {
     // eslint-disable-next-line no-console
     console.log('Error', e);
     return null;
   });
-};

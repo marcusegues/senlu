@@ -1,8 +1,10 @@
 import * as parametersApi from './parameters';
-import * as hermioneApi from './hermione';
-import * as dumbledoreApi from './dumbledore';
+import * as errorsByServiceApi from './errorsByService';
+import * as servicesApi from './services';
 
 // parameters
+export const getCustomerId = state =>
+  parametersApi.getCustomerId(state.parameters);
 export const getMacAddress = state =>
   parametersApi.getMacAddress(state.parameters);
 export const getSessionId = state =>
@@ -12,14 +14,13 @@ export const getTimeSpanStart = state =>
 export const getTimeSpanEnd = state =>
   parametersApi.getTimeSpanEnd(state.parameters);
 
-// hermione
+// errorsByService
 export const getFetchingErrorsByService = state =>
-  hermioneApi.getFetchingErrorsByService(state.hermione);
+  errorsByServiceApi.getFetchingErrorsByService(state.errorsByService);
 export const getErrorsByService = state =>
-  hermioneApi.getErrorsByService(state.hermione);
+  errorsByServiceApi.getErrorsByService(state.errorsByService);
 
-// dumbledore
-export const getFetchingUserServices = state =>
-  dumbledoreApi.getFetchingUserServices(state.dumbledore);
-export const getUserServices = state =>
-  dumbledoreApi.getUserServices(state.dumbledore);
+// services
+export const getFetchingServices = state =>
+  servicesApi.getFetchingServices(state.services);
+export const getServices = state => servicesApi.getServices(state.services);

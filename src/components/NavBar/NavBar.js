@@ -8,12 +8,10 @@ import { withStyles } from 'material-ui/styles';
 import { TextInputField } from '../Input/TextInputField';
 import { updateUIData } from '../../actions/ui';
 import {
-  getCustomerId,
   getFetchingErrorsByService,
   getTimeSpanEnd,
   getTimeSpanStart,
 } from '../../selectors';
-import { getMacAddress } from '../../selectors/query/parameters';
 
 const styles = {
   root: {
@@ -22,35 +20,41 @@ const styles = {
   },
 };
 class NavBarInner extends React.Component {
-  state = {
-    macAddress: this.props.macAddress,
-  };
-
-  handleChangeCustomerId = event => {
-    this.setState({
-      macAddress: event.target.value,
-    });
-  };
-
-  handleSetCustomerId() {
-    this.props.setCustomerId(this.state.macAddress);
-    this.props.updateUIData();
+  constructor(props) {
+    super(props);
+    this.state = {
+      timeSpanStart: this.props.timeSpanStart,
+      timeSpanEnd: this.props.timeSpanEnd,
+    };
   }
 
-  handleChangeTimespanStart = event => {
+  handleChangeTimeSpanStart = event => {
     const [date, time] = event.target.value.split('T');
-    this.props.setTimeSpanStart({ date, time });
-    this.props.updateUIData();
+    this.setState({ timeSpanStart: { date, time } });
   };
 
-  handleChangeTimespanEnd = event => {
+  handleChangeTimeSpanEnd = event => {
     const [date, time] = event.target.value.split('T');
-    this.props.setTimeSpanEnd({ date, time });
-    this.props.updateUIData();
+    this.setState({ timeSpanEnd: { date, time } });
   };
+
+  handleUpdate() {
+    const { timeSpanStart, timeSpanEnd } = this.state;
+    Promise.all([
+      this.props.setTimeSpanStart({
+        date: timeSpanStart.date,
+        time: timeSpanStart.time,
+      }),
+      this.props.setTimeSpanEnd({
+        date: timeSpanEnd.date,
+        time: timeSpanEnd.time,
+      }),
+    ]).then(() => this.props.updateUIData());
+  }
 
   render() {
-    const { timeSpanStart, timeSpanEnd, classes } = this.props;
+    const { classes } = this.props;
+    const { timeSpanStart, timeSpanEnd } = this.state;
     return (
       <AppBar
         position="sticky"
@@ -74,26 +78,20 @@ class NavBarInner extends React.Component {
           }}
         >
           <TextInputField
-            style={{ marginRight: 0 }}
-            label="MAC Address"
-            value={this.state.macAddress}
-            onChange={event => this.handleChangeCustomerId(event)}
-          />
-          <Button color="primary" onClick={() => this.handleSetCustomerId()}>
-            Update
-          </Button>
-          <TextInputField
             label="Timespan start"
             type="datetime-local"
             value={`${timeSpanStart.date}T${timeSpanStart.time}`}
-            onChange={event => this.handleChangeTimespanStart(event)}
+            onChange={event => this.handleChangeTimeSpanStart(event)}
           />
           <TextInputField
             label="Timespan end"
             type="datetime-local"
             value={`${timeSpanEnd.date}T${timeSpanEnd.time}`}
-            onChange={event => this.handleChangeTimespanEnd(event)}
+            onChange={event => this.handleChangeTimeSpanEnd(event)}
           />
+          <Button color="primary" onClick={() => this.handleUpdate()}>
+            Update
+          </Button>
         </div>
       </AppBar>
     );
@@ -101,19 +99,22 @@ class NavBarInner extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  macAddress: getMacAddress(state),
   timeSpanStart: getTimeSpanStart(state),
   timeSpanEnd: getTimeSpanEnd(state),
   fetchingErrorsByService: getFetchingErrorsByService(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  setMacAddress: macAddress =>
-    dispatch({ type: 'SET_MAC_ADDRESS', macAddress }),
   setTimeSpanStart: timeSpanStart =>
-    dispatch({ type: 'SET_TIMESPAN_START', timeSpanStart }),
+    new Promise(resolve => {
+      dispatch({ type: 'SET_TIMESPAN_START', timeSpanStart });
+      resolve();
+    }),
   setTimeSpanEnd: timeSpanEnd =>
-    dispatch({ type: 'SET_TIMESPAN_END', timeSpanEnd }),
+    new Promise(resolve => {
+      dispatch({ type: 'SET_TIMESPAN_END', timeSpanEnd });
+      resolve();
+    }),
   updateUIData: () => dispatch(updateUIData()),
 });
 

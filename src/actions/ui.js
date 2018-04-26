@@ -1,5 +1,5 @@
-import { fetchDumbledoreUserServices } from './dumbledore';
-import { fetchHermioneDegradations } from './hermione';
+import { fetchDumbledoreUserServices } from './services';
+import { fetchHermioneDegradations } from './errorsByService';
 
 export const updateUIData = () => dispatch => {
   dispatch(fetchHermioneDegradations());

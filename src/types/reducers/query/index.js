@@ -1,9 +1,9 @@
 // @flow
 import type { ParametersState } from './parameters';
-import type { HermioneState } from './hermione';
-import type { DumbledoreState } from './dumbledore';
+import type { ErrorsByServiceState } from './errorsByService';
+import type { ServicesState } from './services';
 
-export type UserService =
+export type Service =
   | 'Linear TV OTT'
   | 'Linear TV FttH'
   | 'Replay'
@@ -45,9 +45,9 @@ export type UserService =
   | 'GMS Playstore'
   | 'Live Tv App';
 
-export type UserServices = Array<UserService>;
+export type Services = Array<Service>;
 
-export const userServices: UserServices = [
+export const services: Services = [
   'Linear TV OTT',
   'Linear TV FttH',
   'Replay',
@@ -91,6 +91,7 @@ export const userServices: UserServices = [
 ];
 
 // Parameters
+export type CustomerId = string;
 export type MacAddress = string;
 export type SessionId = number;
 export type TimeSpanDelimiter = { date: string, time: string };
@@ -111,10 +112,10 @@ export type Error = {
   version: Version,
 };
 export type ErrorArray = Array<Error>;
-export type ErrorsByService = { [UserService]: ErrorArray };
+export type ErrorsByService = { [Service]: ErrorArray };
 
 export type QueryState = {
   parameters: ParametersState,
-  hermione: HermioneState,
-  dumbledore: DumbledoreState,
+  errorsByService: ErrorsByServiceState,
+  services: ServicesState,
 };

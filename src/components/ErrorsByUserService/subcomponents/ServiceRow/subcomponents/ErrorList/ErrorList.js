@@ -14,18 +14,17 @@ import {
 } from '@devexpress/dx-react-grid';
 import '../../../../../../styles/index.css';
 
-import * as dumbledoreApi from '../../../../../../api/dumbledore';
 import {
-  getCustomerId,
   getSessionId,
   getTimeSpanEnd,
   getTimeSpanStart,
 } from '../../../../../../selectors';
 import { getMacAddress } from '../../../../../../selectors/query/parameters';
+
 const uuidv4 = require('uuid/v4');
 
 const generateRows = errors =>
-  errors.map((error, idx) => ({
+  errors.map(error => ({
     id: uuidv4(),
     degradation: error.degradation,
     count: error.count,
@@ -34,9 +33,7 @@ const generateRows = errors =>
     version: error.version,
   }));
 
-const SelectionCellComponent = () => {};
-
-const CellComponent = ({ tableRow, tableColumn, style }) => {
+const CellComponent = ({ tableRow, tableColumn }) => {
   if (
     tableColumn.column.name === 'timeStart' ||
     tableColumn.column.name === 'timeEnd'
@@ -80,14 +77,9 @@ class ErrorListInner extends React.Component {
 
   changeSelection = newSelection => {
     const { selection } = this.state;
-    const {
-      macAddress,
-      sessionId,
-      timeSpanStart,
-      timeSpanEnd,
-      service,
-    } = this.props;
-    let selectionId, selectionDirection;
+    const { service } = this.props;
+    let selectionId;
+    let selectionDirection;
     if (newSelection.length > this.state.selection.length) {
       selectionId = newSelection[newSelection.length - 1];
       selectionDirection = 'select';
@@ -137,7 +129,9 @@ class ErrorListInner extends React.Component {
       <Grid rows={rows} columns={columns}>
         <SelectionState
           selection={selection}
-          onSelectionChange={selection => this.changeSelection(selection)}
+          onSelectionChange={selectionArray =>
+            this.changeSelection(selectionArray)
+          }
         />
         <SortingState
           defaultSorting={[{ columnName: 'timeStart', direction: 'asc' }]}

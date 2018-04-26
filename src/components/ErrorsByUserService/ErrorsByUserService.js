@@ -13,28 +13,29 @@ import type {
   Fetching,
   TimeSpanDelimiter,
   SessionId,
-  MacAddress,
+  CustomerId,
 } from '../../types/reducers/query';
 import {
   getErrorsByService,
   getFetchingErrorsByService,
-  getFetchingUserServices,
+  getFetchingServices,
   getSessionId,
   getTimeSpanEnd,
   getTimeSpanStart,
-  getUserServices,
+  getServices,
+  getMacAddress,
+  getCustomerId,
 } from '../../selectors';
-import { getMacAddress } from '../../selectors/query/parameters';
 
 type ErrorListCardProps = {
   errorsByService: Object,
-  userServices: Array<any>,
+  services: Array<any>,
   updateUIData: () => void,
   fetchingUserServices: Fetching,
   fetchingErrorsByService: Fetching,
   timeSpanStart: TimeSpanDelimiter,
   timeSpanEnd: TimeSpanDelimiter,
-  macAddress: MacAddress,
+  customerId: CustomerId,
   sessionId: SessionId,
   classes: Object,
 };
@@ -53,21 +54,21 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
 
   formatData() {
     const data = {};
-    this.props.userServices.forEach(service => {
+    this.props.services.forEach(service => {
       data[service] = this.props.errorsByService[service] || [];
     });
     return data;
   }
 
-  handleSelectError(userService, errorCode) {
-    const { timeSpanStart, timeSpanEnd, macAddress, sessionId } = this.props;
+  handleSelectError(service, errorCode) {
+    const { timeSpanStart, timeSpanEnd, customerId, sessionId } = this.props;
     return dumbledoreApi
       .selectCustomerDegradation(
-        macAddress,
+        customerId,
         sessionId,
         timeSpanStart,
         timeSpanEnd,
-        userService,
+        service,
         errorCode
       )
       .then(response => response && response.status === 200);
@@ -123,8 +124,8 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
                   key={service}
                   service={service}
                   errors={data[service]}
-                  onSelectError={(userService, errorCode) =>
-                    this.handleSelectError(userService, errorCode)
+                  onSelectError={(service, errorCode) =>
+                    this.handleSelectError(service, errorCode)
                   }
                 />
               ))}
@@ -135,14 +136,15 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
 }
 
 const mapStateToProps = state => ({
+  customerId: getCustomerId(state),
   macAddress: getMacAddress(state),
   sessionId: getSessionId(state),
   timeSpanStart: getTimeSpanStart(state),
   timeSpanEnd: getTimeSpanEnd(state),
   fetchingErrorsByService: getFetchingErrorsByService(state),
-  fetchingUserServices: getFetchingUserServices(state),
+  fetchingServices: getFetchingServices(state),
   errorsByService: getErrorsByService(state),
-  userServices: getUserServices(state),
+  services: getServices(state),
 });
 
 const mapDispatchToProps = dispatch => ({

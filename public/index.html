@@ -38,9 +38,14 @@
 
     <!-- Hack to fix the border bottom on the checkbox in the rows of the DevGrid table -->
   <style type="text/css">
-    .MuiTable-root-162 {
+    * [class*="MuiTable-root-"] {
       border-collapse: separate;
     }
+    .MuiTable-root-162, .MuiTable-root-161 {
+      border-collapse: separate;
+    }
+
+
   </style>
   </body>
 </html>
