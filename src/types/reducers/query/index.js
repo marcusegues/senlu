@@ -93,7 +93,7 @@ export const services: Services = [
 // Parameters
 export type CustomerId = string;
 export type MacAddress = string;
-export type SessionId = number;
+export type SessionId = string;
 export type TimeSpanDelimiter = { date: string, time: string };
 
 // UI flags

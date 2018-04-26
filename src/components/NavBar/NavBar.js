@@ -9,6 +9,8 @@ import { TextInputField } from '../Input/TextInputField';
 import { updateUIData } from '../../actions/ui';
 import {
   getFetchingErrorsByService,
+  getFetchMacAddressError,
+  getMacAddress,
   getTimeSpanEnd,
   getTimeSpanStart,
 } from '../../selectors';
@@ -68,31 +70,33 @@ class NavBarInner extends React.Component {
             Sentinel
           </Typography>
         </Toolbar>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            width: '100%',
-            backgroundColor: 'white',
-          }}
-        >
-          <TextInputField
-            label="Timespan start"
-            type="datetime-local"
-            value={`${timeSpanStart.date}T${timeSpanStart.time}`}
-            onChange={event => this.handleChangeTimeSpanStart(event)}
-          />
-          <TextInputField
-            label="Timespan end"
-            type="datetime-local"
-            value={`${timeSpanEnd.date}T${timeSpanEnd.time}`}
-            onChange={event => this.handleChangeTimeSpanEnd(event)}
-          />
-          <Button color="primary" onClick={() => this.handleUpdate()}>
-            Update
-          </Button>
-        </div>
+        {this.props.macAddress !== '' ? (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              width: '100%',
+              backgroundColor: 'white',
+            }}
+          >
+            <TextInputField
+              label="Timespan start"
+              type="datetime-local"
+              value={`${timeSpanStart.date}T${timeSpanStart.time}`}
+              onChange={event => this.handleChangeTimeSpanStart(event)}
+            />
+            <TextInputField
+              label="Timespan end"
+              type="datetime-local"
+              value={`${timeSpanEnd.date}T${timeSpanEnd.time}`}
+              onChange={event => this.handleChangeTimeSpanEnd(event)}
+            />
+            <Button color="primary" onClick={() => this.handleUpdate()}>
+              Update
+            </Button>
+          </div>
+        ) : null}
       </AppBar>
     );
   }
@@ -102,6 +106,7 @@ const mapStateToProps = state => ({
   timeSpanStart: getTimeSpanStart(state),
   timeSpanEnd: getTimeSpanEnd(state),
   fetchingErrorsByService: getFetchingErrorsByService(state),
+  macAddress: getMacAddress(state),
 });
 
 const mapDispatchToProps = dispatch => ({

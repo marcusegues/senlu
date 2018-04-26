@@ -12,7 +12,7 @@
     "lodash": "^4.17.10",
     "material-ui": "^1.0.0-beta.40",
     "material-ui-icons": "^1.0.0-beta.36",
-    "npm": "^6.0.0",
+    "npm": "^5.0.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-redux": "^5.0.7",

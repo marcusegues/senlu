@@ -6,7 +6,7 @@ const initialState: ParametersState = {
   timeSpanEnd: { date: '2018-02-27', time: '22:00' },
   customerId: '',
   macAddress: '',
-  sessionId: 1130344,
+  sessionId: '1130344',
 };
 
 export const parameters = (

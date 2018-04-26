@@ -94,7 +94,6 @@ class ErrorListInner extends React.Component {
       },
     });
     if (selectionDirection === 'select') {
-      debugger;
       this.props
         .onSelectError(service, this.state.rows[selectionId].degradation)
         .then(success => {

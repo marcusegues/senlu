@@ -33,7 +33,7 @@ export const getMacAddressByCustomerId = (
     // eslint-disable-next-line no-console
     console.log('Dumbledore response device mac', response);
     if (response.status !== 200) {
-      throw new Error('Invalid response');
+      throw new Error('Error obtaining MAC address.');
     }
 
     return response.json();

@@ -1,6 +1,7 @@
 import * as parametersApi from './parameters';
 import * as errorsByServiceApi from './errorsByService';
 import * as servicesApi from './services';
+import * as fetchErrorsApi from './fetchErrors';
 
 // parameters
 export const getCustomerId = state =>
@@ -24,3 +25,13 @@ export const getErrorsByService = state =>
 export const getFetchingServices = state =>
   servicesApi.getFetchingServices(state.services);
 export const getServices = state => servicesApi.getServices(state.services);
+
+// fetchErrors
+export const getErrorFetchMacAddress = state =>
+  fetchErrorsApi.getErrorFetchMacAddress(state.fetchErrors);
+
+export const getErrorFetchErrorsByService = state =>
+  fetchErrorsApi.getErrorFetchErrorsByService(state.fetchErrors);
+
+export const getErrorFetchServices = state =>
+    fetchErrorsApi.getErrorFetchServices(state.fetchErrors);

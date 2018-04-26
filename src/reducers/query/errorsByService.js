@@ -1,13 +1,13 @@
 // @flow
-import type { HermioneState } from '../../types/reducers/query/errorsByService';
+import type { ErrorsByServiceState } from '../../types/reducers/query/errorsByService';
 
-const initialState: HermioneState = {
+const initialState: ErrorsByServiceState = {
   fetchingErrorsByService: false,
   errorsByService: {},
 };
 
 export const errorsByService = (
-  state: HermioneState = initialState,
+  state: ErrorsByServiceState = initialState,
   action: any
 ) => {
   switch (action.type) {

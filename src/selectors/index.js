@@ -13,3 +13,12 @@ export const getErrorsByService = state =>
 export const getFetchingServices = state =>
   queryApi.getFetchingServices(state.query);
 export const getServices = state => queryApi.getServices(state.query);
+
+export const getErrorFetchMacAddress = state =>
+  queryApi.getErrorFetchMacAddress(state.query);
+
+export const getErrorFetchErrorsByService = state =>
+  queryApi.getErrorFetchErrorsByService(state.query);
+
+export const getErrorFetchServices = state =>
+    queryApi.getErrorFetchServices(state.query);
