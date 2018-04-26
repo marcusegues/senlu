@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
 import Snackbar from 'material-ui/Snackbar';
-import IconButton from 'material-ui/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import {
   getErrorFetchErrorsByService,
   getErrorFetchMacAddress,
@@ -42,6 +40,7 @@ class ApiErrorsInner extends React.Component {
       errorFetchServices
     );
   }
+
   render() {
     if (!this.errorsPresent()) {
       return null;
@@ -63,7 +62,6 @@ class ApiErrorsInner extends React.Component {
         }}
         open={this.state.open}
         autoHideDuration={6000}
-        onClose={this.handleClose}
         message={
           <div>
             {errorFetchMacAddress ? (
@@ -83,17 +81,6 @@ class ApiErrorsInner extends React.Component {
             ) : null}
           </div>
         }
-        action={[
-          <IconButton
-            key="close"
-            aria-label="Close"
-            color="inherit"
-            className={this.props.classes.close}
-            onClick={this.handleClose}
-          >
-            <CloseIcon />
-          </IconButton>,
-        ]}
       />
     );
   }

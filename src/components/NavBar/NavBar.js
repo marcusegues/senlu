@@ -82,19 +82,19 @@ class NavBarInner extends React.Component {
             }}
           >
             <TextInputField
-              label="Timespan start"
+              label="Startzeit"
               type="datetime-local"
               value={`${timeSpanStart.date}T${timeSpanStart.time}`}
               onChange={event => this.handleChangeTimeSpanStart(event)}
             />
             <TextInputField
-              label="Timespan end"
+              label="Endzeit"
               type="datetime-local"
               value={`${timeSpanEnd.date}T${timeSpanEnd.time}`}
               onChange={event => this.handleChangeTimeSpanEnd(event)}
             />
             <Button color="primary" onClick={() => this.handleUpdate()}>
-              Update
+              Aktualisieren
             </Button>
           </div>
         ) : null}

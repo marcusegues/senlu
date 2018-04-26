@@ -7,12 +7,14 @@ import { ErrorsByUserService } from './ErrorsByUserService/ErrorsByUserService';
 
 import { getQueryStringValue } from '../utils';
 import { getMacAddressByCustomerId } from '../api/dumbledore';
-import { getMacAddress } from '../selectors';
+import { getMacAddress, getSessionId } from '../selectors';
 
 class AppInner extends React.Component {
   componentDidMount() {
     const customerId = getQueryStringValue('customer_id');
+    const sessionId = getQueryStringValue('session_id');
     this.props.setCustomerId(customerId);
+    this.props.setSessionId(sessionId);
     getMacAddressByCustomerId(customerId)
       .then(data => {
         this.props.setMacAddress(data.deviceAddress);
@@ -22,13 +24,17 @@ class AppInner extends React.Component {
       });
   }
 
+  allParamsPresent() {
+    return this.props.macAddress !== '' && this.props.sessionId !== '';
+  }
+
   render() {
     return (
       <React.Fragment>
         <CssBaseline />
         <NavBar />
         <ApiErrors />
-        {this.props.macAddress !== '' ? <ErrorsByUserService /> : null}
+        {this.allParamsPresent() ? <ErrorsByUserService /> : null}
       </React.Fragment>
     );
   }
@@ -36,11 +42,13 @@ class AppInner extends React.Component {
 
 const mapStateToProps = state => ({
   macAddress: getMacAddress(state),
+  sessionId: getSessionId(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   setCustomerId: customerId =>
     dispatch({ type: 'SET_CUSTOMER_ID', customerId }),
+  setSessionId: sessionId => dispatch({ type: 'SET_SESSION_ID', sessionId }),
   setMacAddress: macAddress =>
     dispatch({ type: 'SET_MAC_ADDRESS', macAddress }),
   setFetchMacAddressError: error =>

@@ -55,10 +55,10 @@ class ErrorListInner extends React.Component {
 
     this.state = {
       columns: [
-        { name: 'degradation', title: 'Degradation' },
-        { name: 'count', title: 'Count' },
-        { name: 'timeStart', title: 'Time Start' },
-        { name: 'timeEnd', title: 'Time End' },
+        { name: 'degradation', title: 'Einschränkung' },
+        { name: 'count', title: 'Anzahl' },
+        { name: 'timeStart', title: 'Startzeit' },
+        { name: 'timeEnd', title: 'Endzeit' },
         { name: 'version', title: 'Version' },
       ],
       columnExtensions: [
