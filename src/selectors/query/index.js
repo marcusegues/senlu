@@ -3,8 +3,8 @@ import * as hermioneApi from './hermione';
 import * as dumbledoreApi from './dumbledore';
 
 // parameters
-export const getCustomerId = state =>
-  parametersApi.getCustomerId(state.parameters);
+export const getMacAddress = state =>
+  parametersApi.getMacAddress(state.parameters);
 export const getSessionId = state =>
   parametersApi.getSessionId(state.parameters);
 export const getTimeSpanStart = state =>

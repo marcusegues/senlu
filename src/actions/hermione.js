@@ -1,6 +1,6 @@
 import { getHermioneTimespanFormat } from '../utils/hermione';
 import * as hermioneApi from '../api/hermione';
-import { getCustomerId, getTimeSpanEnd, getTimeSpanStart } from '../selectors';
+import { getMacAddress, getTimeSpanEnd, getTimeSpanStart } from '../selectors';
 
 export const setFetchingErrorsByService = fetching => ({
   type: 'SET_FETCHING_ERRORS_BY_SERVICE',
@@ -14,14 +14,14 @@ export const setErrorsByService = data => ({
 
 export const fetchHermioneDegradations = () => (dispatch, getState) => {
   const state = getState();
-  const customerId = getCustomerId(state);
+  const macAddress = getMacAddress(state);
   const timeSpanStart = getTimeSpanStart(state);
   const timeSpanEnd = getTimeSpanEnd(state);
   dispatch(setFetchingErrorsByService(true));
   dispatch(setErrorsByService({})); // reset the data so UI does not show stale data
   return hermioneApi
     .getDegradationsByMac(
-      customerId,
+      macAddress,
       getHermioneTimespanFormat(timeSpanStart),
       getHermioneTimespanFormat(timeSpanEnd)
     )

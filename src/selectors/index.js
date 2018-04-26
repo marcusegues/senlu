@@ -1,7 +1,7 @@
 import * as queryApi from './query';
 
 // query
-export const getCustomerId = state => queryApi.getCustomerId(state.query);
+export const getMacAddress = state => queryApi.getMacAddress(state.query);
 export const getSessionId = state => queryApi.getSessionId(state.query);
 export const getTimeSpanStart = state => queryApi.getTimeSpanStart(state.query);
 export const getTimeSpanEnd = state => queryApi.getTimeSpanEnd(state.query);

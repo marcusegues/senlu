@@ -62,13 +62,15 @@ export class ServiceRowInner extends React.Component {
             )
           ) : null}
         </ListItem>
-        {errors.length ? (
-          <ErrorList
-            errors={errors}
-            onSelectError={onSelectError}
-            service={service}
-          />
-        ) : null}
+        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+          {errors.length ? (
+            <ErrorList
+              errors={errors}
+              onSelectError={onSelectError}
+              service={service}
+            />
+          ) : null}
+        </Collapse>
       </div>
     );
   }

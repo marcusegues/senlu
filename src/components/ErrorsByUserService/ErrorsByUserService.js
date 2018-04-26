@@ -12,11 +12,10 @@ import { updateUIData } from '../../actions/ui';
 import type {
   Fetching,
   TimeSpanDelimiter,
-  CustomerId,
   SessionId,
+  MacAddress,
 } from '../../types/reducers/query';
 import {
-  getCustomerId,
   getErrorsByService,
   getFetchingErrorsByService,
   getFetchingUserServices,
@@ -25,6 +24,7 @@ import {
   getTimeSpanStart,
   getUserServices,
 } from '../../selectors';
+import { getMacAddress } from '../../selectors/query/parameters';
 
 type ErrorListCardProps = {
   errorsByService: Object,
@@ -34,7 +34,7 @@ type ErrorListCardProps = {
   fetchingErrorsByService: Fetching,
   timeSpanStart: TimeSpanDelimiter,
   timeSpanEnd: TimeSpanDelimiter,
-  customerId: CustomerId,
+  macAddress: MacAddress,
   sessionId: SessionId,
   classes: Object,
 };
@@ -60,10 +60,10 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
   }
 
   handleSelectError(userService, errorCode) {
-    const { timeSpanStart, timeSpanEnd, customerId, sessionId } = this.props;
+    const { timeSpanStart, timeSpanEnd, macAddress, sessionId } = this.props;
     return dumbledoreApi
       .selectCustomerDegradation(
-        customerId,
+        macAddress,
         sessionId,
         timeSpanStart,
         timeSpanEnd,
@@ -135,7 +135,7 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
 }
 
 const mapStateToProps = state => ({
-  customerId: getCustomerId(state),
+  macAddress: getMacAddress(state),
   sessionId: getSessionId(state),
   timeSpanStart: getTimeSpanStart(state),
   timeSpanEnd: getTimeSpanEnd(state),

@@ -20,8 +20,12 @@ export const getDegradationsByCustomerId = (
     return response.json();
   });
 
-export const getDegradationsByMac = (mac, timeSpanStart, timeSpanEnd) => {
-  const macNoDots = mac.toString().replace(/\./g, '');
+export const getDegradationsByMac = (
+  macAddress,
+  timeSpanStart,
+  timeSpanEnd
+) => {
+  const macNoDots = macAddress.toString().replace(/\./g, '');
   return fetch(
     addParamsToUrl(
       'https://hermione-dot-ql-sen-stag.appspot.com/get_degradations',

@@ -1,10 +1,11 @@
 // @flow
 import type { ParametersState } from '../../types/reducers/query/parameters';
+import { getQueryStringValue } from '../../utils';
 
 const initialState: ParametersState = {
   timeSpanStart: { date: '2018-02-27', time: '00:00' },
   timeSpanEnd: { date: '2018-02-27', time: '22:00' },
-  customerId: '3ACFC5000020',
+  macAddress: getQueryStringValue('mac'),
   sessionId: 1130344,
 };
 
@@ -13,10 +14,10 @@ export const parameters = (
   action: any
 ) => {
   switch (action.type) {
-    case 'SET_CUSTOMER_ID': {
+    case 'SET_MAC_ADDRESS': {
       return {
         ...state,
-        customerId: action.customerId,
+        macAddress: action.macAddress,
       };
     }
     case 'SET_SESSION_ID': {

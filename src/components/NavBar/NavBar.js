@@ -13,6 +13,7 @@ import {
   getTimeSpanEnd,
   getTimeSpanStart,
 } from '../../selectors';
+import { getMacAddress } from '../../selectors/query/parameters';
 
 const styles = {
   root: {
@@ -22,17 +23,17 @@ const styles = {
 };
 class NavBarInner extends React.Component {
   state = {
-    customerId: this.props.customerId,
+    macAddress: this.props.macAddress,
   };
 
   handleChangeCustomerId = event => {
     this.setState({
-      customerId: event.target.value,
+      macAddress: event.target.value,
     });
   };
 
   handleSetCustomerId() {
-    this.props.setCustomerId(this.state.customerId);
+    this.props.setCustomerId(this.state.macAddress);
     this.props.updateUIData();
   }
 
@@ -75,7 +76,7 @@ class NavBarInner extends React.Component {
           <TextInputField
             style={{ marginRight: 0 }}
             label="MAC Address"
-            value={this.state.customerId}
+            value={this.state.macAddress}
             onChange={event => this.handleChangeCustomerId(event)}
           />
           <Button color="primary" onClick={() => this.handleSetCustomerId()}>
@@ -100,15 +101,15 @@ class NavBarInner extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  customerId: getCustomerId(state),
+  macAddress: getMacAddress(state),
   timeSpanStart: getTimeSpanStart(state),
   timeSpanEnd: getTimeSpanEnd(state),
   fetchingErrorsByService: getFetchingErrorsByService(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCustomerId: customerId =>
-    dispatch({ type: 'SET_CUSTOMER_ID', customerId }),
+  setMacAddress: macAddress =>
+    dispatch({ type: 'SET_MAC_ADDRESS', macAddress }),
   setTimeSpanStart: timeSpanStart =>
     dispatch({ type: 'SET_TIMESPAN_START', timeSpanStart }),
   setTimeSpanEnd: timeSpanEnd =>

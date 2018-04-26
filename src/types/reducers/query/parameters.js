@@ -1,9 +1,9 @@
 // @flow
-import type { CustomerId, SessionId, TimeSpanDelimiter } from './index';
+import type { MacAddress, SessionId, TimeSpanDelimiter } from './index';
 
 export type ParametersState = {
   timeSpanStart: TimeSpanDelimiter,
   timeSpanEnd: TimeSpanDelimiter,
-  customerId: string,
+  macAddress: MacAddress,
   sessionId: SessionId,
 };

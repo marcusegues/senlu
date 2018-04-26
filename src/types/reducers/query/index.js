@@ -91,7 +91,7 @@ export const userServices: UserServices = [
 ];
 
 // Parameters
-export type CustomerId = number;
+export type MacAddress = string;
 export type SessionId = number;
 export type TimeSpanDelimiter = { date: string, time: string };
 

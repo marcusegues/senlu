@@ -21,11 +21,12 @@ import {
   getTimeSpanEnd,
   getTimeSpanStart,
 } from '../../../../../../selectors';
+import { getMacAddress } from '../../../../../../selectors/query/parameters';
 const uuidv4 = require('uuid/v4');
 
 const generateRows = errors =>
   errors.map((error, idx) => ({
-    id: idx,
+    id: uuidv4(),
     degradation: error.degradation,
     count: error.count,
     timeStart: error.timeStart,
@@ -80,7 +81,7 @@ class ErrorListInner extends React.Component {
   changeSelection = newSelection => {
     const { selection } = this.state;
     const {
-      customerId,
+      macAddress,
       sessionId,
       timeSpanStart,
       timeSpanEnd,
@@ -101,31 +102,22 @@ class ErrorListInner extends React.Component {
       },
     });
     if (selectionDirection === 'select') {
-      dumbledoreApi
-        .selectCustomerDegradation(
-          customerId,
-          sessionId,
-          timeSpanStart,
-          timeSpanEnd,
-          service,
-          'ERR-15'
-        )
-        .then(success => {
-          if (success) {
-            this.setState({
-              pendingSelectionChange: omit(this.state.pendingSelectionChange, [
-                selectionId,
-              ]),
-              selection: newSelection,
-            });
-          } else {
-            this.setState({
-              pendingSelectionChange: omit(this.state.pendingSelectionChange, [
-                selectionId,
-              ]),
-            });
-          }
-        });
+      this.props.onSelectError(service, 'ERR-15').then(success => {
+        if (success) {
+          this.setState({
+            pendingSelectionChange: omit(this.state.pendingSelectionChange, [
+              selectionId,
+            ]),
+            selection: newSelection,
+          });
+        } else {
+          this.setState({
+            pendingSelectionChange: omit(this.state.pendingSelectionChange, [
+              selectionId,
+            ]),
+          });
+        }
+      });
     } else {
       // simulate an API call to unselect the box
       setTimeout(() => {
@@ -138,33 +130,6 @@ class ErrorListInner extends React.Component {
       }, 500);
     }
   };
-
-  handleSelect() {
-    const checked = this.state.checkbox;
-    this.setState({
-      checkbox: 'pending',
-    });
-    if (checked === 'notSelected') {
-      this.props.onSelectError().then(success => {
-        if (success) {
-          this.setState({
-            checkbox: 'selected',
-          });
-        } else {
-          this.setState({
-            checkbox: 'notSelected',
-          });
-        }
-      });
-    } else if (checked === 'selected') {
-      // simulate an API call to unselect the box
-      setTimeout(() => {
-        this.setState({
-          checkbox: 'notSelected',
-        });
-      }, 500);
-    }
-  }
 
   render() {
     const { rows, columns, selection, columnExtensions } = this.state;
@@ -191,7 +156,7 @@ class ErrorListInner extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  customerId: getCustomerId(state),
+  macAddress: getMacAddress(state),
   sessionId: getSessionId(state),
   timeSpanStart: getTimeSpanStart(state),
   timeSpanEnd: getTimeSpanEnd(state),
