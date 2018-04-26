@@ -17,11 +17,10 @@ export const updateUIData = () => dispatch => {
   ])
     .then(([degradations, services]) => {
       // if both calls succeed, then set the data from their responses
-      debugger;
       dispatch(setServices(services));
       dispatch(setErrorsByService(degradations));
     })
-    .catch(e => {
+    .catch(() => {
       // if either of the calls fails, reset the data for both of the calls
       dispatch(setErrorsByService({}));
       dispatch(setServices([]));

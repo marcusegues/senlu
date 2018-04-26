@@ -9,7 +9,6 @@ import { TextInputField } from '../Input/TextInputField';
 import { updateUIData } from '../../actions/ui';
 import {
   getFetchingErrorsByService,
-  getFetchMacAddressError,
   getMacAddress,
   getTimeSpanEnd,
   getTimeSpanStart,
@@ -38,7 +37,6 @@ class NavBarInner extends React.Component {
 
   handleChangeTimeSpanEnd = event => {
     const [date, time] = event.target.value.split('T');
-    debugger;
     this.props.resetFetchErrorsByServiceErrors();
     this.setState({ timeSpanEnd: { date, time } });
   };
@@ -124,10 +122,8 @@ const mapDispatchToProps = dispatch => ({
       resolve();
     }),
   updateUIData: () => dispatch(updateUIData()),
-  resetFetchErrorsByServiceErrors: () => {
-    debugger;
-    dispatch({ type: 'RESET_ERROR_FETCH_ERRORS_BY_SERVICE' });
-  },
+  resetFetchErrorsByServiceErrors: () =>
+    dispatch({ type: 'RESET_ERROR_FETCH_ERRORS_BY_SERVICE' }),
 });
 
 export const NavBar = connect(mapStateToProps, mapDispatchToProps)(

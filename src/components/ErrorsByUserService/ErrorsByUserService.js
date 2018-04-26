@@ -31,7 +31,7 @@ type ErrorListCardProps = {
   errorsByService: Object,
   services: Array<any>,
   updateUIData: () => void,
-  fetchingUserServices: Fetching,
+  fetchingServices: Fetching,
   fetchingErrorsByService: Fetching,
   timeSpanStart: TimeSpanDelimiter,
   timeSpanEnd: TimeSpanDelimiter,

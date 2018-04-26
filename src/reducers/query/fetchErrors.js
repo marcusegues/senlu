@@ -43,7 +43,6 @@ export const fetchErrors = (
       };
     }
     case 'RESET_ERROR_FETCH_ERRORS_BY_SERVICE': {
-      debugger;
       return {
         ...state,
         errorFetchErrorsByService: null,
