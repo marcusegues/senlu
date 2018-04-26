@@ -8,13 +8,16 @@ export const updateUIData = () => dispatch => {
   Promise.all([
     dispatch(fetchHermioneDegradations()).catch(e => {
       dispatch({ type: 'SET_ERROR_FETCH_ERRORS_BY_SERVICE', error: e.message }); // add error to redux no matter what
+      throw e;
     }),
     dispatch(fetchDumbledoreUserServices()).catch(e => {
       dispatch({ type: 'SET_ERROR_FETCH_SERVICES', error: e.message }); // add error to redux no matter what
+      throw e;
     }),
   ])
     .then(([degradations, services]) => {
       // if both calls succeed, then set the data from their responses
+      debugger;
       dispatch(setServices(services));
       dispatch(setErrorsByService(degradations));
     })
