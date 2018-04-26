@@ -32,11 +32,14 @@ class NavBarInner extends React.Component {
 
   handleChangeTimeSpanStart = event => {
     const [date, time] = event.target.value.split('T');
+    this.props.resetFetchErrorsByServiceErrors();
     this.setState({ timeSpanStart: { date, time } });
   };
 
   handleChangeTimeSpanEnd = event => {
     const [date, time] = event.target.value.split('T');
+    debugger;
+    this.props.resetFetchErrorsByServiceErrors();
     this.setState({ timeSpanEnd: { date, time } });
   };
 
@@ -121,6 +124,10 @@ const mapDispatchToProps = dispatch => ({
       resolve();
     }),
   updateUIData: () => dispatch(updateUIData()),
+  resetFetchErrorsByServiceErrors: () => {
+    debugger;
+    dispatch({ type: 'RESET_ERROR_FETCH_ERRORS_BY_SERVICE' });
+  },
 });
 
 export const NavBar = connect(mapStateToProps, mapDispatchToProps)(

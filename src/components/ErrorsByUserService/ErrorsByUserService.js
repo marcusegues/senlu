@@ -76,9 +76,7 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
   }
 
   fetchingData() {
-    return (
-      this.props.fetchingUserServices || this.props.fetchingErrorsByService
-    );
+    return this.props.fetchingServices || this.props.fetchingErrorsByService;
   }
 
   render() {
