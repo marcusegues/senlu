@@ -52,12 +52,13 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
     this.props.updateUIData();
   }
 
-  formatData() {
-    const data = {};
-    this.props.services.forEach(service => {
-      data[service] = this.props.errorsByService[service] || [];
-    });
-    return data;
+  orderServicesByErrors() {
+    const { errorsByService } = this.props;
+    return this.props.services.sort(
+      (a, b) =>
+        ((errorsByService[b] && errorsByService[b].length) || 0) -
+        ((errorsByService[a] && errorsByService[a].length) || 0)
+    );
   }
 
   handleSelectError(service, errorCode) {
@@ -82,7 +83,6 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
 
   render() {
     const { classes } = this.props;
-    const data = this.formatData();
     const fetchingData = this.fetchingData();
     return (
       <Paper
@@ -119,13 +119,13 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
         >
           {fetchingData
             ? null
-            : Object.keys(data).map(service => (
+            : this.orderServicesByErrors().map(service => (
                 <ServiceRow
                   key={service}
                   service={service}
-                  errors={data[service]}
-                  onSelectError={(service, errorCode) =>
-                    this.handleSelectError(service, errorCode)
+                  errors={this.props.errorsByService[service] || []}
+                  onSelectError={(selectedService, degradation) =>
+                    this.handleSelectError(selectedService, degradation)
                   }
                 />
               ))}

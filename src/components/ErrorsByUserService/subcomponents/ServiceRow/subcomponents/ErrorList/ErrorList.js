@@ -94,22 +94,25 @@ class ErrorListInner extends React.Component {
       },
     });
     if (selectionDirection === 'select') {
-      this.props.onSelectError(service, 'ERR-15').then(success => {
-        if (success) {
-          this.setState({
-            pendingSelectionChange: omit(this.state.pendingSelectionChange, [
-              selectionId,
-            ]),
-            selection: newSelection,
-          });
-        } else {
-          this.setState({
-            pendingSelectionChange: omit(this.state.pendingSelectionChange, [
-              selectionId,
-            ]),
-          });
-        }
-      });
+      debugger;
+      this.props
+        .onSelectError(service, this.state.rows[selectionId].degradation)
+        .then(success => {
+          if (success) {
+            this.setState({
+              pendingSelectionChange: omit(this.state.pendingSelectionChange, [
+                selectionId,
+              ]),
+              selection: newSelection,
+            });
+          } else {
+            this.setState({
+              pendingSelectionChange: omit(this.state.pendingSelectionChange, [
+                selectionId,
+              ]),
+            });
+          }
+        });
     } else {
       // simulate an API call to unselect the box
       setTimeout(() => {
