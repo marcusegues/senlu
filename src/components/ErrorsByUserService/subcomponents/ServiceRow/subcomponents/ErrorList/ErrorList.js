@@ -55,7 +55,7 @@ class ErrorListInner extends React.Component {
 
     this.state = {
       columns: [
-        { name: 'degradation', title: 'Einschränkung' },
+        { name: 'degradation', title: 'Fehlerbild' },
         { name: 'count', title: 'Anzahl' },
         { name: 'timeStart', title: 'Startzeit' },
         { name: 'timeEnd', title: 'Endzeit' },
@@ -66,7 +66,7 @@ class ErrorListInner extends React.Component {
         { columnName: 'count', width: 100 },
       ],
       rows: generateRows(this.props.errors),
-      selection: [1],
+      selection: [],
       pendingSelectionChange: {},
     };
   }
