@@ -61,7 +61,8 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
     );
   }
 
-  handleSelectError(service, errorCode) {
+  handleSelectError(service, degradation, selected: boolean) {
+    debugger;
     const { timeSpanStart, timeSpanEnd, customerId, sessionId } = this.props;
     return dumbledoreApi
       .selectCustomerDegradation(
@@ -70,7 +71,8 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
         timeSpanStart,
         timeSpanEnd,
         service,
-        errorCode
+        degradation,
+        selected
       )
       .then(response => response && response.status === 200);
   }
@@ -122,8 +124,12 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
                   key={service}
                   service={service}
                   errors={this.props.errorsByService[service] || []}
-                  onSelectError={(selectedService, degradation) =>
-                    this.handleSelectError(selectedService, degradation)
+                  onSelectError={(selectedService, degradation, selected) =>
+                    this.handleSelectError(
+                      selectedService,
+                      degradation,
+                      selected
+                    )
                   }
                 />
               ))}

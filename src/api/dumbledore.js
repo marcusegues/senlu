@@ -45,7 +45,8 @@ export const selectCustomerDegradation = (
   timeSpanStart: TimeSpanDelimiter,
   timeSpanEnd: TimeSpanDelimiter,
   service: Service,
-  degradation: Degradation
+  degradation: Degradation,
+  selected: boolean
 ): DumbledoreApi =>
   fetch('https://dumbledore-dot-ql-sen-stag.appspot.com/customerDegradation', {
     method: 'POST',
@@ -59,6 +60,7 @@ export const selectCustomerDegradation = (
       time_end: `${timeSpanEnd.date} ${timeSpanEnd.time}`,
       user_service: service,
       error_code: degradation,
+      selected,
     }),
   }).catch(e => {
     // eslint-disable-next-line no-console
