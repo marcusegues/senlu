@@ -108,7 +108,7 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
                   alignItems: 'center',
                 }}
               >
-                QoE Degradations
+                QoE Degradationen
                 {fetchingData ? (
                   <CircularProgress style={{ margin: 10 }} />
                 ) : null}
