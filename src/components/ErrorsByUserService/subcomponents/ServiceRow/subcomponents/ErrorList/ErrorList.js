@@ -100,7 +100,6 @@ class ErrorListInner extends React.Component {
         selectionDirection === 'select'
       )
       .then(success => {
-        debugger;
         if (success) {
           this.setState({
             pendingSelectionChange: omit(this.state.pendingSelectionChange, [

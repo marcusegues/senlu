@@ -62,7 +62,6 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
   }
 
   handleSelectError(service, degradation, selected: boolean) {
-    debugger;
     const { timeSpanStart, timeSpanEnd, customerId, sessionId } = this.props;
     return dumbledoreApi
       .selectCustomerDegradation(
