@@ -17,7 +17,7 @@ class AppInner extends React.Component {
     this.props.setSessionId(sessionId);
     getMacAddressByCustomerId(customerId)
       .then(data => {
-        this.props.setMacAddress(data.deviceAddress);
+        this.props.setMacAddress(data.device_address);
       })
       .catch(e => {
         this.props.setFetchMacAddressError(e.message);
