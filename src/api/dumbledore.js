@@ -15,20 +15,26 @@ export const allUserServices = (): DumbledoreApi =>
     response => response.json()
   );
 
-export const userServices = (macAddress: MacAddress): DumbledoreApi =>
-  fetch(
-    `https://dumbledore-dot-ql-sen-stag.appspot.com/userServices/${macAddress}`
-  ).then(response => {
-    // eslint-disable-next-line no-console
-    console.log('Dumbledore response', response);
-    return response.json();
-  });
+export const userServices = (): DumbledoreApi =>
+  fetch(`https://dumbledore-dot-ql-sen-stag.appspot.com/userService`).then(
+    response => {
+      // eslint-disable-next-line no-console
+      console.log('Dumbledore response', response);
+      if (response.status !== 200) {
+        throw new Error('Error obtaining user services.');
+      }
+      return response.json();
+    }
+  );
 
 export const getMacAddressByCustomerId = (
-  customerId: CustomerId
+  customerId: CustomerId,
+  accessToken: number = 123
 ): DumbledoreApi =>
   fetch(
-    `https://dumbledore-dot-ql-sen-stag.appspot.com/deviceAddress/${customerId}`
+    `https://dumbledore-dot-ql-sen-stag.appspot.com/deviceAddress/${
+      customerId
+    }/${accessToken}`
   ).then(response => {
     // eslint-disable-next-line no-console
     console.log('Dumbledore response device mac', response);

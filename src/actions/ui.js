@@ -1,8 +1,13 @@
-import { fetchDumbledoreUserServices, setServices } from './services';
+import {
+  fetchDumbledoreUserServices,
+  resetServices,
+  setServices,
+} from './services';
 import {
   fetchHermioneDegradations,
   setErrorsByService,
 } from './errorsByService';
+import { initialErrorsByService } from '../types/reducers/query/errorsByService';
 
 export const updateUIData = () => dispatch => {
   Promise.all([
@@ -22,7 +27,7 @@ export const updateUIData = () => dispatch => {
     })
     .catch(() => {
       // if either of the calls fails, reset the data for both of the calls
-      dispatch(setErrorsByService({}));
-      dispatch(setServices([]));
+      dispatch(setErrorsByService(initialErrorsByService));
+      dispatch(resetServices());
     });
 };

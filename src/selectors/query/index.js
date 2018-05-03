@@ -18,8 +18,12 @@ export const getTimeSpanEnd = state =>
 // errorsByService
 export const getFetchingErrorsByService = state =>
   errorsByServiceApi.getFetchingErrorsByService(state.errorsByService);
+
 export const getErrorsByService = state =>
   errorsByServiceApi.getErrorsByService(state.errorsByService);
+
+export const getError = (state, serviceId, idx) =>
+  errorsByServiceApi.getError(state.errorsByService, serviceId, idx);
 
 // services
 export const getFetchingServices = state =>
@@ -34,4 +38,4 @@ export const getErrorFetchErrorsByService = state =>
   fetchErrorsApi.getErrorFetchErrorsByService(state.fetchErrors);
 
 export const getErrorFetchServices = state =>
-    fetchErrorsApi.getErrorFetchServices(state.fetchErrors);
+  fetchErrorsApi.getErrorFetchServices(state.fetchErrors);

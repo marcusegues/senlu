@@ -1,9 +1,13 @@
 // @flow
 import type { ErrorsByServiceState } from '../../types/reducers/query/errorsByService';
+import {
+  initialErrorsByService,
+  initialSelectedErrors,
+} from '../../types/reducers/query/errorsByService';
 
 const initialState: ErrorsByServiceState = {
   fetchingErrorsByService: false,
-  errorsByService: {},
+  errorsByService: initialErrorsByService,
 };
 
 export const errorsByService = (

@@ -1,10 +1,10 @@
 // @flow
-import { formatServiceName } from '../../utils/index';
 import type { ServicesState } from '../../types/reducers/query/services';
+import { initialServices } from '../../types/reducers/query/services';
 
 const initialState: ServicesState = {
   fetchingServices: false,
-  services: [],
+  services: initialServices,
 };
 
 export const services = (state: ServicesState = initialState, action: any) => {
@@ -18,7 +18,13 @@ export const services = (state: ServicesState = initialState, action: any) => {
     case 'SET_SERVICES': {
       return {
         ...state,
-        services: action.data.map(formatServiceName),
+        services: action.data,
+      };
+    }
+    case 'RESET_SERVICES': {
+      return {
+        ...state,
+        services: initialServices,
       };
     }
     default: {

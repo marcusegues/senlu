@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { CircularProgress } from 'material-ui/Progress';
 import { withStyles } from 'material-ui/styles';
 import List, { ListSubheader } from 'material-ui/List';
 import { PaperCard } from '../General/PaperCard';
-import { CircularProgress } from 'material-ui/Progress';
 import * as dumbledoreApi from '../../api/dumbledore';
 import { ServiceRow } from './subcomponents/ServiceRow/ServiceRow';
 import { updateUIData } from '../../actions/ui';
@@ -14,6 +14,7 @@ import type {
   TimeSpanDelimiter,
   SessionId,
   CustomerId,
+  Services,
 } from '../../types/reducers/query';
 import {
   getErrorsByService,
@@ -29,7 +30,7 @@ import {
 
 type ErrorListCardProps = {
   errorsByService: Object,
-  services: Array<any>,
+  services: Services,
   updateUIData: () => void,
   fetchingServices: Fetching,
   fetchingErrorsByService: Fetching,
@@ -54,14 +55,13 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
 
   orderServicesByErrors() {
     const { errorsByService } = this.props;
-    return this.props.services.sort(
+
+    return Object.keys(this.props.services).sort(
       (a, b) =>
         ((errorsByService[b] && errorsByService[b].length) || 0) -
         ((errorsByService[a] && errorsByService[a].length) || 0)
     );
   }
-
-  handleExpandError() {}
 
   handleSelectError(service, degradation, selected: boolean) {
     const { timeSpanStart, timeSpanEnd, customerId, sessionId } = this.props;
@@ -86,11 +86,7 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
     const { classes } = this.props;
     const fetchingData = this.fetchingData();
     return (
-      <PaperCard
-        style={{
-          width: '60%',
-        }}
-      >
+      <PaperCard>
         <List
           classes={{
             root: classes.root,
@@ -115,12 +111,12 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
         >
           {fetchingData
             ? null
-            : this.orderServicesByErrors().map(service => (
+            : this.orderServicesByErrors().map(serviceId => (
                 <ServiceRow
-                  key={service}
-                  service={service}
-                  errors={this.props.errorsByService[service] || []}
-                  onExpandError={() => this.handleExpandError()}
+                  key={serviceId}
+                  serviceId={serviceId}
+                  service={this.props.services[serviceId]}
+                  errors={this.props.errorsByService[serviceId] || []}
                   onSelectError={(selectedService, degradation, selected) =>
                     this.handleSelectError(
                       selectedService,

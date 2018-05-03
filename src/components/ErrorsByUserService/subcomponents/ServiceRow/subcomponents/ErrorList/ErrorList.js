@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import omit from 'lodash/omit';
+import { RowDetailState } from '@devexpress/dx-react-grid';
 import {
   Grid,
   Table,
   TableHeaderRow,
+  TableRowDetail,
   TableSelection,
 } from '@devexpress/dx-react-grid-material-ui';
 import {
@@ -13,41 +15,24 @@ import {
   IntegratedSorting,
 } from '@devexpress/dx-react-grid';
 import '../../../../../../styles/index.css';
-
+import { CellComponent } from './subcomponents/CellComponent';
 import {
   getSessionId,
   getTimeSpanEnd,
   getTimeSpanStart,
 } from '../../../../../../selectors';
 import { getMacAddress } from '../../../../../../selectors/query/parameters';
-
-const uuidv4 = require('uuid/v4');
+import { ErrorListRowDetail } from './subcomponents/ErrorListRowDetail';
 
 const generateRows = errors =>
-  errors.map(error => ({
-    id: uuidv4(),
+  errors.map((error, idx) => ({
+    id: idx, // this should be a unique error id coming from error.id in the future
     degradation: error.degradation,
     count: error.count,
     timeStart: error.timeStart,
     timeEnd: error.timeEnd,
     version: error.version,
   }));
-
-const CellComponent = ({ tableRow, tableColumn }) => {
-  if (
-    tableColumn.column.name === 'timeStart' ||
-    tableColumn.column.name === 'timeEnd'
-  ) {
-    const timeString = tableRow.row[tableColumn.column.name];
-    return (
-      <Table.Cell>
-        <div>{timeString.split(' ')[0]}</div>
-        <div>{timeString.split(' ')[1]}</div>
-      </Table.Cell>
-    );
-  }
-  return <Table.Cell>{tableRow.row[tableColumn.column.name]}</Table.Cell>;
-};
 
 class ErrorListInner extends React.Component {
   constructor(props) {
@@ -120,6 +105,7 @@ class ErrorListInner extends React.Component {
     const { rows, columns, selection, columnExtensions } = this.state;
     return (
       <Grid rows={rows} columns={columns}>
+        <RowDetailState />
         <SelectionState
           selection={selection}
           onSelectionChange={selectionArray =>
@@ -137,6 +123,11 @@ class ErrorListInner extends React.Component {
         />
         <TableSelection />
         <TableHeaderRow showSortingControls />
+        <TableRowDetail
+          contentComponent={({ row }) => (
+            <ErrorListRowDetail serviceId={this.props.serviceId} row={row} />
+          )}
+        />
       </Grid>
     );
   }

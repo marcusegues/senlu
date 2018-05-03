@@ -16,7 +16,13 @@ export class ServiceRow extends React.Component {
   }
 
   render() {
-    const { service, errors, onSelectError } = this.props;
+    const {
+      service,
+      serviceId,
+      errors,
+      onSelectError,
+      onToggleExpandError,
+    } = this.props;
     if (typeof errors === 'string') {
       // when there are no errors, errors is '"No logs for timespan."
       return (
@@ -55,8 +61,9 @@ export class ServiceRow extends React.Component {
           {errors.length ? (
             <ErrorList
               errors={errors}
+              onToggleExpandError={onToggleExpandError}
               onSelectError={onSelectError}
-              service={service}
+              serviceId={serviceId}
             />
           ) : null}
         </Collapse>

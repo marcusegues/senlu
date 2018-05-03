@@ -5,3 +5,5 @@ export type ErrorsByServiceState = {
   fetchingErrorsByService: Fetching,
   errorsByService: ErrorsByService,
 };
+
+export const initialErrorsByService = {};

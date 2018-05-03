@@ -5,3 +5,5 @@ export type ServicesState = {
   fetchingServices: Fetching,
   services: Services,
 };
+
+export const initialServices = {};
