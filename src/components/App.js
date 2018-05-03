@@ -4,7 +4,7 @@ import CssBaseline from 'material-ui/CssBaseline';
 import { NavBar } from './NavBar/NavBar';
 import { ApiErrors } from './ErrorHandling/ApiErrors';
 import { ErrorsByUserService } from './ErrorsByUserService/ErrorsByUserService';
-
+import { StatusInfo } from './StatusInfo/StatusInfo';
 import { getQueryStringValue } from '../utils';
 import { getMacAddress, getSessionId } from '../selectors';
 
@@ -14,13 +14,6 @@ class AppInner extends React.Component {
     const sessionId = getQueryStringValue('session_id');
     this.props.setCustomerId(customerId);
     this.props.setSessionId(sessionId);
-    // getMacAddressByCustomerId(customerId)
-    //   .then(data => {
-    //     this.props.setMacAddress(data.device_address);
-    //   })
-    //   .catch(e => {
-    //     this.props.setFetchMacAddressError(e.message);
-    //   });
   }
 
   allParamsPresent() {
@@ -32,6 +25,7 @@ class AppInner extends React.Component {
       <React.Fragment>
         <CssBaseline />
         <NavBar />
+        <StatusInfo />
         <ApiErrors />
         {this.allParamsPresent() ? <ErrorsByUserService /> : null}
       </React.Fragment>

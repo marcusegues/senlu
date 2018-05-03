@@ -2,6 +2,7 @@ import * as parametersApi from './parameters';
 import * as errorsByServiceApi from './errorsByService';
 import * as servicesApi from './services';
 import * as fetchErrorsApi from './fetchErrors';
+import * as statusInfoApi from './statusInfo';
 
 // parameters
 export const getCustomerId = state =>
@@ -39,3 +40,7 @@ export const getErrorFetchErrorsByService = state =>
 
 export const getErrorFetchServices = state =>
   fetchErrorsApi.getErrorFetchServices(state.fetchErrors);
+
+// query.statusInfo
+export const getFetchingStatusInfo = state =>
+  statusInfoApi.getFetchingStatusInfo(state.statusInfo);

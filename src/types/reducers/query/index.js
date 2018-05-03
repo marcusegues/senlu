@@ -76,4 +76,5 @@ export type QueryState = {
   parameters: ParametersState,
   errorsByService: ErrorsByServiceState,
   services: ServicesState,
+
 };

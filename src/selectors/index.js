@@ -32,3 +32,7 @@ export const getErrorFetchErrorsByService = state =>
 
 export const getErrorFetchServices = state =>
   queryApi.getErrorFetchServices(state.query);
+
+// query.statusInfo
+export const getFetchingStatusInfo = state =>
+  queryApi.getFetchingStatusInfo(state.query);
