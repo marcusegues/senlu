@@ -59,7 +59,6 @@ class ErrorListInner extends React.Component {
         { name: 'count', title: 'Anzahl' },
         { name: 'timeStart', title: 'Startzeit' },
         { name: 'timeEnd', title: 'Endzeit' },
-        { name: 'version', title: 'Version' },
       ],
       columnExtensions: [
         { columnName: 'degradation', width: 200 },

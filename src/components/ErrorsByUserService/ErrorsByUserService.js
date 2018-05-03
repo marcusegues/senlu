@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
 import List, { ListSubheader } from 'material-ui/List';
-import Paper from 'material-ui/Paper';
+import { PaperCard } from '../General/PaperCard';
 import { CircularProgress } from 'material-ui/Progress';
 import * as dumbledoreApi from '../../api/dumbledore';
 import { ServiceRow } from './subcomponents/ServiceRow/ServiceRow';
@@ -61,6 +61,8 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
     );
   }
 
+  handleExpandError() {}
+
   handleSelectError(service, degradation, selected: boolean) {
     const { timeSpanStart, timeSpanEnd, customerId, sessionId } = this.props;
     return dumbledoreApi
@@ -84,14 +86,9 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
     const { classes } = this.props;
     const fetchingData = this.fetchingData();
     return (
-      <Paper
+      <PaperCard
         style={{
-          height: '100%',
-          overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          margin: 15,
+          width: '60%',
         }}
       >
         <List
@@ -123,6 +120,7 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
                   key={service}
                   service={service}
                   errors={this.props.errorsByService[service] || []}
+                  onExpandError={() => this.handleExpandError()}
                   onSelectError={(selectedService, degradation, selected) =>
                     this.handleSelectError(
                       selectedService,
@@ -133,7 +131,7 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
                 />
               ))}
         </List>
-      </Paper>
+      </PaperCard>
     );
   }
 }

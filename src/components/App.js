@@ -4,6 +4,7 @@ import CssBaseline from 'material-ui/CssBaseline';
 import { NavBar } from './NavBar/NavBar';
 import { ApiErrors } from './ErrorHandling/ApiErrors';
 import { ErrorsByUserService } from './ErrorsByUserService/ErrorsByUserService';
+import { ErrorsView } from './ErrorsView/ErrorsView';
 
 import { getQueryStringValue } from '../utils';
 import { getMacAddressByCustomerId } from '../api/dumbledore';
@@ -34,7 +35,7 @@ class AppInner extends React.Component {
         <CssBaseline />
         <NavBar />
         <ApiErrors />
-        {this.allParamsPresent() ? <ErrorsByUserService /> : null}
+        {this.allParamsPresent() ? <ErrorsView /> : null}
       </React.Fragment>
     );
   }
