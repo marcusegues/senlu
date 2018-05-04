@@ -32,7 +32,7 @@ class AppInner extends React.Component {
     return new Promise((resolve, reject) => {
       const customerId = getQueryStringValue('customer_id');
       const sessionId = getQueryStringValue('session_id');
-      const accessToken = getQueryStringValue('access_token');
+      const accessToken = getQueryStringValue('access_token') || '123';
       this.props.setCustomerId(customerId);
       this.props.setSessionId(sessionId);
       this.props.setAccessToken(accessToken);
