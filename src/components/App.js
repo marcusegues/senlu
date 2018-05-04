@@ -7,6 +7,7 @@ import { ErrorsByUserService } from './ErrorsByUserService/ErrorsByUserService';
 import { StatusInfo } from './StatusInfo/StatusInfo';
 import { getQueryStringValue } from '../utils';
 import { getMacAddress, getSessionId } from '../selectors';
+import { getMacAddressByCustomerId } from '../api/dumbledore';
 
 class AppInner extends React.Component {
   componentDidMount() {
@@ -14,6 +15,13 @@ class AppInner extends React.Component {
     const sessionId = getQueryStringValue('session_id');
     this.props.setCustomerId(customerId);
     this.props.setSessionId(sessionId);
+    getMacAddressByCustomerId(customerId)
+      .then(data => {
+        this.props.setMacAddress(data.device_address);
+      })
+      .catch(e => {
+        this.props.setFetchMacAddressError(e.message);
+      });
   }
 
   allParamsPresent() {

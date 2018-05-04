@@ -4,8 +4,6 @@ import {
   Grid,
   Table,
   TableHeaderRow,
-  TableRowDetail,
-  TableSelection,
 } from '@devexpress/dx-react-grid-material-ui';
 import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
 import Divider from 'material-ui/Divider';

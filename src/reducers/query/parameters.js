@@ -5,7 +5,7 @@ const initialState: ParametersState = {
   timeSpanStart: { date: '2018-02-27', time: '00:00' },
   timeSpanEnd: { date: '2018-02-27', time: '22:00' },
   customerId: '',
-  macAddress: '3ACFC5000020',
+  macAddress: '',
   sessionId: '',
 };
 
