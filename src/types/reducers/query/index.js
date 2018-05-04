@@ -52,6 +52,7 @@ export type Services = { [Id]: Service };
 export type CustomerId = string;
 export type MacAddress = string;
 export type SessionId = string;
+export type AccessToken = string;
 export type TimeSpanDelimiter = { date: string, time: string };
 
 // UI flags
@@ -76,5 +77,4 @@ export type QueryState = {
   parameters: ParametersState,
   errorsByService: ErrorsByServiceState,
   services: ServicesState,
-
 };

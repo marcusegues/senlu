@@ -7,6 +7,7 @@ const initialState: ParametersState = {
   customerId: '',
   macAddress: '',
   sessionId: '',
+  accessToken: '',
 };
 
 export const parameters = (
@@ -30,6 +31,12 @@ export const parameters = (
       return {
         ...state,
         sessionId: action.sessionId,
+      };
+    }
+    case 'SET_ACCESS_TOKEN': {
+      return {
+        ...state,
+        accessToken: action.accessToken,
       };
     }
     case 'SET_TIMESPAN_START': {

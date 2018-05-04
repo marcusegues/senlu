@@ -48,6 +48,32 @@ export const fetchErrors = (
         errorFetchErrorsByService: null,
       };
     }
+    case 'SET_ERROR_MISSING_CUSTOMER_ID': {
+      return {
+        ...state,
+        errorMissingCustomerId: action.error,
+      };
+    }
+    case 'RESET_ERROR_MISSING_CUSTOMER_ID': {
+      return {
+        ...state,
+        errorMissingCustomerId: null,
+      };
+    }
+    case 'SET_ERROR_MISSING_SESSION_ID': {
+      return {
+        ...state,
+        errorMissingSessionId: action.error,
+      };
+    }
+
+    case 'SET_ERROR_MISSING_ACCESS_TOKEN': {
+      return {
+        ...state,
+        errorMissingAccessToken: action.error,
+      };
+    }
+
     default: {
       return state;
     }

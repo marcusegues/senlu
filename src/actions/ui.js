@@ -12,12 +12,10 @@ import { initialErrorsByService } from '../types/reducers/query/errorsByService'
 export const updateUIData = () => dispatch => {
   Promise.all([
     dispatch(fetchHermioneDegradations()).catch(e => {
-      debugger;
       dispatch({ type: 'SET_ERROR_FETCH_ERRORS_BY_SERVICE', error: e.message }); // add error to redux no matter what
       throw e;
     }),
     dispatch(fetchDumbledoreUserServices()).catch(e => {
-      debugger;
       dispatch({ type: 'SET_ERROR_FETCH_SERVICES', error: e.message }); // add error to redux no matter what
       throw e;
     }),
@@ -29,7 +27,6 @@ export const updateUIData = () => dispatch => {
     })
     .catch(() => {
       // if either of the calls fails, reset the data for both of the calls
-      debugger;
       dispatch(setErrorsByService(initialErrorsByService));
       dispatch(resetServices());
     });

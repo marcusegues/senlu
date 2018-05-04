@@ -33,11 +33,17 @@ class ApiErrorsInner extends React.Component {
       errorFetchMacAddress,
       errorFetchErrorsByService,
       errorFetchServices,
+      errorMissingCustomerId,
+      errorMissingSessionId,
+      errorMissingAccessToken,
     } = this.props;
     return !!(
       errorFetchMacAddress ||
       errorFetchErrorsByService ||
-      errorFetchServices
+      errorFetchServices ||
+      errorMissingCustomerId ||
+      errorMissingSessionId ||
+      errorMissingAccessToken
     );
   }
 
@@ -49,6 +55,9 @@ class ApiErrorsInner extends React.Component {
       errorFetchMacAddress,
       errorFetchErrorsByService,
       errorFetchServices,
+      errorMissingCustomerId,
+      errorMissingSessionId,
+      errorMissingAccessToken,
     } = this.props;
 
     return (
@@ -79,6 +88,21 @@ class ApiErrorsInner extends React.Component {
                 <span>{errorFetchErrorsByService}</span>
               </div>
             ) : null}
+            {errorMissingCustomerId ? (
+              <div>
+                <span>{errorMissingCustomerId}</span>
+              </div>
+            ) : null}
+            {errorMissingSessionId ? (
+              <div>
+                <span>{errorMissingSessionId}</span>
+              </div>
+            ) : null}
+            {errorMissingAccessToken ? (
+              <div>
+                <span>{errorMissingAccessToken}</span>
+              </div>
+            ) : null}
           </div>
         }
       />
@@ -90,6 +114,9 @@ const mapStateToProps = state => ({
   errorFetchMacAddress: getErrorFetchMacAddress(state),
   errorFetchServices: getErrorFetchServices(state),
   errorFetchErrorsByService: getErrorFetchErrorsByService(state),
+  errorMissingCustomerId: state.query.fetchErrors.errorMissingCustomerId,
+  errorMissingSessionId: state.query.fetchErrors.errorMissingSessionId,
+  errorMissingAccessToken: state.query.fetchErrors.errorMissingAccessToken,
 });
 
 export const ApiErrors = connect(mapStateToProps, null)(

@@ -12,18 +12,45 @@ import { fetchStatusInfo } from '../actions/statusInfo';
 
 class AppInner extends React.Component {
   componentDidMount() {
-    const customerId = getQueryStringValue('customer_id');
-    const sessionId = getQueryStringValue('session_id');
-    this.props.setCustomerId(customerId);
-    this.props.setSessionId(sessionId);
-    getMacAddressByCustomerId(customerId)
-      .then(data => {
-        this.props.setMacAddress(data.device_address);
-        this.props.getStatusInfo();
+    this.checkQueryParams()
+      .then(({ customerId }) => {
+        getMacAddressByCustomerId(customerId)
+          .then(data => {
+            this.props.setMacAddress(data.device_address);
+            this.props.getStatusInfo();
+          })
+          .catch(e => {
+            this.props.setFetchMacAddressError(e.message);
+          });
       })
       .catch(e => {
-        this.props.setFetchMacAddressError(e.message);
+        console.log('Missing query params.');
       });
+  }
+
+  checkQueryParams() {
+    return new Promise((resolve, reject) => {
+      const customerId = getQueryStringValue('customer_id');
+      const sessionId = getQueryStringValue('session_id');
+      const accessToken = getQueryStringValue('access_token');
+      this.props.setCustomerId(customerId);
+      this.props.setSessionId(sessionId);
+      this.props.setAccessToken(accessToken);
+      if (customerId === '' || sessionId === '' || accessToken === '') {
+        if (customerId === '') {
+          this.props.setErrorMissingCustomerId('Missing customerId.');
+        }
+        if (sessionId === '') {
+          this.props.setErrorMissingSessionId('Missing sessionId.');
+        }
+        if (accessToken === '') {
+          this.props.setErrorMissingAccessToken('Missing accessToken.');
+        }
+        reject(new Error('Missing query params.'));
+      } else {
+        resolve({ customerId, sessionId, accessToken });
+      }
+    });
   }
 
   allParamsPresent() {
@@ -52,10 +79,18 @@ const mapDispatchToProps = dispatch => ({
   setCustomerId: customerId =>
     dispatch({ type: 'SET_CUSTOMER_ID', customerId }),
   setSessionId: sessionId => dispatch({ type: 'SET_SESSION_ID', sessionId }),
+  setAccessToken: accessToken =>
+    dispatch({ type: 'SET_ACCESS_TOKEN', accessToken }),
   setMacAddress: macAddress =>
     dispatch({ type: 'SET_MAC_ADDRESS', macAddress }),
   setFetchMacAddressError: error =>
     dispatch({ type: 'SET_ERROR_FETCH_MAC_ADDRESS', error }),
+  setErrorMissingCustomerId: error =>
+    dispatch({ type: 'SET_ERROR_MISSING_CUSTOMER_ID', error }),
+  setErrorMissingSessionId: error =>
+    dispatch({ type: 'SET_ERROR_MISSING_SESSION_ID', error }),
+  setErrorMissingAccessToken: error =>
+    dispatch({ type: 'SET_ERROR_MISSING_ACCESS_TOKEN', error }),
   getStatusInfo: () => dispatch(fetchStatusInfo()),
 });
 
