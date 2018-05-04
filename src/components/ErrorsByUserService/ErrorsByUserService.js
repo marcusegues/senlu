@@ -56,11 +56,12 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
   orderServicesByErrors() {
     const { errorsByService } = this.props;
 
-    return Object.keys(this.props.services).sort(
+    const res = Object.keys(this.props.services).sort(
       (a, b) =>
         ((errorsByService[b] && errorsByService[b].length) || 0) -
         ((errorsByService[a] && errorsByService[a].length) || 0)
     );
+    return res;
   }
 
   handleSelectError(service, degradation, selected: boolean) {

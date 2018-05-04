@@ -25,7 +25,6 @@ export const fetchDumbledoreUserServices = () => (dispatch, getState) => {
       return data;
     })
     .catch(e => {
-      debugger;
       dispatch(setFetchingUserServices(false));
       throw e;
     });
