@@ -7,6 +7,7 @@ import type {
   Service,
   Degradation,
 } from '../types/reducers/query';
+import type {Id} from "../types/reducers";
 
 export type DumbledoreApi = Promise<?Object>;
 
@@ -50,7 +51,7 @@ export const selectCustomerDegradation = (
   sessionId: SessionId,
   timeSpanStart: TimeSpanDelimiter,
   timeSpanEnd: TimeSpanDelimiter,
-  service: Service,
+  serviceId: Id,
   degradation: Degradation,
   selected: boolean
 ): DumbledoreApi =>
@@ -64,7 +65,7 @@ export const selectCustomerDegradation = (
       session_id: sessionId,
       time_start: `${timeSpanStart.date} ${timeSpanStart.time}`,
       time_end: `${timeSpanEnd.date} ${timeSpanEnd.time}`,
-      user_service: service,
+      user_service: serviceId,
       error_code: degradation,
       selected,
     }),
