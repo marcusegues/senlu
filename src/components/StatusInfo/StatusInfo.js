@@ -15,10 +15,6 @@ const styles = {
 };
 
 class StatusInfoInner extends React.Component {
-  componentDidMount() {
-    this.props.getStatusInfo();
-  }
-
   render() {
     const {
       classes,
@@ -71,10 +67,6 @@ const mapStateToProps = state => ({
   macAddress: getMacAddress(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  getStatusInfo: () => dispatch(fetchStatusInfo()),
-});
-
-export const StatusInfo = connect(mapStateToProps, mapDispatchToProps)(
+export const StatusInfo = connect(mapStateToProps)(
   withStyles(styles)(StatusInfoInner)
 );

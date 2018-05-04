@@ -8,6 +8,7 @@ import { StatusInfo } from './StatusInfo/StatusInfo';
 import { getQueryStringValue } from '../utils';
 import { getMacAddress, getSessionId } from '../selectors';
 import { getMacAddressByCustomerId } from '../api/dumbledore';
+import { fetchStatusInfo } from '../actions/statusInfo';
 
 class AppInner extends React.Component {
   componentDidMount() {
@@ -18,6 +19,7 @@ class AppInner extends React.Component {
     getMacAddressByCustomerId(customerId)
       .then(data => {
         this.props.setMacAddress(data.device_address);
+        this.props.getStatusInfo();
       })
       .catch(e => {
         this.props.setFetchMacAddressError(e.message);
@@ -54,6 +56,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: 'SET_MAC_ADDRESS', macAddress }),
   setFetchMacAddressError: error =>
     dispatch({ type: 'SET_ERROR_FETCH_MAC_ADDRESS', error }),
+  getStatusInfo: () => dispatch(fetchStatusInfo()),
 });
 
 export const App = connect(mapStateToProps, mapDispatchToProps)(AppInner);

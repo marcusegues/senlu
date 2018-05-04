@@ -23,14 +23,6 @@ export class ServiceRow extends React.Component {
       onSelectError,
       onToggleExpandError,
     } = this.props;
-    if (typeof errors === 'string') {
-      // when there are no errors, errors is '"No logs for timespan."
-      return (
-        <ListItem>
-          <ListItemText primary="No results." />
-        </ListItem>
-      );
-    }
 
     return (
       <div>

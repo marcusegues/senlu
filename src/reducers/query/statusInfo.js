@@ -20,7 +20,7 @@ export const statusInfo = (
     case 'SET_FETCHING_STATUS_INFO': {
       return {
         ...state,
-        fetchingStatusInfo: action.fetchingStatusInfo,
+        fetchingStatusInfo: action.fetching,
       };
     }
     case 'SET_STATUS_INFO': {

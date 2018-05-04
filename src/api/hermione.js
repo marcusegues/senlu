@@ -48,5 +48,8 @@ export const getCurrentStatus = macAddress => {
       'https://hermione-dot-ql-sen-stag.appspot.com/get_current_status',
       { mac: macAddress }
     )
-  ).then(response => response.json());
+  ).then(response => {
+    console.log('Get current status response', response);
+    return response.json();
+  });
 };

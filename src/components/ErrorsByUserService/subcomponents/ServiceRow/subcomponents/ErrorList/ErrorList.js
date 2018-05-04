@@ -61,7 +61,7 @@ class ErrorListInner extends React.Component {
 
   changeSelection = newSelection => {
     const { selection } = this.state;
-    const { service } = this.props;
+    const { serviceId } = this.props;
     let selectionId;
     let selectionDirection;
     if (newSelection.length > this.state.selection.length) {
@@ -79,7 +79,7 @@ class ErrorListInner extends React.Component {
     });
     this.props
       .onSelectError(
-        service,
+        serviceId,
         this.state.rows[selectionId].degradation,
         selectionDirection === 'select'
       )
