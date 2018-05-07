@@ -22,6 +22,7 @@ class StatusInfoInner extends React.Component {
       uptime,
       fetchingStatusInfo,
       macAddress,
+      fetchingMacAddress,
     } = this.props;
     return (
       <PaperCard>
@@ -40,14 +41,14 @@ class StatusInfoInner extends React.Component {
                 }}
               >
                 Status
-                {fetchingStatusInfo ? (
+                {fetchingStatusInfo || fetchingMacAddress ? (
                   <CircularProgress style={{ margin: 10 }} />
                 ) : null}
               </div>
             </ListSubheader>
           }
         >
-          {fetchingStatusInfo ? null : (
+          {fetchingStatusInfo || fetchingMacAddress ? null : (
             <ListItem>
               <ListItemText>MAC: {macAddress}</ListItemText>
               <ListItemText>Softwareversion: {softwareVersion}</ListItemText>
@@ -62,6 +63,7 @@ class StatusInfoInner extends React.Component {
 
 const mapStateToProps = state => ({
   fetchingStatusInfo: getFetchingStatusInfo(state),
+  fetchingMacAddress: state.query.parameters.fetchingMacAddress,
   softwareVersion: state.query.statusInfo.softwareVersion,
   uptime: state.query.statusInfo.uptime,
   macAddress: getMacAddress(state),

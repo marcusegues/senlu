@@ -7,7 +7,7 @@ import type {
   Service,
   Degradation,
 } from '../types/reducers/query';
-import type {Id} from "../types/reducers";
+import type { Id } from '../types/reducers';
 
 export type DumbledoreApi = Promise<?Object>;
 
@@ -42,7 +42,6 @@ export const getMacAddressByCustomerId = (
     if (response.status !== 200) {
       throw new Error('Error obtaining MAC address.');
     }
-
     return response.json();
   });
 

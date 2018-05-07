@@ -6,6 +6,7 @@ const initialState: ParametersState = {
   timeSpanEnd: { date: '2018-02-27', time: '22:00' },
   customerId: '',
   macAddress: '',
+  fetchingMacAddress: false,
   sessionId: '',
   accessToken: '',
 };
@@ -25,6 +26,12 @@ export const parameters = (
       return {
         ...state,
         macAddress: action.macAddress,
+      };
+    }
+    case 'SET_FETCHING_MAC_ADDRESS': {
+      return {
+        ...state,
+        fetchingMacAddress: action.fetching,
       };
     }
     case 'SET_SESSION_ID': {

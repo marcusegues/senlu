@@ -7,24 +7,19 @@ import { ErrorsByUserService } from './ErrorsByUserService/ErrorsByUserService';
 import { StatusInfo } from './StatusInfo/StatusInfo';
 import { getQueryStringValue } from '../utils';
 import { getMacAddress, getSessionId } from '../selectors';
-import { getMacAddressByCustomerId } from '../api/dumbledore';
 import { fetchStatusInfo } from '../actions/statusInfo';
+import { fetchMacAddressByCustomerId } from '../actions/parameters';
 
 class AppInner extends React.Component {
   componentDidMount() {
     this.checkQueryParams()
       .then(({ customerId }) => {
-        getMacAddressByCustomerId(customerId)
-          .then(data => {
-            this.props.setMacAddress(data.device_address);
-            this.props.getStatusInfo();
-          })
-          .catch(e => {
-            this.props.setFetchMacAddressError(e.message);
-          });
+        this.props
+          .fetchMacAddressByCustomerId(customerId)
+          .then(() => this.props.getStatusInfo());
       })
       .catch(e => {
-        console.log('Missing query params.');
+        console.log(e.message);
       });
   }
 
@@ -92,6 +87,8 @@ const mapDispatchToProps = dispatch => ({
   setErrorMissingAccessToken: error =>
     dispatch({ type: 'SET_ERROR_MISSING_ACCESS_TOKEN', error }),
   getStatusInfo: () => dispatch(fetchStatusInfo()),
+  fetchMacAddressByCustomerId: customerId =>
+    dispatch(fetchMacAddressByCustomerId(customerId)),
 });
 
 export const App = connect(mapStateToProps, mapDispatchToProps)(AppInner);

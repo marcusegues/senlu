@@ -5,6 +5,7 @@ import type {
   SessionId,
   TimeSpanDelimiter,
   AccessToken,
+  Fetching,
 } from './index';
 
 export type ParametersState = {
@@ -12,6 +13,7 @@ export type ParametersState = {
   timeSpanEnd: TimeSpanDelimiter,
   customerId: CustomerId,
   macAddress: MacAddress,
+  fetchingMacAddress: Fetching,
   sessionId: SessionId,
   accessToken: AccessToken,
 };
