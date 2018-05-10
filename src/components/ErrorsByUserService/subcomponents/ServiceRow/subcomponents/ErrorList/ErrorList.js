@@ -16,6 +16,7 @@ import {
 } from '@devexpress/dx-react-grid';
 import '../../../../../../styles/index.css';
 import { CellComponent } from './subcomponents/CellComponent';
+import { SelectionCell } from './subcomponents/SelectionCell';
 import {
   getSessionId,
   getTimeSpanEnd,
@@ -23,10 +24,10 @@ import {
 } from '../../../../../../selectors';
 import { getMacAddress } from '../../../../../../selectors/query/parameters';
 import { ErrorListRowDetail } from './subcomponents/ErrorListRowDetail';
+const uuidv4 = require('uuid/v4');
 
 const generateRows = errors =>
-  errors.map((error, idx) => ({
-    id: idx, // this should be a unique error id coming from error.id in the future
+  errors.map(error => ({
     degradation: error.degradation,
     count: error.count,
     timeStart: error.timeStart,
@@ -50,8 +51,8 @@ class ErrorListInner extends React.Component {
         { columnName: 'count', width: 100 },
       ],
       rows: generateRows(this.props.errors),
-      selection: [],
-      pendingSelectionChange: {},
+      selection: this.props.selectedDegradation,
+      pendingSelectionChange: false,
     };
   }
 
@@ -59,43 +60,35 @@ class ErrorListInner extends React.Component {
     return this.state.rows.find(error => error.id === id);
   }
 
-  changeSelection = newSelection => {
-    const { selection } = this.state;
-    const { serviceId } = this.props;
-    let selectionId;
-    let selectionDirection;
-    if (newSelection.length > this.state.selection.length) {
-      selectionId = newSelection[newSelection.length - 1];
-      selectionDirection = 'select';
-    } else {
-      selectionId = selection[selection.length - 1];
-      selectionDirection = 'unselect';
-    }
+  componentWillReceiveProps(nextProps) {
+    debugger;
     this.setState({
-      pendingSelectionChange: {
-        ...this.state.pendingSelectionChange,
-        [selectionId]: selectionDirection,
-      },
+      selection: nextProps.selectedDegradation,
+    });
+  }
+
+  changeSelection = newSelection => {
+    const { serviceId, selectedDegradation } = this.props;
+    const selectRowId =
+      newSelection[newSelection.length - 1] !== undefined
+        ? newSelection[newSelection.length - 1]
+        : null;
+
+    this.setState({
+      pendingSelectionChange: true,
     });
     this.props
       .onSelectError(
         serviceId,
-        this.state.rows[selectionId].degradation,
-        selectionDirection === 'select'
+        this.state.rows[
+          selectRowId !== null ? selectRowId : selectedDegradation
+        ].degradation,
+        selectRowId
       )
       .then(success => {
         if (success) {
           this.setState({
-            pendingSelectionChange: omit(this.state.pendingSelectionChange, [
-              selectionId,
-            ]),
-            selection: newSelection,
-          });
-        } else {
-          this.setState({
-            pendingSelectionChange: omit(this.state.pendingSelectionChange, [
-              selectionId,
-            ]),
+            pendingSelectionChange: false,
           });
         }
       });
@@ -121,7 +114,7 @@ class ErrorListInner extends React.Component {
           columnExtensions={columnExtensions}
           cellComponent={CellComponent}
         />
-        <TableSelection />
+        <TableSelection cellComponent={SelectionCell} />
         <TableHeaderRow showSortingControls />
         <TableRowDetail
           contentComponent={({ row }) => (

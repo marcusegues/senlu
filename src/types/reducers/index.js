@@ -7,3 +7,7 @@ export type AppState = {
 
 export type Id = string;
 export type Index = number;
+
+export type ServiceId = Id;
+export type DegradationId = Id;
+export type SelectedRowIndex = Index;

@@ -11,9 +11,16 @@ import type { Id } from '../types/reducers';
 
 export type DumbledoreApi = Promise<?Object>;
 
-export const allUserServices = (): DumbledoreApi =>
-  fetch('https://dumbledore-dot-ql-sen-stag.appspot.com/userServices').then(
-    response => response.json()
+export const getDegradationNames = (): DumbledoreApi =>
+  fetch(`https://dumbledore-dot-ql-sen-stag.appspot.com/errorCode`).then(
+    response => {
+      // eslint-disable-next-line no-console
+      console.log('Dumbledore response', response);
+      if (response.status !== 200) {
+        throw new Error('Error obtaining user services.');
+      }
+      return response.json();
+    }
   );
 
 export const userServices = (): DumbledoreApi =>

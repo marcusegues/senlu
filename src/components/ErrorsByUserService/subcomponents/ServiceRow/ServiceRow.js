@@ -22,6 +22,7 @@ export class ServiceRow extends React.Component {
       errors,
       onSelectError,
       onToggleExpandError,
+      selectedDegradation,
     } = this.props;
 
     return (
@@ -53,6 +54,11 @@ export class ServiceRow extends React.Component {
           {errors.length ? (
             <ErrorList
               errors={errors}
+              selectedDegradation={
+                selectedDegradation.serviceId === serviceId
+                  ? [selectedDegradation.selectedRowIndex]
+                  : []
+              }
               onToggleExpandError={onToggleExpandError}
               onSelectError={onSelectError}
               serviceId={serviceId}

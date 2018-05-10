@@ -27,6 +27,9 @@ import {
   getMacAddress,
   getCustomerId,
 } from '../../selectors';
+import { fetchDegradationNames } from '../../actions/errorsByService';
+import type { SelectedDegradation } from '../../types/reducers/query/errorsByService';
+import { initialSelectedDegradation } from '../../types/reducers/query/errorsByService';
 
 type ErrorListCardProps = {
   errorsByService: Object,
@@ -34,6 +37,9 @@ type ErrorListCardProps = {
   updateUIData: () => void,
   fetchingServices: Fetching,
   fetchingErrorsByService: Fetching,
+  fetchDegradationNames: () => void,
+  selectedDegradation: SelectedDegradation,
+  setSelectedDegradation: SelectedDegradation => void,
   timeSpanStart: TimeSpanDelimiter,
   timeSpanEnd: TimeSpanDelimiter,
   customerId: CustomerId,
@@ -51,6 +57,7 @@ const styles = {
 class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
   componentDidMount() {
     this.props.updateUIData();
+    this.props.fetchDegradationNames();
   }
 
   orderServicesByErrors() {
@@ -64,19 +71,59 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
     return res;
   }
 
-  handleSelectError(service, degradation, selected: boolean) {
-    const { timeSpanStart, timeSpanEnd, customerId, sessionId } = this.props;
-    return dumbledoreApi
-      .selectCustomerDegradation(
-        customerId,
-        sessionId,
-        timeSpanStart,
-        timeSpanEnd,
-        service,
-        degradation,
-        selected
-      )
-      .then(response => response && response.status === 200);
+  handleSelectError(serviceId, degradationId, selectRowId) {
+    const selected = selectRowId !== null;
+    const {
+      timeSpanStart,
+      timeSpanEnd,
+      customerId,
+      sessionId,
+      selectedDegradation,
+    } = this.props;
+    const needToUnselectOther = !!(
+      selectedDegradation.serviceId &&
+      selectedDegradation.degradationId &&
+      (serviceId !== selectedDegradation.serviceId ||
+        degradationId !== selectedDegradation.degradationId)
+    );
+    debugger;
+    const unselect = needToUnselectOther
+      ? dumbledoreApi
+          .selectCustomerDegradation(
+            customerId,
+            sessionId,
+            timeSpanStart,
+            timeSpanEnd,
+            selectedDegradation.serviceId,
+            selectedDegradation.degradationId,
+            false
+          )
+          .then(response => response && response.status === 200)
+      : Promise.resolve(true);
+
+    return Promise.all([
+      unselect,
+      dumbledoreApi
+        .selectCustomerDegradation(
+          customerId,
+          sessionId,
+          timeSpanStart,
+          timeSpanEnd,
+          serviceId,
+          degradationId,
+          selected
+        )
+        .then(response => response && response.status === 200),
+    ]).then(([successUnselectOther, successCurrent]) => {
+      if (successUnselectOther && successCurrent) {
+        this.props.setSelectedDegradation(
+          selected
+            ? { serviceId, degradationId, selectedRowIndex: selectRowId }
+            : initialSelectedDegradation
+        );
+        return true;
+      }
+    });
   }
 
   fetchingData() {
@@ -115,6 +162,7 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
             : this.orderServicesByErrors().map(serviceId => (
                 <ServiceRow
                   key={serviceId}
+                  selectedDegradation={this.props.selectedDegradation}
                   serviceId={serviceId}
                   service={this.props.services[serviceId]}
                   errors={this.props.errorsByService[serviceId] || []}
@@ -143,10 +191,14 @@ const mapStateToProps = state => ({
   fetchingServices: getFetchingServices(state),
   errorsByService: getErrorsByService(state),
   services: getServices(state),
+  selectedDegradation: state.query.errorsByService.selectedDegradation,
 });
 
 const mapDispatchToProps = dispatch => ({
   updateUIData: () => dispatch(updateUIData()),
+  fetchDegradationNames: () => dispatch(fetchDegradationNames()),
+  setSelectedDegradation: selectedDegradation =>
+    dispatch({ type: 'SET_SELECTED_DEGRADATION', selectedDegradation }),
 });
 
 export const ErrorsByUserService = connect(mapStateToProps, mapDispatchToProps)(
