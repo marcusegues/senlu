@@ -42,14 +42,10 @@ export const getDegradationsByMac = (
   });
 };
 
-export const getCurrentStatus = macAddress => {
-  return fetch(
+export const getCurrentStatus = macAddress =>
+  fetch(
     addParamsToUrl(
       'https://hermione-dot-ql-sen-stag.appspot.com/get_current_status',
       { mac: macAddress }
     )
-  ).then(response => {
-    console.log('Get current status response', response);
-    return response.json();
-  });
-};
+  ).then(response => response.json());

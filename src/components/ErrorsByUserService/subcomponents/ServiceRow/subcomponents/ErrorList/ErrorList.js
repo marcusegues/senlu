@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import omit from 'lodash/omit';
-import { RowDetailState } from '@devexpress/dx-react-grid';
 import {
   Grid,
   Table,
@@ -13,6 +11,7 @@ import {
   SelectionState,
   SortingState,
   IntegratedSorting,
+  RowDetailState,
 } from '@devexpress/dx-react-grid';
 import '../../../../../../styles/index.css';
 import { CellComponent } from './subcomponents/CellComponent';
@@ -25,7 +24,6 @@ import {
 } from '../../../../../../selectors';
 import { getMacAddress } from '../../../../../../selectors/query/parameters';
 import { ErrorListRowDetail } from './subcomponents/ErrorListRowDetail';
-const uuidv4 = require('uuid/v4');
 
 class ErrorListInner extends React.Component {
   constructor(props) {
@@ -44,8 +42,14 @@ class ErrorListInner extends React.Component {
       ],
       rows: this.generateRows(this.props.errors),
       selection: this.props.selectedDegradation,
-      pendingSelectionChange: false,
+      // pendingSelectionChange: false,
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      selection: nextProps.selectedDegradation,
+    });
   }
 
   getErrorById(id) {
@@ -63,12 +67,6 @@ class ErrorListInner extends React.Component {
     }));
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      selection: nextProps.selectedDegradation,
-    });
-  }
-
   changeSelection = newSelection => {
     const { serviceId, selectedDegradation } = this.props;
     const selectRowId =
@@ -76,24 +74,22 @@ class ErrorListInner extends React.Component {
         ? newSelection[newSelection.length - 1]
         : null;
 
-    this.setState({
-      pendingSelectionChange: true,
-    });
-    this.props
-      .onSelectError(
-        serviceId,
-        this.state.rows[
-          selectRowId !== null ? selectRowId : selectedDegradation
-        ].degradation,
-        selectRowId
-      )
-      .then(success => {
-        if (success) {
-          this.setState({
-            pendingSelectionChange: false,
-          });
-        }
-      });
+    // this.setState({
+    //   pendingSelectionChange: true,
+    // });
+    this.props.onSelectError(
+      serviceId,
+      this.state.rows[selectRowId !== null ? selectRowId : selectedDegradation]
+        .degradation,
+      selectRowId
+    );
+    // .then(success => {
+    //   if (success) {
+    //     this.setState({
+    //       pendingSelectionChange: false,
+    //     });
+    //   }
+    // });
   };
 
   render() {

@@ -1,10 +1,8 @@
 // @flow
 import type {
   CustomerId,
-  MacAddress,
   SessionId,
   TimeSpanDelimiter,
-  Service,
   Degradation,
 } from '../types/reducers/query';
 import type { Id } from '../types/reducers';

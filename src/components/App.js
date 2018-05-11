@@ -19,6 +19,7 @@ class AppInner extends React.Component {
           .then(() => this.props.getStatusInfo());
       })
       .catch(e => {
+        // eslint-disable-next-line no-console
         console.log(e.message);
       });
   }

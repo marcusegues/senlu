@@ -4,10 +4,10 @@ import { CircularProgress } from 'material-ui/Progress';
 
 import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
-import { fetchStatusInfo } from '../../actions/statusInfo';
 import { PaperCard } from '../General/PaperCard';
 import { getFetchingStatusInfo, getMacAddress } from '../../selectors';
-var moment = require('moment');
+
+const moment = require('moment');
 
 const styles = {
   root: {
@@ -16,52 +16,47 @@ const styles = {
   },
 };
 
-class StatusInfoInner extends React.Component {
-  render() {
-    const {
-      classes,
-      softwareVersion,
-      uptime,
-      fetchingStatusInfo,
-      macAddress,
-      fetchingMacAddress,
-    } = this.props;
-    return (
-      <PaperCard>
-        <List
-          classes={{
-            root: classes.root,
-          }}
-          subheader={
-            <ListSubheader component="div">
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
-                {`Status ${moment().format('D. MMMM YYYY')}`}
-                {fetchingStatusInfo || fetchingMacAddress ? (
-                  <CircularProgress style={{ margin: 10 }} />
-                ) : null}
-              </div>
-            </ListSubheader>
-          }
-        >
-          {fetchingStatusInfo || fetchingMacAddress ? null : (
-            <ListItem>
-              <ListItemText>MAC: {macAddress}</ListItemText>
-              <ListItemText>Softwareversion: {softwareVersion}</ListItemText>
-              <ListItemText>Betriebszeit: {uptime}</ListItemText>
-            </ListItem>
-          )}
-        </List>
-      </PaperCard>
-    );
-  }
-}
+const StatusInfoInner = ({
+  classes,
+  softwareVersion,
+  uptime,
+  fetchingStatusInfo,
+  macAddress,
+  fetchingMacAddress,
+}) => (
+  <PaperCard>
+    <List
+      classes={{
+        root: classes.root,
+      }}
+      subheader={
+        <ListSubheader component="div">
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            {`Status ${moment().format('D. MMMM YYYY')}`}
+            {fetchingStatusInfo || fetchingMacAddress ? (
+              <CircularProgress style={{ margin: 10 }} />
+            ) : null}
+          </div>
+        </ListSubheader>
+      }
+    >
+      {fetchingStatusInfo || fetchingMacAddress ? null : (
+        <ListItem>
+          <ListItemText>MAC: {macAddress}</ListItemText>
+          <ListItemText>Softwareversion: {softwareVersion}</ListItemText>
+          <ListItemText>Betriebszeit: {uptime}</ListItemText>
+        </ListItem>
+      )}
+    </List>
+  </PaperCard>
+);
 
 const mapStateToProps = state => ({
   fetchingStatusInfo: getFetchingStatusInfo(state),

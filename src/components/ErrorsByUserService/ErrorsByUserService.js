@@ -86,19 +86,22 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
       (serviceId !== selectedDegradation.serviceId ||
         degradationId !== selectedDegradation.degradationId)
     );
-    const unselect = needToUnselectOther
-      ? dumbledoreApi
-          .selectCustomerDegradation(
-            customerId,
-            sessionId,
-            timeSpanStart,
-            timeSpanEnd,
-            selectedDegradation.serviceId,
-            selectedDegradation.degradationId,
-            false
-          )
-          .then(response => response && response.status === 200)
-      : Promise.resolve(true);
+    const unselect =
+      needToUnselectOther &&
+      selectedDegradation.serviceId && // Flowcheck
+      selectedDegradation.degradationId // Flowcheck
+        ? dumbledoreApi
+            .selectCustomerDegradation(
+              customerId,
+              sessionId,
+              timeSpanStart,
+              timeSpanEnd,
+              selectedDegradation.serviceId,
+              selectedDegradation.degradationId,
+              false
+            )
+            .then(response => response && response.status === 200)
+        : Promise.resolve(true);
 
     return Promise.all([
       unselect,
@@ -122,6 +125,9 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
         );
         return true;
       }
+      // something went wrong with checking or unchecking so handle this (actually request a simpler API so
+      // two requests don't have to be made and this whole logic can be refactored
+      return false;
     });
   }
 

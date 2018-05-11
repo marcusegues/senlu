@@ -1,7 +1,7 @@
 // @flow
 import type { ParametersState } from '../../types/reducers/query/parameters';
 
-var moment = require('moment');
+const moment = require('moment');
 
 const now = moment();
 const nowMinusOneDay = now.subtract(1, 'day');

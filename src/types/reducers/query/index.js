@@ -2,7 +2,7 @@
 import type { ParametersState } from './parameters';
 import type { ErrorsByServiceState } from './errorsByService';
 import type { ServicesState } from './services';
-import type { Id, Index } from '../index';
+import type { Id } from '../index';
 
 export type Service =
   | 'Linear TV OTT'

@@ -1,5 +1,4 @@
 import * as dumbledoreApi from '../api/dumbledore';
-import { getMacAddress } from '../selectors';
 
 export const setFetchingUserServices = fetching => ({
   type: 'SET_FETCHING_SERVICES',
@@ -15,7 +14,7 @@ export const resetServices = () => ({
   type: 'RESET_SERVICES',
 });
 
-export const fetchDumbledoreUserServices = () => (dispatch, getState) => {
+export const fetchDumbledoreUserServices = () => dispatch => {
   dispatch(setFetchingUserServices(true));
   dispatch(resetServices());
   return dumbledoreApi
