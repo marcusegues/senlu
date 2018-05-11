@@ -112,7 +112,14 @@ class ErrorListInner extends React.Component {
           columnExtensions={columnExtensions}
           cellComponent={CellComponent}
         />
-        <TableSelection cellComponent={SelectionCell} />
+        <TableSelection
+          cellComponent={({ tableRow, onToggle }) =>
+            SelectionCell({
+              selected: selection.indexOf(tableRow.rowId) !== -1,
+              onToggle,
+            })
+          }
+        />
         <TableHeaderRow showSortingControls />
         <TableRowDetail
           contentComponent={({ row }) => (
