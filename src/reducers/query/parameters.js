@@ -3,9 +3,18 @@ import type { ParametersState } from '../../types/reducers/query/parameters';
 
 var moment = require('moment');
 
+const now = moment();
+const nowMinusOneDay = now.subtract(1, 'day');
+
 const initialState: ParametersState = {
-  timeSpanStart: { date: moment().format('YYYY-MM-DD'), time: '00:00' },
-  timeSpanEnd: { date: moment().format('YYYY-MM-DD'), time: '22:00' },
+  timeSpanStart: {
+    date: nowMinusOneDay.format('YYYY-MM-DD'),
+    time: nowMinusOneDay.format('HH:mm'),
+  },
+  timeSpanEnd: {
+    date: now.format('YYYY-MM-DD'),
+    time: now.format('HH:mm'),
+  },
   customerId: '',
   macAddress: '',
   fetchingMacAddress: false,

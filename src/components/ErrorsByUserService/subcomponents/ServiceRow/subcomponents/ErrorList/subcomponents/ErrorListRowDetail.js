@@ -7,16 +7,12 @@ import {
 } from '@devexpress/dx-react-grid-material-ui';
 import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import { getError } from '../../../../../../../selectors';
+import {
+  getDegradationNameById,
+  getError,
+} from '../../../../../../../selectors';
 
 const uuidv4 = require('uuid/v4');
-
-const generateRows = (proportions, services) =>
-  proportions.map(data => ({
-    degradation: data.error_label,
-    service: services[data.service],
-    proportion: data.proportion,
-  }));
 
 class ErrorListRowDetailInner extends React.Component {
   constructor(props) {
@@ -27,12 +23,25 @@ class ErrorListRowDetailInner extends React.Component {
         { name: 'service', title: 'Service' },
         { name: 'proportion', title: 'Anteil' },
       ],
-      rows: generateRows(this.props.error.proportions, this.props.services),
+      columnExtensions: [{ columnName: 'degradation', width: 275 }],
+      rows: this.generateRows(
+        this.props.error.proportions,
+        this.props.services
+      ),
     };
   }
+
+  generateRows(proportions, services) {
+    return proportions.map(data => ({
+      degradation: this.props.getDegradationNameById(data.error_label),
+      service: services[data.service],
+      proportion: data.proportion,
+    }));
+  }
+
   render() {
     const { error } = this.props;
-    const { rows, columns } = this.state;
+    const { rows, columns, columnExtensions } = this.state;
     return (
       <List>
         <ListSubheader>Informationen</ListSubheader>
@@ -51,7 +60,7 @@ class ErrorListRowDetailInner extends React.Component {
         <Divider />
         <ListSubheader>Degradationen in Zeitspanne</ListSubheader>
         <Grid rows={rows} columns={columns}>
-          <Table />
+          <Table columnExtensions={columnExtensions} />
           <TableHeaderRow />
         </Grid>
       </List>
@@ -62,6 +71,8 @@ class ErrorListRowDetailInner extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
   error: getError(state, ownProps.serviceId, ownProps.row.id),
   services: state.query.services.services,
+  getDegradationNameById: degradationId =>
+    getDegradationNameById(state, degradationId),
 });
 
 export const ErrorListRowDetail = connect(mapStateToProps, null)(
