@@ -1,9 +1,11 @@
 // @flow
 import type { ParametersState } from '../../types/reducers/query/parameters';
 
+var moment = require('moment');
+
 const initialState: ParametersState = {
-  timeSpanStart: { date: '2018-02-27', time: '00:00' },
-  timeSpanEnd: { date: '2018-02-27', time: '22:00' },
+  timeSpanStart: { date: moment().format('YYYY-MM-DD'), time: '00:00' },
+  timeSpanEnd: { date: moment().format('YYYY-MM-DD'), time: '22:00' },
   customerId: '',
   macAddress: '',
   fetchingMacAddress: false,

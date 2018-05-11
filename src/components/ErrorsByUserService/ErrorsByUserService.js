@@ -86,7 +86,6 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
       (serviceId !== selectedDegradation.serviceId ||
         degradationId !== selectedDegradation.degradationId)
     );
-    debugger;
     const unselect = needToUnselectOther
       ? dumbledoreApi
           .selectCustomerDegradation(

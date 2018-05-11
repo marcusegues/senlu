@@ -9,6 +9,7 @@ const initialState: ErrorsByServiceState = {
   fetchingErrorsByService: false,
   errorsByService: initialErrorsByService,
   fetchingDegradationNames: false,
+  degradationNames: [],
   selectedDegradation: initialSelectedDegradation,
 };
 

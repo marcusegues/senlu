@@ -26,6 +26,7 @@ export const fetchDumbledoreUserServices = () => (dispatch, getState) => {
     })
     .catch(e => {
       dispatch(setFetchingUserServices(false));
+      dispatch({ type: 'SET_ERROR_FETCH_SERVICES', error: e.message }); // add error to redux no matter what
       throw e;
     });
 };

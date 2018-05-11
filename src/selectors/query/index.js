@@ -26,6 +26,9 @@ export const getErrorsByService = state =>
 export const getError = (state, serviceId, idx) =>
   errorsByServiceApi.getError(state.errorsByService, serviceId, idx);
 
+export const getDegradationNameById = (state, id) =>
+  errorsByServiceApi.getDegradationNameById(state.errorsByService, id);
+
 // services
 export const getFetchingServices = state =>
   servicesApi.getFetchingServices(state.services);

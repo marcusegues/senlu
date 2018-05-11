@@ -41,6 +41,11 @@ export const fetchHermioneDegradations = () => (dispatch, getState) => {
       // eslint-disable-next-line no-console
       console.log('Hermione data is', data);
       return data;
+    })
+    .catch(e => {
+      dispatch(setFetchingErrorsByService(false));
+      dispatch({ type: 'SET_ERROR_FETCH_ERRORS_BY_SERVICE', error: e.message }); // add error to redux no matter what
+      throw e;
     });
 };
 

@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { CircularProgress } from 'material-ui/Progress';
+
 import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
 import { fetchStatusInfo } from '../../actions/statusInfo';
 import { PaperCard } from '../General/PaperCard';
 import { getFetchingStatusInfo, getMacAddress } from '../../selectors';
+var moment = require('moment');
 
 const styles = {
   root: {
@@ -40,7 +42,7 @@ class StatusInfoInner extends React.Component {
                   alignItems: 'center',
                 }}
               >
-                Status
+                {`Status ${moment().format('D. MMMM YYYY')}`}
                 {fetchingStatusInfo || fetchingMacAddress ? (
                   <CircularProgress style={{ margin: 10 }} />
                 ) : null}

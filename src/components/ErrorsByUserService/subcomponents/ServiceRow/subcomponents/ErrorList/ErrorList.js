@@ -18,6 +18,7 @@ import '../../../../../../styles/index.css';
 import { CellComponent } from './subcomponents/CellComponent';
 import { SelectionCell } from './subcomponents/SelectionCell';
 import {
+  getDegradationNameById,
   getSessionId,
   getTimeSpanEnd,
   getTimeSpanStart,
@@ -25,15 +26,6 @@ import {
 import { getMacAddress } from '../../../../../../selectors/query/parameters';
 import { ErrorListRowDetail } from './subcomponents/ErrorListRowDetail';
 const uuidv4 = require('uuid/v4');
-
-const generateRows = errors =>
-  errors.map(error => ({
-    degradation: error.degradation,
-    count: error.count,
-    timeStart: error.timeStart,
-    timeEnd: error.timeEnd,
-    version: error.version,
-  }));
 
 class ErrorListInner extends React.Component {
   constructor(props) {
@@ -50,7 +42,7 @@ class ErrorListInner extends React.Component {
         { columnName: 'degradation', width: 200 },
         { columnName: 'count', width: 100 },
       ],
-      rows: generateRows(this.props.errors),
+      rows: this.generateRows(this.props.errors),
       selection: this.props.selectedDegradation,
       pendingSelectionChange: false,
     };
@@ -60,8 +52,18 @@ class ErrorListInner extends React.Component {
     return this.state.rows.find(error => error.id === id);
   }
 
+  generateRows(errors) {
+    return errors.map((error, idx) => ({
+      id: idx,
+      degradation: this.props.getDegradationNameById(error.degradation),
+      count: error.count,
+      timeStart: error.timeStart,
+      timeEnd: error.timeEnd,
+      version: error.version,
+    }));
+  }
+
   componentWillReceiveProps(nextProps) {
-    debugger;
     this.setState({
       selection: nextProps.selectedDegradation,
     });
@@ -131,6 +133,8 @@ const mapStateToProps = state => ({
   sessionId: getSessionId(state),
   timeSpanStart: getTimeSpanStart(state),
   timeSpanEnd: getTimeSpanEnd(state),
+  getDegradationNameById: degradationId =>
+    getDegradationNameById(state, degradationId),
 });
 
 export const ErrorList = connect(mapStateToProps, null)(ErrorListInner);

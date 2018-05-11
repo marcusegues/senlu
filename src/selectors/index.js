@@ -17,6 +17,9 @@ export const getErrorsByService = state =>
 export const getError = (state, serviceId, idx) =>
   queryApi.getError(state.query, serviceId, idx);
 
+export const getDegradationNameById = (state, id) =>
+  queryApi.getDegradationNameById(state.query, id);
+
 // query.services
 export const getFetchingServices = state =>
   queryApi.getFetchingServices(state.query);
