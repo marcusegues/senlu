@@ -5,7 +5,7 @@ const moment = require('moment');
 
 const now = moment();
 const nowMinusOneDay = moment(now).subtract(1, 'day');
-debugger;
+
 const initialState: ParametersState = {
   timeSpanStart: {
     date: nowMinusOneDay.format('YYYY-MM-DD'),
