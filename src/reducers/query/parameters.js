@@ -4,8 +4,8 @@ import type { ParametersState } from '../../types/reducers/query/parameters';
 const moment = require('moment');
 
 const now = moment();
-const nowMinusOneDay = now.subtract(1, 'day');
-
+const nowMinusOneDay = moment(now).subtract(1, 'day');
+debugger;
 const initialState: ParametersState = {
   timeSpanStart: {
     date: nowMinusOneDay.format('YYYY-MM-DD'),
