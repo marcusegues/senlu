@@ -1,6 +1,8 @@
 Luna
 * Run locally
 - `npm run dev`
+- navigate to `http://localhost:3000?customer_id=100200300&session_id=123`
+- and optionally add key 'access_token' to the query params
 
 * Deploy to cloud
 - `npm run deploy`
