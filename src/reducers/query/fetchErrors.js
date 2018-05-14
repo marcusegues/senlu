@@ -1,5 +1,6 @@
 // @flow
 import type { FetchErrorsState } from '../../types/reducers/query/fetchErrors';
+import type { Action } from '../../types/actions/actions';
 
 const initialState: FetchErrorsState = {
   errorFetchMacAddress: null,
@@ -9,7 +10,7 @@ const initialState: FetchErrorsState = {
 
 export const fetchErrors = (
   state: FetchErrorsState = initialState,
-  action: any
+  action: Action
 ) => {
   switch (action.type) {
     case 'SET_ERROR_FETCH_MAC_ADDRESS': {

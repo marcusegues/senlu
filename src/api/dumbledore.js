@@ -3,13 +3,13 @@ import type {
   CustomerId,
   SessionId,
   TimeSpanDelimiter,
-  Degradation,
+  DegradationName,
+  DegradationNames,
+  Services,
 } from '../types/reducers/query';
 import type { Id } from '../types/reducers';
 
-export type DumbledoreApi = Promise<?Object>;
-
-export const getDegradationNames = (): DumbledoreApi =>
+export const getDegradationNames = (): Promise<DegradationNames> =>
   fetch(`https://dumbledore-dot-ql-sen-stag.appspot.com/errorCode/`).then(
     response => {
       // eslint-disable-next-line no-console
@@ -21,7 +21,7 @@ export const getDegradationNames = (): DumbledoreApi =>
     }
   );
 
-export const userServices = (): DumbledoreApi =>
+export const userServices = (): Promise<Services> =>
   fetch(`https://dumbledore-dot-ql-sen-stag.appspot.com/userService`).then(
     response => {
       // eslint-disable-next-line no-console
@@ -36,7 +36,7 @@ export const userServices = (): DumbledoreApi =>
 export const getMacAddressByCustomerId = (
   customerId: CustomerId,
   accessToken: number = 123
-): DumbledoreApi =>
+): Promise<{ device_address: string }> =>
   fetch(
     `https://dumbledore-dot-ql-sen-stag.appspot.com/deviceAddress/${
       customerId
@@ -56,9 +56,9 @@ export const selectCustomerDegradation = (
   timeSpanStart: TimeSpanDelimiter,
   timeSpanEnd: TimeSpanDelimiter,
   serviceId: Id,
-  degradation: Degradation,
+  degradation: DegradationName,
   selected: boolean
-): DumbledoreApi =>
+): Promise<Object> =>
   fetch('https://dumbledore-dot-ql-sen-stag.appspot.com/customerDegradation', {
     method: 'POST',
     headers: {
@@ -75,6 +75,6 @@ export const selectCustomerDegradation = (
     }),
   }).catch(e => {
     // eslint-disable-next-line no-console
-    console.log('Error', e);
-    return null;
+    console.log('Error selecting customer degradation.', e);
+    throw e;
   });

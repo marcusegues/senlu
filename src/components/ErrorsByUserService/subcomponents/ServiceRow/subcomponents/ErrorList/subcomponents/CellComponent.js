@@ -1,7 +1,14 @@
+// @flow
 import React from 'react';
 import { Table } from '@devexpress/dx-react-grid-material-ui';
 
-export const CellComponent = ({ tableRow, tableColumn }) => {
+export const CellComponent = ({
+  tableRow,
+  tableColumn,
+}: {
+  tableRow: Table.TableRow,
+  tableColumn: Table.TableColumn,
+}) => {
   if (
     tableColumn.column.name === 'timeStart' ||
     tableColumn.column.name === 'timeEnd'

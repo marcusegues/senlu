@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { connect } from 'react-redux';
 import {
@@ -10,11 +11,58 @@ import Divider from 'material-ui/Divider';
 import {
   getDegradationNameById,
   getError,
+  getServices,
 } from '../../../../../../../selectors';
+import type {
+  DegradationName,
+  Degradation,
+  Services,
+  Proportions,
+} from '../../../../../../../types/reducers/query';
+import type { AppState, Id } from '../../../../../../../types/reducers';
+import type { ErrorListRow } from '../ErrorList';
 
 const uuidv4 = require('uuid/v4');
 
-class ErrorListRowDetailInner extends React.Component {
+type Column = {
+  name: string,
+  title: string,
+};
+
+type ErrorListRowDetailRow = {
+  degradation: string,
+  service: string,
+  proportion: number,
+};
+
+type ColumnExtension = {
+  columnName: string,
+  width: number,
+};
+
+type ErrorListRowDetailProvidedProps = {
+  error: Degradation,
+  services: Services,
+  getDegradationNameById: (degradationId: Id) => DegradationName,
+};
+
+type ErrorListRowDetailOwnProps = {
+  // eslint-disable-next-line react/no-unused-prop-types
+  serviceId: Id,
+  // eslint-disable-next-line react/no-unused-prop-types
+  row: ErrorListRow,
+};
+
+type ErrorListRowDetailState = {
+  columns: Array<Column>,
+  rows: Array<ErrorListRowDetailRow>,
+  columnExtensions: Array<ColumnExtension>,
+};
+
+class ErrorListRowDetailInner extends React.Component<
+  ErrorListRowDetailProvidedProps & ErrorListRowDetailOwnProps,
+  ErrorListRowDetailState
+> {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,15 +71,18 @@ class ErrorListRowDetailInner extends React.Component {
         { name: 'service', title: 'Service' },
         { name: 'proportion', title: 'Anteil' },
       ],
-      columnExtensions: [{ columnName: 'degradation', width: 275 }],
       rows: this.generateRows(
         this.props.error.proportions,
         this.props.services
       ),
+      columnExtensions: [{ columnName: 'degradation', width: 275 }],
     };
   }
 
-  generateRows(proportions, services) {
+  generateRows(
+    proportions: Proportions,
+    services: Services
+  ): Array<ErrorListRowDetailRow> {
     return proportions.map(data => ({
       degradation: this.props.getDegradationNameById(data.error_label),
       service: services[data.service],
@@ -68,9 +119,12 @@ class ErrorListRowDetailInner extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (
+  state: AppState,
+  ownProps: ErrorListRowDetailOwnProps
+) => ({
   error: getError(state, ownProps.serviceId, ownProps.row.id),
-  services: state.query.services.services,
+  services: getServices(state),
   getDegradationNameById: degradationId =>
     getDegradationNameById(state, degradationId),
 });

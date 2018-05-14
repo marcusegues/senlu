@@ -1,10 +1,19 @@
-import { addParamsToUrl } from './utils';
+// @flow
+import { addParamsToUrl, removeDotsFromMacAddress } from './utils';
+import type {
+  CustomerId,
+  DegradationName,
+  DegradationsByService,
+  MacAddress,
+  TimeSpanDelimiter,
+} from '../types/reducers/query';
+import { StatusInfo } from '../components/StatusInfo/StatusInfo';
 
 export const getDegradationsByCustomerId = (
-  customerId,
-  timeSpanStart,
-  timeSpanEnd
-) =>
+  customerId: CustomerId,
+  timeSpanStart: TimeSpanDelimiter,
+  timeSpanEnd: TimeSpanDelimiter
+): Promise<DegradationsByService> =>
   fetch(
     addParamsToUrl(
       'https://hermione-dot-ql-sen-stag.appspot.com/get_degradations',
@@ -21,11 +30,11 @@ export const getDegradationsByCustomerId = (
   });
 
 export const getDegradationsByMac = (
-  macAddress,
-  timeSpanStart,
-  timeSpanEnd
-) => {
-  const macNoDots = macAddress.toString().replace(/\./g, '');
+  macAddress: MacAddress,
+  timeSpanStart: TimeSpanDelimiter,
+  timeSpanEnd: TimeSpanDelimiter
+): Promise<DegradationsByService> => {
+  const macNoDots = removeDotsFromMacAddress(macAddress);
   return fetch(
     addParamsToUrl(
       'https://hermione-dot-ql-sen-stag.appspot.com/get_degradations',
@@ -42,7 +51,7 @@ export const getDegradationsByMac = (
   });
 };
 
-export const getCurrentStatus = macAddress =>
+export const getCurrentStatus = (macAddress: MacAddress): Promise<StatusInfo> =>
   fetch(
     addParamsToUrl(
       'https://hermione-dot-ql-sen-stag.appspot.com/get_current_status',

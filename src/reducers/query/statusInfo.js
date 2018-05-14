@@ -5,6 +5,7 @@ import {
   initialSoftwareVersion,
   initialUptime,
 } from '../../types/reducers/query/statusInfo';
+import type { Action } from '../../types/actions/actions';
 
 const initialState: StatusInfoState = {
   softwareVersion: initialSoftwareVersion,
@@ -14,7 +15,7 @@ const initialState: StatusInfoState = {
 
 export const statusInfo = (
   state: StatusInfoState = initialState,
-  action: any
+  action: Action
 ) => {
   switch (action.type) {
     case 'SET_FETCHING_STATUS_INFO': {

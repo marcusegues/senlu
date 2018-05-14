@@ -1,5 +1,6 @@
 // @flow
 import type { ParametersState } from '../../types/reducers/query/parameters';
+import type { Action } from '../../types/actions/actions';
 
 const moment = require('moment');
 
@@ -24,7 +25,7 @@ const initialState: ParametersState = {
 
 export const parameters = (
   state: ParametersState = initialState,
-  action: any
+  action: Action
 ) => {
   switch (action.type) {
     case 'SET_CUSTOMER_ID': {

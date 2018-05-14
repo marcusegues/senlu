@@ -1,6 +1,11 @@
+// @flow
 import * as dumbledoreApi from '../api/dumbledore';
+import type { CustomerId, DegradationName } from '../types/reducers/query';
+import type { Dispatch } from '../types';
 
-export const fetchMacAddressByCustomerId = customerId => dispatch => {
+export const fetchMacAddressByCustomerId = (customerId: CustomerId) => (
+  dispatch: Dispatch
+): Promise<{ device_address: string } | DegradationName> => {
   dispatch({ type: 'SET_FETCHING_MAC_ADDRESS', fetching: true });
   return dumbledoreApi
     .getMacAddressByCustomerId(customerId)
@@ -12,5 +17,6 @@ export const fetchMacAddressByCustomerId = customerId => dispatch => {
     .catch(error => {
       dispatch({ type: 'SET_FETCHING_MAC_ADDRESS', fetching: false });
       dispatch({ type: 'SET_ERROR_FETCH_MAC_ADDRESS', error: error.message });
+      return error;
     });
 };

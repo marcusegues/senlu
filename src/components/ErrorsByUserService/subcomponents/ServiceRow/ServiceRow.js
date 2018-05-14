@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { ListItem, ListItemText } from 'material-ui/List';
 import ExpandLess from 'material-ui-icons/ExpandLess';
@@ -5,8 +6,26 @@ import ExpandMore from 'material-ui-icons/ExpandMore';
 import Collapse from 'material-ui/transitions/Collapse';
 import { TrafficLight } from '../../../../svg/TrafficLight';
 import { ErrorList } from './subcomponents/ErrorList/ErrorList';
+import type { ServiceId } from '../../../../types/reducers';
+import type { OnSelectServiceError } from '../../ErrorsByUserService';
+import type { Degradation, Service } from '../../../../types/reducers/query';
 
-export class ServiceRow extends React.Component {
+type ServiceRowOwnProps = {
+  service: Service,
+  serviceId: ServiceId,
+  errors: Array<Degradation>,
+  onSelectError: OnSelectServiceError,
+  selectedDegradation: any,
+};
+
+type ServiceRowState = {
+  expanded: boolean,
+};
+
+export class ServiceRow extends React.Component<
+  ServiceRowOwnProps,
+  ServiceRowState
+> {
   state = {
     expanded: false,
   };
@@ -21,7 +40,6 @@ export class ServiceRow extends React.Component {
       serviceId,
       errors,
       onSelectError,
-      onToggleExpandError,
       selectedDegradation,
     } = this.props;
 
@@ -54,12 +72,11 @@ export class ServiceRow extends React.Component {
           {errors.length ? (
             <ErrorList
               errors={errors}
-              selectedDegradation={
+              selectedDegradationRowIndex={
                 selectedDegradation.serviceId === serviceId
                   ? [selectedDegradation.selectedRowIndex]
                   : []
               }
-              onToggleExpandError={onToggleExpandError}
               onSelectError={onSelectError}
               serviceId={serviceId}
             />

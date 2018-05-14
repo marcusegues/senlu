@@ -1,3 +1,4 @@
+// @flow
 import {
   fetchDumbledoreUserServices,
   resetServices,
@@ -8,11 +9,12 @@ import {
   setErrorsByService,
 } from './errorsByService';
 import { initialErrorsByService } from '../types/reducers/query/errorsByService';
+import type { Dispatch } from '../types';
 
-export const updateUIData = () => dispatch => {
+export const updateUIData = () => (dispatch: Dispatch) => {
   Promise.all([
     dispatch(fetchHermioneDegradations()),
-    dispatch(fetchDumbledoreUserServices())
+    dispatch(fetchDumbledoreUserServices()),
   ])
     .then(([degradations, services]) => {
       // if both calls succeed, then set the data from their responses

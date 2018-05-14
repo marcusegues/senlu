@@ -59,19 +59,39 @@ export type TimeSpanDelimiter = { date: string, time: string };
 export type Fetching = boolean;
 
 // API response
-export type Degradation = string;
+export type DegradationName = string;
 export type Count = number;
 export type TimeString = string;
 export type Version = string;
-export type Error = {
-  degradation: Degradation,
+
+export type Proportion = {
+  error_label: Id,
+  proportion: number,
+  service: Id,
+};
+
+export type Proportions = Array<Proportion>;
+
+export type Log = string;
+export type Logs = Array<Log>;
+
+export type Degradation = {
+  id?: Id,
+  degradation: DegradationName,
   count: Count,
   timeStart: TimeString,
   timeEnd: TimeString,
   version: Version,
+  proportions: Proportions,
+  uptime: string,
+  logs: Logs,
 };
-export type ErrorArray = Array<Error>;
-export type ErrorsByService = { [Id]: ErrorArray };
+
+export type DegradationArray = Array<Degradation>;
+export type DegradationsByService = { [Id]: DegradationArray };
+
+export type DegradationNames = Array<Degradation>;
+export const initialDegradationNames = [];
 
 export type QueryState = {
   parameters: ParametersState,

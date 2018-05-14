@@ -4,18 +4,20 @@ import {
   initialErrorsByService,
   initialSelectedDegradation,
 } from '../../types/reducers/query/errorsByService';
+import type { Action } from '../../types/actions/actions';
+import { initialDegradationNames } from '../../types/reducers/query';
 
 const initialState: ErrorsByServiceState = {
   fetchingErrorsByService: false,
   errorsByService: initialErrorsByService,
   fetchingDegradationNames: false,
-  degradationNames: [],
+  degradationNames: initialDegradationNames,
   selectedDegradation: initialSelectedDegradation,
 };
 
 export const errorsByService = (
   state: ErrorsByServiceState = initialState,
-  action: any
+  action: Action
 ) => {
   switch (action.type) {
     case 'SET_FETCHING_ERRORS_BY_SERVICE': {

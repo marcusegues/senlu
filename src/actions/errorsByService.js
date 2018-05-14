@@ -1,29 +1,40 @@
+// @flow
 import { getHermioneTimespanFormat } from '../utils/hermione';
 import * as hermioneApi from '../api/hermione';
 import * as dumbledoreApi from '../api/dumbledore';
 import { getMacAddress, getTimeSpanEnd, getTimeSpanStart } from '../selectors';
+import type {
+  DegradationNames,
+  DegradationsByService,
+  Fetching,
+} from '../types/reducers/query';
+import type { Dispatch, GetState } from '../types';
+import type { Action } from '../types/actions/actions';
 
-export const setFetchingErrorsByService = fetching => ({
+export const setFetchingErrorsByService = (fetching: Fetching): Action => ({
   type: 'SET_FETCHING_ERRORS_BY_SERVICE',
   fetching,
 });
 
-export const setFetchingDegradationNames = fetching => ({
+export const setFetchingDegradationNames = (fetching: Fetching): Action => ({
   type: 'SET_FETCHING_DEGRADATION_NAMES',
   fetching,
 });
 
-export const setErrorsByService = data => ({
+export const setErrorsByService = (data: DegradationsByService): Action => ({
   type: 'SET_ERRORS_BY_SERVICE',
   data,
 });
 
-export const setDegradationNames = data => ({
+export const setDegradationNames = (data: DegradationNames): Action => ({
   type: 'SET_DEGRADATION_NAMES',
   data,
 });
 
-export const fetchHermioneDegradations = () => (dispatch, getState) => {
+export const fetchHermioneDegradations = () => (
+  dispatch: Dispatch,
+  getState: GetState
+) => {
   const state = getState();
   const macAddress = getMacAddress(state);
   const timeSpanStart = getTimeSpanStart(state);
@@ -49,9 +60,9 @@ export const fetchHermioneDegradations = () => (dispatch, getState) => {
     });
 };
 
-export const fetchDegradationNames = () => dispatch => {
+export const fetchDegradationNames = () => (dispatch: Dispatch) => {
   dispatch(setFetchingDegradationNames(true));
-  return dumbledoreApi.getDegradationNames().then(data => {
+  return dumbledoreApi.getDegradationNames().then((data: DegradationNames) => {
     dispatch(setFetchingDegradationNames(false));
     // eslint-disable-next-line no-console
     console.log('Dumbledore degradations by name is', data);

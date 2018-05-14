@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { connect } from 'react-redux';
 import {
@@ -16,16 +17,66 @@ import {
 import '../../../../../../styles/index.css';
 import { CellComponent } from './subcomponents/CellComponent';
 import { SelectionCell } from './subcomponents/SelectionCell';
-import {
-  getDegradationNameById,
-  getSessionId,
-  getTimeSpanEnd,
-  getTimeSpanStart,
-} from '../../../../../../selectors';
-import { getMacAddress } from '../../../../../../selectors/query/parameters';
+import { getDegradationNameById } from '../../../../../../selectors';
 import { ErrorListRowDetail } from './subcomponents/ErrorListRowDetail';
+import type {
+  Count,
+  Degradation,
+  DegradationArray,
+  DegradationName,
+  TimeString,
+  Version,
+} from '../../../../../../types/reducers/query';
+import type {
+  DegradationId,
+  Id,
+  Index,
+  SelectedRowIndex,
+  ServiceId,
+} from '../../../../../../types/reducers';
+import type { OnSelectServiceError } from '../../../../ErrorsByUserService';
 
-class ErrorListInner extends React.Component {
+type Column = {
+  name: string,
+  title: string,
+};
+
+export type ErrorListRow = {
+  id: Index,
+  degradation: DegradationName,
+  count: Count,
+  timeStart: TimeString,
+  timeEnd: TimeString,
+  version: Version,
+};
+
+type ColumnExtension = {
+  columnName: string,
+  width: number,
+};
+
+type ErrorListState = {
+  columns: Array<Column>,
+  rows: Array<ErrorListRow>,
+  columnExtensions: Array<ColumnExtension>,
+  selectedRowIndex: Array<SelectedRowIndex>,
+};
+
+type ErrorListProvidedProps = {
+  getDegradationNameById: (degradationId: DegradationId) => DegradationName,
+};
+
+type ErrorListOwnProps = {
+  selectedDegradationRowIndex: Array<Index>,
+  serviceId: ServiceId,
+  errors: DegradationArray,
+  onSelectError: OnSelectServiceError,
+};
+
+class ErrorListInner extends React.Component<
+  ErrorListProvidedProps & ErrorListOwnProps,
+  ErrorListState
+> {
   constructor(props) {
     super(props);
 
@@ -41,14 +92,14 @@ class ErrorListInner extends React.Component {
         { columnName: 'count', width: 100 },
       ],
       rows: this.generateRows(this.props.errors),
-      selection: this.props.selectedDegradation,
+      selectedRowIndex: this.props.selectedDegradationRowIndex,
       // pendingSelectionChange: false,
     };
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      selection: nextProps.selectedDegradation,
+      selectedRowIndex: nextProps.selectedDegradationRowIndex,
     });
   }
 
@@ -56,7 +107,7 @@ class ErrorListInner extends React.Component {
     return this.state.rows.find(error => error.id === id);
   }
 
-  generateRows(errors) {
+  generateRows(errors: Array<Degradation>): Array<ErrorListRow> {
     return errors.map((error, idx) => ({
       id: idx,
       degradation: this.props.getDegradationNameById(error.degradation),
@@ -68,20 +119,22 @@ class ErrorListInner extends React.Component {
   }
 
   changeSelection = newSelection => {
-    const { serviceId, selectedDegradation } = this.props;
-    const selectRowId =
+    const { serviceId, selectedDegradationRowIndex } = this.props;
+    const selectRowIndex =
       newSelection[newSelection.length - 1] !== undefined
         ? newSelection[newSelection.length - 1]
-        : null;
+        : -1;
 
     // this.setState({
     //   pendingSelectionChange: true,
     // });
+    debugger;
     this.props.onSelectError(
       serviceId,
-      this.state.rows[selectRowId !== null ? selectRowId : selectedDegradation]
-        .degradation,
-      selectRowId
+      this.state.rows[
+        selectRowIndex !== -1 ? selectRowIndex : selectedDegradationRowIndex[0]
+      ].degradation,
+      selectRowIndex
     );
     // .then(success => {
     //   if (success) {
@@ -93,12 +146,12 @@ class ErrorListInner extends React.Component {
   };
 
   render() {
-    const { rows, columns, selection, columnExtensions } = this.state;
+    const { rows, columns, selectedRowIndex, columnExtensions } = this.state;
     return (
       <Grid rows={rows} columns={columns}>
         <RowDetailState />
         <SelectionState
-          selection={selection}
+          selection={[selectedRowIndex]}
           onSelectionChange={selectionArray =>
             this.changeSelection(selectionArray)
           }
@@ -115,7 +168,7 @@ class ErrorListInner extends React.Component {
         <TableSelection
           cellComponent={({ tableRow, onToggle }) =>
             SelectionCell({
-              selected: selection.indexOf(tableRow.rowId) !== -1,
+              selected: selectedRowIndex === tableRow.rowId,
               onToggle,
             })
           }
@@ -132,10 +185,6 @@ class ErrorListInner extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  macAddress: getMacAddress(state),
-  sessionId: getSessionId(state),
-  timeSpanStart: getTimeSpanStart(state),
-  timeSpanEnd: getTimeSpanEnd(state),
   getDegradationNameById: degradationId =>
     getDegradationNameById(state, degradationId),
 });

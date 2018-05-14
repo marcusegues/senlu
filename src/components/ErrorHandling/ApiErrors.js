@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
@@ -7,8 +8,9 @@ import {
   getErrorFetchMacAddress,
   getErrorFetchServices,
 } from '../../selectors';
+import type { FetchError } from '../../types/reducers/query/fetchErrors';
 
-const styles = theme => ({
+const styles = (theme: Object) => ({
   close: {
     width: theme.spacing.unit * 4,
     height: theme.spacing.unit * 4,
@@ -23,7 +25,21 @@ const styles = theme => ({
   },
 });
 
-class ApiErrorsInner extends React.Component {
+type apiErrorsProps = {
+  errorFetchMacAddress: FetchError,
+  errorFetchServices: FetchError,
+  errorFetchErrorsByService: FetchError,
+  errorMissingCustomerId: FetchError,
+  errorMissingSessionId: FetchError,
+  errorMissingAccessToken: FetchError,
+  classes: Object,
+};
+
+type apiErrorsState = {
+  open: boolean,
+};
+
+class ApiErrorsInner extends React.Component<apiErrorsProps, apiErrorsState> {
   state = {
     open: true,
   };

@@ -30,6 +30,12 @@ import {
 import { fetchDegradationNames } from '../../actions/errorsByService';
 import type { SelectedDegradation } from '../../types/reducers/query/errorsByService';
 import { initialSelectedDegradation } from '../../types/reducers/query/errorsByService';
+import type {
+  DegradationId,
+  Index,
+  SelectedRowIndex,
+  ServiceId,
+} from '../../types/reducers';
 
 type ErrorListCardProps = {
   errorsByService: Object,
@@ -46,6 +52,12 @@ type ErrorListCardProps = {
   sessionId: SessionId,
   classes: Object,
 };
+
+export type OnSelectServiceError = (
+  selectedServiceId: ServiceId,
+  degradationId: DegradationId,
+  selectRowIndex: Index
+) => Promise<boolean>;
 
 const styles = {
   root: {
@@ -71,8 +83,12 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
     return res;
   }
 
-  handleSelectError(serviceId, degradationId, selectRowId) {
-    const selected = selectRowId !== null;
+  handleSelectError(
+    serviceId: ServiceId,
+    degradationId: DegradationId,
+    selectRowIndex: SelectedRowIndex
+  ) {
+    const selected = selectRowIndex !== -1;
     const {
       timeSpanStart,
       timeSpanEnd,
@@ -87,9 +103,7 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
         degradationId !== selectedDegradation.degradationId)
     );
     const unselect =
-      needToUnselectOther &&
-      selectedDegradation.serviceId && // Flowcheck
-      selectedDegradation.degradationId // Flowcheck
+      needToUnselectOther && selectedDegradation !== 'noSelection'
         ? dumbledoreApi
             .selectCustomerDegradation(
               customerId,
@@ -120,7 +134,7 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
       if (successUnselectOther && successCurrent) {
         this.props.setSelectedDegradation(
           selected
-            ? { serviceId, degradationId, selectedRowIndex: selectRowId }
+            ? { serviceId, degradationId, selectedRowIndex: selectRowIndex }
             : initialSelectedDegradation
         );
         return true;
@@ -171,11 +185,15 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
                   serviceId={serviceId}
                   service={this.props.services[serviceId]}
                   errors={this.props.errorsByService[serviceId] || []}
-                  onSelectError={(selectedService, degradation, selected) =>
+                  onSelectError={(
+                    selectedServiceId: ServiceId,
+                    degradationId: DegradationId,
+                    selectRowIndex: SelectedRowIndex
+                  ) =>
                     this.handleSelectError(
-                      selectedService,
-                      degradation,
-                      selected
+                      selectedServiceId,
+                      degradationId,
+                      selectRowIndex
                     )
                   }
                 />
