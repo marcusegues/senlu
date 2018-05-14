@@ -4,11 +4,6 @@ import type { Fetching } from './index';
 export type Uptime = string;
 export type SoftwareVersion = string;
 
-type StatusInfo = {
-    version: SoftwareVersion,
-    uptime: Uptime,
-};
-
 export type StatusInfoState = {
   softwareVersion: SoftwareVersion,
   uptime: Uptime,

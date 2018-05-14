@@ -29,7 +29,6 @@ import type {
 } from '../../../../../../types/reducers/query';
 import type {
   DegradationId,
-  Id,
   Index,
   SelectedRowIndex,
   ServiceId,
@@ -128,7 +127,6 @@ class ErrorListInner extends React.Component<
     // this.setState({
     //   pendingSelectionChange: true,
     // });
-    debugger;
     this.props.onSelectError(
       serviceId,
       this.state.rows[

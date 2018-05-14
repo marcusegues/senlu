@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import CssBaseline from 'material-ui/CssBaseline';
 import { NavBar } from './NavBar/NavBar';
@@ -10,8 +10,31 @@ import { getQueryStringValue } from '../utils';
 import { getMacAddress, getSessionId } from '../selectors';
 import { fetchStatusInfo } from '../actions/statusInfo';
 import { fetchMacAddressByCustomerId } from '../actions/parameters';
+import type {
+  AccessToken,
+  CustomerId,
+  MacAddress,
+  SessionId,
+} from '../types/reducers/query';
+import type { FetchError } from '../types/reducers/query/fetchErrors';
+import type { Dispatch } from '../types';
 
-class AppInner extends React.Component {
+type AppProvidedProps = {
+  macAddress: MacAddress,
+  sessionId: SessionId,
+  setCustomerId: (customerId: CustomerId) => void,
+  setSessionId: (sessionId: SessionId) => void,
+  setAccessToken: (accessToken: AccessToken) => void,
+  setErrorMissingCustomerId: (error: FetchError) => void,
+  setErrorMissingSessionId: (error: FetchError) => void,
+  setErrorMissingAccessToken: (error: FetchError) => void,
+  getStatusInfo: () => void,
+  fetchMacAddressByCustomerId: (
+    customerId: CustomerId
+  ) => Promise<{ device_address: string }>,
+};
+
+class AppInner extends React.Component<AppProvidedProps, null> {
   componentDidMount() {
     this.checkQueryParams()
       .then(({ customerId }) => {
@@ -72,16 +95,12 @@ const mapStateToProps = state => ({
   sessionId: getSessionId(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCustomerId: customerId =>
     dispatch({ type: 'SET_CUSTOMER_ID', customerId }),
   setSessionId: sessionId => dispatch({ type: 'SET_SESSION_ID', sessionId }),
   setAccessToken: accessToken =>
     dispatch({ type: 'SET_ACCESS_TOKEN', accessToken }),
-  setMacAddress: macAddress =>
-    dispatch({ type: 'SET_MAC_ADDRESS', macAddress }),
-  setFetchMacAddressError: error =>
-    dispatch({ type: 'SET_ERROR_FETCH_MAC_ADDRESS', error }),
   setErrorMissingCustomerId: error =>
     dispatch({ type: 'SET_ERROR_MISSING_CUSTOMER_ID', error }),
   setErrorMissingSessionId: error =>

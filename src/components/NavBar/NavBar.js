@@ -9,19 +9,36 @@ import { withStyles } from 'material-ui/styles';
 import { TextInputField } from '../Input/TextInputField';
 import { updateUIData } from '../../actions/ui';
 import {
-  getFetchingErrorsByService,
   getMacAddress,
   getTimeSpanEnd,
   getTimeSpanStart,
 } from '../../selectors';
+import type { MacAddress, TimeSpanDelimiter } from '../../types/reducers/query';
 
-const styles = {
+const styles: Object = {
   root: {
     color: 'primary',
     background: '#2096ba',
   },
 };
-class NavBarInner extends React.Component {
+
+type NavBarProvidedProps = {
+  timeSpanStart: TimeSpanDelimiter,
+  timeSpanEnd: TimeSpanDelimiter,
+  macAddress: MacAddress,
+  setTimeSpanStart: (timeSpanStart: TimeSpanDelimiter) => Promise<void>,
+  setTimeSpanEnd: (timeSpanEnd: TimeSpanDelimiter) => Promise<void>,
+  updateUIData: () => void,
+  resetErrorFetchErrorsByService: () => void,
+  classes: Object,
+};
+
+type NavBarState = {
+  timeSpanStart: TimeSpanDelimiter,
+  timeSpanEnd: TimeSpanDelimiter,
+};
+
+class NavBarInner extends React.Component<NavBarProvidedProps, NavBarState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,13 +49,13 @@ class NavBarInner extends React.Component {
 
   handleChangeTimeSpanStart = event => {
     const [date, time] = event.target.value.split('T');
-    this.props.resetFetchErrorsByServiceErrors();
+    this.props.resetErrorFetchErrorsByService();
     this.setState({ timeSpanStart: { date, time } });
   };
 
   handleChangeTimeSpanEnd = event => {
     const [date, time] = event.target.value.split('T');
-    this.props.resetFetchErrorsByServiceErrors();
+    this.props.resetErrorFetchErrorsByService();
     this.setState({ timeSpanEnd: { date, time } });
   };
 
@@ -107,7 +124,6 @@ class NavBarInner extends React.Component {
 const mapStateToProps = state => ({
   timeSpanStart: getTimeSpanStart(state),
   timeSpanEnd: getTimeSpanEnd(state),
-  fetchingErrorsByService: getFetchingErrorsByService(state),
   macAddress: getMacAddress(state),
 });
 
@@ -123,7 +139,7 @@ const mapDispatchToProps = dispatch => ({
       resolve();
     }),
   updateUIData: () => dispatch(updateUIData()),
-  resetFetchErrorsByServiceErrors: () =>
+  resetErrorFetchErrorsByService: () =>
     dispatch({ type: 'RESET_ERROR_FETCH_ERRORS_BY_SERVICE' }),
 });
 

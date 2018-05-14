@@ -1,5 +1,7 @@
+// @flow
 import type {
   AccessToken,
+  CustomerId,
   DegradationNames,
   DegradationsByService,
   Fetching,
@@ -10,6 +12,7 @@ import type {
 } from '../reducers/query';
 import type { SelectedDegradation } from '../reducers/query/errorsByService';
 import type { SoftwareVersion, Uptime } from '../reducers/query/statusInfo';
+import type { FetchError } from '../reducers/query/fetchErrors';
 
 export type Action =
   // errorsByService
@@ -23,11 +26,11 @@ export type Action =
   }
   | {
     type: 'SET_ERRORS_BY_SERVICE',
-    errorsByService: DegradationsByService,
+    data: DegradationsByService,
   }
   | {
     type: 'SET_DEGRADATION_NAMES',
-    degradationNames: DegradationNames,
+    data: DegradationNames,
   }
   | {
     type: 'SET_SELECTED_DEGRADATION',
@@ -36,31 +39,42 @@ export type Action =
   // fetchErrors
   | {
     type: 'SET_ERROR_FETCH_MAC_ADDRESS',
-    errorFetchMacAddress: FetchError,
+    error: FetchError,
   }
   | {
     type: 'RESET_ERROR_FETCH_MAC_ADDRESS',
   }
   | {
     type: 'SET_ERROR_FETCH_SERVICES',
-    errorFetchServices: FetchError,
+    error: FetchError,
   }
   | {
     type: 'RESET_ERROR_FETCH_SERVICES',
   }
   | {
     type: 'SET_ERROR_MISSING_CUSTOMER_ID',
-    errorMissingCustomerId: FetchError,
+    error: FetchError,
   }
   | {
     type: 'RESET_ERROR_MISSING_CUSTOMER_ID',
   }
   | {
     type: 'SET_ERROR_MISSING_SESSION_ID',
-    errorMissingSessionId: FetchError,
+    error: FetchError,
   }
   | {
     type: 'RESET_ERROR_MISSING_SESSION_ID',
+  }
+  | {
+    type: 'SET_ERROR_MISSING_ACCESS_TOKEN',
+    error: FetchError,
+  }
+  | {
+    type: 'SET_ERROR_FETCH_ERRORS_BY_SERVICE',
+    error: FetchError,
+  }
+  | {
+    type: 'RESET_ERROR_FETCH_ERRORS_BY_SERVICE',
   }
   // parameters
   | {
@@ -68,12 +82,20 @@ export type Action =
     customerId: CustomerId,
   }
   | {
+    type: 'SET_SESSION_ID',
+    sessionId: SessionId,
+  }
+  | {
     type: 'SET_MAC_ADDRESS',
     macAddress: MacAddress,
   }
   | {
+    type: 'SET_ACCESS_TOKEN',
+    accessToken: AccessToken,
+  }
+  | {
     type: 'SET_FETCHING_MAC_ADDRESS',
-    fetchingMacAddress: Fetching,
+    fetching: Fetching,
   }
   | {
     type: 'SET_CUSTOMER_ID',
@@ -90,11 +112,11 @@ export type Action =
   // Services
   | {
     type: 'SET_FETCHING_SERVICES',
-    fetchingServices: Fetching,
+    fetching: Fetching,
   }
   | {
     type: 'SET_SERVICES',
-    services: Services,
+    data: Services,
   }
   | {
     type: 'RESET_SERVICES',
@@ -102,7 +124,7 @@ export type Action =
   // StatusInfo
   | {
     type: 'SET_FETCHING_STATUS_INFO',
-    fetchingStatusInfo: Fetching,
+    fetching: Fetching,
   }
   | {
     type: 'SET_STATUS_INFO',
