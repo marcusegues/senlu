@@ -2,18 +2,20 @@
 import React from 'react';
 import { Table } from '@devexpress/dx-react-grid-material-ui';
 
+type CellComponentOwnProps = {
+  tableRow: Table.TableRow,
+  tableColumn: Table.TableColumn,
+};
+
 export const CellComponent = ({
   tableRow,
   tableColumn,
-}: {
-  tableRow: Table.TableRow,
-  tableColumn: Table.TableColumn,
-}) => {
+}: CellComponentOwnProps) => {
   if (
     tableColumn.column.name === 'timeStart' ||
     tableColumn.column.name === 'timeEnd'
   ) {
-    const timeString = tableRow.row[tableColumn.column.name];
+    const timeString: string = tableRow.row[tableColumn.column.name];
     return (
       <Table.Cell>
         <div>{timeString.split(' ')[0]}</div>

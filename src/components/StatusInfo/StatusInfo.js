@@ -7,6 +7,12 @@ import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
 import { PaperCard } from '../General/PaperCard';
 import { getFetchingStatusInfo, getMacAddress } from '../../selectors';
+import type {
+  SoftwareVersion,
+  Uptime,
+} from '../../types/reducers/query/statusInfo';
+import type { Fetching, MacAddress } from '../../types/reducers/query';
+import type { AppState } from '../../types/reducers';
 
 const moment = require('moment');
 
@@ -17,6 +23,15 @@ const styles = {
   },
 };
 
+type StatusInfoProvidedProps = {
+  classes: Object,
+  softwareVersion: SoftwareVersion,
+  uptime: Uptime,
+  fetchingStatusInfo: Fetching,
+  macAddress: MacAddress,
+  fetchingMacAddress: Fetching,
+};
+
 const StatusInfoInner = ({
   classes,
   softwareVersion,
@@ -24,7 +39,7 @@ const StatusInfoInner = ({
   fetchingStatusInfo,
   macAddress,
   fetchingMacAddress,
-}) => (
+}: StatusInfoProvidedProps) => (
   <PaperCard>
     <List
       classes={{
@@ -59,7 +74,7 @@ const StatusInfoInner = ({
   </PaperCard>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppState) => ({
   fetchingStatusInfo: getFetchingStatusInfo(state),
   fetchingMacAddress: state.query.parameters.fetchingMacAddress,
   softwareVersion: state.query.statusInfo.softwareVersion,
