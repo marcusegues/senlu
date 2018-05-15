@@ -9,7 +9,7 @@ export const fetchMacAddressByCustomerId = (customerId: CustomerId) => (
   dispatch({ type: 'SET_FETCHING_MAC_ADDRESS', fetching: true });
   return dumbledoreApi
     .getMacAddressByCustomerId(customerId)
-    .then(data => {
+    .then((data: { device_address: string }) => {
       dispatch({ type: 'SET_FETCHING_MAC_ADDRESS', fetching: false });
       dispatch({ type: 'SET_MAC_ADDRESS', macAddress: data.device_address });
       return data;

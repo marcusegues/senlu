@@ -14,4 +14,7 @@ Redux Thunk is used to manage these API calls together with updated to redux sto
 Material UI Next components are used for building the UI.
 
 
-
+Note
+- Need to keep the version of Material-UI Next on the release before the breaking release called v1.0.0-rc.0 (https://github.com/mui-org/material-ui/releases)
+- It breaks the grid library, DevExtreme: https://github.com/DevExpress/devextreme-reactive/issues/1073
+- When they upgrade we upgrade, following link https://github.com/mui-org/material-ui/releases
