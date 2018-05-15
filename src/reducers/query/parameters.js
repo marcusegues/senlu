@@ -1,11 +1,12 @@
 // @flow
+import type Moment from 'moment';
 import type { ParametersState } from '../../types/reducers/query/parameters';
 import type { Action } from '../../types/actions/actions';
 
 const moment = require('moment');
 
-const now = moment();
-const nowMinusOneDay = moment(now).subtract(1, 'day');
+const now: Moment = moment();
+const nowMinusOneDay: Moment = moment(now).subtract(1, 'day');
 
 const initialState: ParametersState = {
   timeSpanStart: {

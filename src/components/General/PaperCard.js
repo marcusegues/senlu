@@ -1,8 +1,13 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import Paper from 'material-ui/Paper';
 
-export const PaperCard = ({ children, style }) => (
+type PaperCardProps = {
+  children: React.Node,
+  style?: Object,
+};
+
+export const PaperCard = ({ children, style }: PaperCardProps) => (
   <Paper
     style={{
       height: '100%',
@@ -18,3 +23,7 @@ export const PaperCard = ({ children, style }) => (
     {children}{' '}
   </Paper>
 );
+
+PaperCard.defaultProps = {
+  style: {},
+};

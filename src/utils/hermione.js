@@ -1,1 +1,6 @@
-export const getHermioneTimespanFormat = timeSpan => `${timeSpan.date} ${timeSpan.time}:00`;
+// @flow
+import type { TimeSpanDelimiter } from '../types/reducers/query';
+
+export const getHermioneTimeSpanFormat = (
+  timeSpan: TimeSpanDelimiter
+): string => `${timeSpan.date} ${timeSpan.time}:00`;

@@ -47,13 +47,13 @@ class NavBarInner extends React.Component<NavBarProvidedProps, NavBarState> {
     };
   }
 
-  handleChangeTimeSpanStart = event => {
+  handleChangeTimeSpanStart = (event: Object): void => {
     const [date, time] = event.target.value.split('T');
     this.props.resetErrorFetchErrorsByService();
     this.setState({ timeSpanStart: { date, time } });
   };
 
-  handleChangeTimeSpanEnd = event => {
+  handleChangeTimeSpanEnd = (event: Object): void => {
     const [date, time] = event.target.value.split('T');
     this.props.resetErrorFetchErrorsByService();
     this.setState({ timeSpanEnd: { date, time } });

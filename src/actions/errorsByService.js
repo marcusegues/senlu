@@ -1,5 +1,5 @@
 // @flow
-import { getHermioneTimespanFormat } from '../utils/hermione';
+import { getHermioneTimeSpanFormat } from '../utils/hermione';
 import * as hermioneApi from '../api/hermione';
 import * as dumbledoreApi from '../api/dumbledore';
 import { getMacAddress, getTimeSpanEnd, getTimeSpanStart } from '../selectors';
@@ -44,8 +44,8 @@ export const fetchHermioneDegradations = () => (
   return hermioneApi
     .getDegradationsByMac(
       macAddress,
-      getHermioneTimespanFormat(timeSpanStart),
-      getHermioneTimespanFormat(timeSpanEnd)
+      getHermioneTimeSpanFormat(timeSpanStart),
+      getHermioneTimeSpanFormat(timeSpanEnd)
     )
     .then(data => {
       dispatch(setFetchingErrorsByService(false));

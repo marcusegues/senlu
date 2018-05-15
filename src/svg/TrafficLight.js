@@ -1,6 +1,15 @@
+// @flow
 import React from 'react';
 
-export const TrafficLight = ({ onClick = () => {}, color }) => (
+type TrafficLightProps = {
+  onClick?: () => any,
+  color: 'yellow' | 'red' | 'green',
+};
+
+export const TrafficLight = ({
+  onClick = () => {},
+  color,
+}: TrafficLightProps) => (
   <svg
     viewBox="0 0 125 62"
     width="50"
@@ -32,3 +41,7 @@ export const TrafficLight = ({ onClick = () => {}, color }) => (
     </g>
   </svg>
 );
+
+TrafficLight.defaultProps = {
+  onClick: () => {},
+};

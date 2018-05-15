@@ -3,14 +3,13 @@ import { addParamsToUrl, removeDotsFromMacAddress } from './utils';
 import type {
   DegradationsByService,
   MacAddress,
-  TimeSpanDelimiter,
 } from '../types/reducers/query';
 import { StatusInfo } from '../components/StatusInfo/StatusInfo';
 
 export const getDegradationsByMac = (
   macAddress: MacAddress,
-  timeSpanStart: TimeSpanDelimiter,
-  timeSpanEnd: TimeSpanDelimiter
+  timeSpanStart: string,
+  timeSpanEnd: string
 ): Promise<DegradationsByService> => {
   const macNoDots = removeDotsFromMacAddress(macAddress);
   return fetch(

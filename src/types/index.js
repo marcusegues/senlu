@@ -1,7 +1,7 @@
 // @flow
 import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
 import type { Action } from './actions/actions';
-import type { AppState } from '../index';
+import type { AppState } from './reducers';
 
 export type Store = ReduxStore<AppState, Action>;
 

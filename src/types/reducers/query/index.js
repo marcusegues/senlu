@@ -3,6 +3,8 @@ import type { ParametersState } from './parameters';
 import type { ErrorsByServiceState } from './errorsByService';
 import type { ServicesState } from './services';
 import type { Id } from '../index';
+import type { FetchErrorsState } from './fetchErrors';
+import type { StatusInfoState } from './statusInfo';
 
 export type Service =
   | 'Linear TV OTT'
@@ -90,11 +92,13 @@ export type Degradation = {
 export type DegradationArray = Array<Degradation>;
 export type DegradationsByService = { [Id]: DegradationArray };
 
-export type DegradationNames = Array<Degradation>;
+export type DegradationNames = Array<DegradationName>;
 export const initialDegradationNames = [];
 
 export type QueryState = {
   parameters: ParametersState,
   errorsByService: ErrorsByServiceState,
   services: ServicesState,
+  fetchErrors: FetchErrorsState,
+  statusInfo: StatusInfoState,
 };
