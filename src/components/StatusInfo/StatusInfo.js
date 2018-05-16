@@ -6,12 +6,14 @@ import { CircularProgress } from 'material-ui/Progress';
 import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
 import { PaperCard } from '../General/PaperCard';
+import { SoftwareVersionText } from './SoftwareVersionText';
 import { getFetchingStatusInfo, getMacAddress } from '../../selectors';
 import type {
   SoftwareVersion,
+  Technology,
   Uptime,
 } from '../../types/reducers/query/statusInfo';
-import type { Fetching, MacAddress } from '../../types/reducers/query';
+import type { IsFetching, MacAddress } from '../../types/reducers/query';
 import type { AppState } from '../../types/reducers';
 
 const moment = require('moment');
@@ -26,16 +28,20 @@ const styles = {
 type StatusInfoProvidedProps = {
   classes: Object,
   softwareVersion: SoftwareVersion,
+  technology: Technology,
+  latestSoftwareVersion: SoftwareVersion,
   uptime: Uptime,
-  fetchingStatusInfo: Fetching,
+  fetchingStatusInfo: IsFetching,
   macAddress: MacAddress,
-  fetchingMacAddress: Fetching,
+  fetchingMacAddress: IsFetching,
 };
 
 const StatusInfoInner = ({
   classes,
   softwareVersion,
   uptime,
+  technology,
+  latestSoftwareVersion,
   fetchingStatusInfo,
   macAddress,
   fetchingMacAddress,
@@ -65,9 +71,18 @@ const StatusInfoInner = ({
     >
       {fetchingStatusInfo || fetchingMacAddress ? null : (
         <ListItem>
-          <ListItemText>MAC: {macAddress}</ListItemText>
-          <ListItemText>Softwareversion: {softwareVersion}</ListItemText>
-          <ListItemText>Betriebszeit: {uptime}</ListItemText>
+          <ListItemText>
+            <div>MAC: {macAddress}</div>
+          </ListItemText>
+          <ListItemText>
+            <SoftwareVersionText softwareVersion={softwareVersion} />
+          </ListItemText>
+          <ListItemText>
+            <div>Betriebszeit: {uptime}</div>
+          </ListItemText>
+          <ListItemText>
+            <div>Technology: {technology}</div>
+          </ListItemText>
         </ListItem>
       )}
     </List>
@@ -78,6 +93,8 @@ const mapStateToProps = (state: AppState) => ({
   fetchingStatusInfo: getFetchingStatusInfo(state),
   fetchingMacAddress: state.query.parameters.fetchingMacAddress,
   softwareVersion: state.query.statusInfo.softwareVersion,
+  technology: state.query.statusInfo.technology,
+  latestSoftwareVersion: state.query.statusInfo.latestSoftwareVersion,
   uptime: state.query.statusInfo.uptime,
   macAddress: getMacAddress(state),
 });

@@ -12,15 +12,15 @@ import {
   getDegradationNameById,
   getError,
   getServices,
-} from '../../../../../../../selectors';
+} from '../../selectors/index';
 import type {
   DegradationName,
   Degradation,
   Services,
   Proportions,
-} from '../../../../../../../types/reducers/query';
-import type { AppState, Id } from '../../../../../../../types/reducers';
-import type { ErrorListRow } from '../ErrorList';
+} from '../../types/reducers/query/index';
+import type { AppState, Id } from '../../types/reducers/index';
+import type { ErrorListRow } from './ErrorList/ErrorList';
 
 const uuidv4 = require('uuid/v4');
 

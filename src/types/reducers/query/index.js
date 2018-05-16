@@ -58,7 +58,7 @@ export type AccessToken = string;
 export type TimeSpanDelimiter = { date: string, time: string };
 
 // UI flags
-export type Fetching = boolean;
+export type IsFetching = boolean;
 
 // API response
 export type DegradationName = string;

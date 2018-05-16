@@ -1,9 +1,11 @@
 // @flow
 import React from 'react';
 
+export type TrafficLightColor = 'yellow' | 'red' | 'green';
+
 type TrafficLightProps = {
   onClick?: () => any,
-  color: 'yellow' | 'red' | 'green',
+  color: TrafficLightColor,
 };
 
 export const TrafficLight = ({

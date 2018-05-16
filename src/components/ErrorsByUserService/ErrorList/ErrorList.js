@@ -14,11 +14,11 @@ import {
   IntegratedSorting,
   RowDetailState,
 } from '@devexpress/dx-react-grid';
-import '../../../../../../styles/index.css';
-import { CellComponent } from './subcomponents/CellComponent';
-import { SelectionCell } from './subcomponents/SelectionCell';
-import { getDegradationNameById } from '../../../../../../selectors';
-import { ErrorListRowDetail } from './subcomponents/ErrorListRowDetail';
+import '../../../styles/index.css';
+import { CellComponent } from '../CellComponent';
+import { SelectionCell } from '../SelectionCell';
+import { getDegradationNameById } from '../../../selectors';
+import { ErrorListRowDetail } from '../ErrorListRowDetail';
 import type {
   Count,
   Degradation,
@@ -26,14 +26,14 @@ import type {
   DegradationName,
   TimeString,
   Version,
-} from '../../../../../../types/reducers/query';
+} from '../../../types/reducers/query';
 import type {
   DegradationId,
   Index,
   SelectedRowIndex,
   ServiceId,
-} from '../../../../../../types/reducers';
-import type { OnSelectServiceError } from '../../../../ErrorsByUserService';
+} from '../../../types/reducers';
+import type { OnSelectServiceError } from '../ErrorsByUserService';
 
 type Column = {
   name: string,

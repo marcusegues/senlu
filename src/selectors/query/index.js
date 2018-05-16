@@ -9,7 +9,7 @@ import type {
   Degradation,
   DegradationName,
   DegradationsByService,
-  Fetching,
+  IsFetching,
   MacAddress,
   QueryState,
   Services,
@@ -32,7 +32,7 @@ export const getTimeSpanEnd = (state: QueryState): TimeSpanDelimiter =>
   parametersApi.getTimeSpanEnd(state.parameters);
 
 // errorsByService
-export const getFetchingErrorsByService = (state: QueryState): Fetching =>
+export const getFetchingErrorsByService = (state: QueryState): IsFetching =>
   errorsByServiceApi.getFetchingErrorsByService(state.errorsByService);
 
 export const getErrorsByService = (state: QueryState): DegradationsByService =>
@@ -52,7 +52,7 @@ export const getDegradationNameById = (
   errorsByServiceApi.getDegradationNameById(state.errorsByService, idx);
 
 // services
-export const getFetchingServices = (state: QueryState): Fetching =>
+export const getFetchingServices = (state: QueryState): IsFetching =>
   servicesApi.getFetchingServices(state.services);
 export const getServices = (state: QueryState): Services =>
   servicesApi.getServices(state.services);
@@ -68,5 +68,5 @@ export const getErrorFetchServices = (state: QueryState): FetchError =>
   fetchErrorsApi.getErrorFetchServices(state.fetchErrors);
 
 // query.statusInfo
-export const getFetchingStatusInfo = (state: QueryState): Fetching =>
+export const getFetchingStatusInfo = (state: QueryState): IsFetching =>
   statusInfoApi.getFetchingStatusInfo(state.statusInfo);

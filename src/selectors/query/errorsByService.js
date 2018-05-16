@@ -4,13 +4,13 @@ import type {
   Degradation,
   DegradationName,
   DegradationsByService,
-  Fetching,
+  IsFetching,
 } from '../../types/reducers/query';
 import type { Index, ServiceId } from '../../types/reducers';
 
 export const getFetchingErrorsByService = (
   state: ErrorsByServiceState
-): Fetching => state.fetchingErrorsByService;
+): IsFetching => state.fetchingErrorsByService;
 
 export const getErrorsByService = (
   state: ErrorsByServiceState

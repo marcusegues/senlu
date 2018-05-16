@@ -4,11 +4,12 @@ import { ListItem, ListItemText } from 'material-ui/List';
 import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import Collapse from 'material-ui/transitions/Collapse';
-import { TrafficLight } from '../../../../svg/TrafficLight';
-import { ErrorList } from './subcomponents/ErrorList/ErrorList';
-import type { ServiceId } from '../../../../types/reducers';
-import type { OnSelectServiceError } from '../../ErrorsByUserService';
-import type { Degradation, Service } from '../../../../types/reducers/query';
+import { TrafficLight } from '../../../svg/TrafficLight';
+import { ErrorList } from '../ErrorList/ErrorList';
+import type { ServiceId } from '../../../types/reducers/index';
+import type { OnSelectServiceError } from '../ErrorsByUserService';
+import type { Degradation, Service } from '../../../types/reducers/query/index';
+import { getColor } from './util';
 
 type ServiceRowOwnProps = {
   service: Service,
@@ -46,17 +47,7 @@ export class ServiceRow extends React.Component<
     return (
       <div>
         <ListItem button onClick={() => this.handleToggleExpand()}>
-          {(() => {
-            const len = errors.length;
-            switch (true) {
-              case len === 0:
-                return <TrafficLight color="green" />;
-              case len < 10:
-                return <TrafficLight color="yellow" />;
-              default:
-                return <TrafficLight color="red" />;
-            }
-          })()}
+          <TrafficLight color={getColor(errors)} />
           <ListItemText primary={service} />
 
           {/* eslint-disable-next-line no-nested-ternary */}

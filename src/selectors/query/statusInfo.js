@@ -1,6 +1,6 @@
 // @flow
 import type { StatusInfoState } from '../../types/reducers/query/statusInfo';
-import type { Fetching } from '../../types/reducers/query';
+import type { IsFetching } from '../../types/reducers/query';
 
-export const getFetchingStatusInfo = (state: StatusInfoState): Fetching =>
+export const getFetchingStatusInfo = (state: StatusInfoState): IsFetching =>
   state.fetchingStatusInfo;

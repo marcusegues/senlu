@@ -4,25 +4,29 @@ import type {
   CustomerId,
   DegradationNames,
   DegradationsByService,
-  Fetching,
+  IsFetching,
   MacAddress,
   Services,
   SessionId,
   TimeSpanDelimiter,
 } from '../reducers/query';
 import type { SelectedDegradation } from '../reducers/query/errorsByService';
-import type { SoftwareVersion, Uptime } from '../reducers/query/statusInfo';
+import type {
+  SoftwareVersion,
+  Technology,
+  Uptime,
+} from '../reducers/query/statusInfo';
 import type { FetchError } from '../reducers/query/fetchErrors';
 
 export type Action =
   // errorsByService
   | {
     type: 'SET_FETCHING_ERRORS_BY_SERVICE',
-    fetching: Fetching,
+    fetching: IsFetching,
   }
   | {
     type: 'SET_FETCHING_DEGRADATION_NAMES',
-    fetching: Fetching,
+    fetching: IsFetching,
   }
   | {
     type: 'SET_ERRORS_BY_SERVICE',
@@ -95,7 +99,7 @@ export type Action =
   }
   | {
     type: 'SET_FETCHING_MAC_ADDRESS',
-    fetching: Fetching,
+    fetching: IsFetching,
   }
   | {
     type: 'SET_CUSTOMER_ID',
@@ -112,7 +116,7 @@ export type Action =
   // Services
   | {
     type: 'SET_FETCHING_SERVICES',
-    fetching: Fetching,
+    fetching: IsFetching,
   }
   | {
     type: 'SET_SERVICES',
@@ -124,10 +128,18 @@ export type Action =
   // StatusInfo
   | {
     type: 'SET_FETCHING_STATUS_INFO',
-    fetching: Fetching,
+    fetching: IsFetching,
   }
   | {
     type: 'SET_STATUS_INFO',
     softwareVersion: SoftwareVersion,
     uptime: Uptime,
+  }
+  | {
+    type: 'SET_LATEST_SOFTWARE_VERSION',
+    softwareVersion: SoftwareVersion,
+  }
+  | {
+    type: 'SET_TECHNOLOGY',
+    technology: Technology,
   };

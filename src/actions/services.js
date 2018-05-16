@@ -1,10 +1,10 @@
 // @flow
 import * as dumbledoreApi from '../api/dumbledore';
 import type { Dispatch } from '../types';
-import type { Fetching, Services } from '../types/reducers/query';
+import type { IsFetching, Services } from '../types/reducers/query';
 import type { Action } from '../types/actions/actions';
 
-export const setFetchingUserServices = (fetching: Fetching): Action => ({
+export const setFetchingUserServices = (fetching: IsFetching): Action => ({
   type: 'SET_FETCHING_SERVICES',
   fetching,
 });

@@ -6,11 +6,11 @@ import { withStyles } from 'material-ui/styles';
 import List, { ListSubheader } from 'material-ui/List';
 import { PaperCard } from '../General/PaperCard';
 import * as dumbledoreApi from '../../api/dumbledore';
-import { ServiceRow } from './subcomponents/ServiceRow/ServiceRow';
+import { ServiceRow } from './ServiceRow/ServiceRow';
 import { updateUIData } from '../../actions/ui';
 
 import type {
-  Fetching,
+  IsFetching,
   TimeSpanDelimiter,
   SessionId,
   CustomerId,
@@ -41,8 +41,8 @@ type ErrorListCardProps = {
   errorsByService: Object,
   services: Services,
   updateUIData: () => void,
-  fetchingServices: Fetching,
-  fetchingErrorsByService: Fetching,
+  fetchingServices: IsFetching,
+  fetchingErrorsByService: IsFetching,
   fetchDegradationNames: () => void,
   selectedDegradation: SelectedDegradation,
   setSelectedDegradation: SelectedDegradation => void,

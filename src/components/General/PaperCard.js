@@ -19,8 +19,7 @@ export const PaperCard = ({ children, style }: PaperCardProps) => (
       ...style,
     }}
   >
-    {' '}
-    {children}{' '}
+    {children}
   </Paper>
 );
 

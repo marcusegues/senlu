@@ -6,17 +6,17 @@ import { getMacAddress, getTimeSpanEnd, getTimeSpanStart } from '../selectors';
 import type {
   DegradationNames,
   DegradationsByService,
-  Fetching,
+  IsFetching,
 } from '../types/reducers/query';
 import type { Dispatch, GetState } from '../types';
 import type { Action } from '../types/actions/actions';
 
-export const setFetchingErrorsByService = (fetching: Fetching): Action => ({
+export const setFetchingErrorsByService = (fetching: IsFetching): Action => ({
   type: 'SET_FETCHING_ERRORS_BY_SERVICE',
   fetching,
 });
 
-export const setFetchingDegradationNames = (fetching: Fetching): Action => ({
+export const setFetchingDegradationNames = (fetching: IsFetching): Action => ({
   type: 'SET_FETCHING_DEGRADATION_NAMES',
   fetching,
 });

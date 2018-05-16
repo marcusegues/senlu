@@ -1,8 +1,8 @@
 // @flow
-import type { Fetching, Services } from './index';
+import type { IsFetching, Services } from './index';
 
 export type ServicesState = {
-  fetchingServices: Fetching,
+  fetchingServices: IsFetching,
   services: Services,
 };
 

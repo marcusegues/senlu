@@ -1,6 +1,6 @@
 // @flow
 import type {
-  Fetching,
+  IsFetching,
   DegradationsByService,
   DegradationNames,
 } from './index';
@@ -15,9 +15,9 @@ export type SelectedDegradation =
   | 'noSelection';
 
 export type ErrorsByServiceState = {
-  fetchingErrorsByService: Fetching,
+  fetchingErrorsByService: IsFetching,
   errorsByService: DegradationsByService,
-  fetchingDegradationNames: Fetching,
+  fetchingDegradationNames: IsFetching,
   selectedDegradation: SelectedDegradation,
   degradationNames: DegradationNames,
 };

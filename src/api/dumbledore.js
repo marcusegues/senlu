@@ -8,44 +8,58 @@ import type {
   Services,
 } from '../types/reducers/query';
 import type { Id } from '../types/reducers';
+import { dumbledoreUrl } from './utils/urls';
+import type {SoftwareVersion, Technology} from '../types/reducers/query/statusInfo';
 
 export const getDegradationNames = (): Promise<DegradationNames> =>
-  fetch(`https://dumbledore-dot-ql-sen-stag.appspot.com/errorCode/`).then(
-    response => {
-      // eslint-disable-next-line no-console
-      console.log('Dumbledore response', response);
-      if (response.status !== 200) {
-        throw new Error('Error obtaining user services.');
-      }
-      return response.json();
+  fetch(`${dumbledoreUrl()}/errorCode/`).then(response => {
+    // eslint-disable-next-line no-console
+    console.log('Dumbledore response', response);
+    if (response.status !== 200) {
+      throw new Error('Error obtaining user services.');
     }
-  );
+    return response.json();
+  });
 
 export const userServices = (): Promise<Services> =>
-  fetch(`https://dumbledore-dot-ql-sen-stag.appspot.com/userService`).then(
-    response => {
-      // eslint-disable-next-line no-console
-      console.log('Dumbledore response', response);
-      if (response.status !== 200) {
-        throw new Error('Error obtaining user services.');
-      }
-      return response.json();
+  fetch(`${dumbledoreUrl()}/userService`).then(response => {
+    // eslint-disable-next-line no-console
+    console.log('Dumbledore response', response);
+    if (response.status !== 200) {
+      throw new Error('Error obtaining user services.');
     }
-  );
+    return response.json();
+  });
 
 export const getMacAddressByCustomerId = (
   customerId: CustomerId,
   accessToken: number = 123
 ): Promise<{ device_address: string }> =>
-  fetch(
-    `https://dumbledore-dot-ql-sen-stag.appspot.com/deviceAddress/${
-      customerId
-    }/${accessToken}`
-  ).then(response => {
-    // eslint-disable-next-line no-console
-    console.log('Dumbledore response device mac', response);
+  fetch(`${dumbledoreUrl()}/deviceAddress/${customerId}/${accessToken}`).then(
+    response => {
+      // eslint-disable-next-line no-console
+      console.log('Dumbledore response device mac', response);
+      if (response.status !== 200) {
+        throw new Error('Error obtaining MAC address.');
+      }
+      return response.json();
+    }
+  );
+
+export const getLatestSoftwareVersion = (): Promise<{
+  firmware: SoftwareVersion,
+}> =>
+  fetch(`${dumbledoreUrl()}/latestFirmware`).then(response => {
     if (response.status !== 200) {
-      throw new Error('Error obtaining MAC address.');
+      throw new Error('Error obtaining latest software version.');
+    }
+    return response.json();
+  });
+
+export const getTechnology = (customerId: CustomerId): Promise<{ technology: Technology }> =>
+  fetch(`${dumbledoreUrl()}/customerInfo/${customerId}`).then(response => {
+    if (response.status !== 200) {
+      throw new Error('Error obtaining technology.');
     }
     return response.json();
   });
@@ -59,7 +73,7 @@ export const selectCustomerDegradation = (
   degradation: DegradationName,
   selected: boolean
 ): Promise<Object> =>
-  fetch('https://dumbledore-dot-ql-sen-stag.appspot.com/customerDegradation', {
+  fetch(`${dumbledoreUrl()}/customerDegradation`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

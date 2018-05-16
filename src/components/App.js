@@ -8,7 +8,11 @@ import { ErrorsByUserService } from './ErrorsByUserService/ErrorsByUserService';
 import { StatusInfo } from './StatusInfo/StatusInfo';
 import { getQueryStringValue } from '../utils';
 import { getMacAddress, getSessionId } from '../selectors';
-import { fetchStatusInfo } from '../actions/statusInfo';
+import {
+  fetchLatestSoftwareVersion,
+  fetchStatusInfo,
+  fetchTechnology,
+} from '../actions/statusInfo';
 import { fetchMacAddressByCustomerId } from '../actions/parameters';
 import type {
   AccessToken,
@@ -29,6 +33,8 @@ type AppProvidedProps = {
   setErrorMissingSessionId: (error: FetchError) => void,
   setErrorMissingAccessToken: (error: FetchError) => void,
   getStatusInfo: () => void,
+  getLatestSoftwareVersion: () => void,
+  getTechnology: (customerId: CustomerId) => void,
   fetchMacAddressByCustomerId: (
     customerId: CustomerId
   ) => Promise<{ device_address: string }>,
@@ -38,9 +44,11 @@ class AppInner extends React.Component<AppProvidedProps, null> {
   componentDidMount() {
     this.checkQueryParams()
       .then(({ customerId }) => {
-        this.props
-          .fetchMacAddressByCustomerId(customerId)
-          .then(() => this.props.getStatusInfo());
+        this.props.fetchMacAddressByCustomerId(customerId).then(() => {
+          this.props.getStatusInfo();
+          this.props.getLatestSoftwareVersion();
+          this.props.getTechnology(customerId);
+        });
       })
       .catch(e => {
         // eslint-disable-next-line no-console
@@ -49,13 +57,14 @@ class AppInner extends React.Component<AppProvidedProps, null> {
   }
 
   checkQueryParams() {
+    const { setCustomerId, setSessionId, setAccessToken } = this.props;
     return new Promise((resolve, reject) => {
       const customerId = getQueryStringValue('customer_id');
       const sessionId = getQueryStringValue('session_id');
       const accessToken = getQueryStringValue('access_token') || '123';
-      this.props.setCustomerId(customerId);
-      this.props.setSessionId(sessionId);
-      this.props.setAccessToken(accessToken);
+      setCustomerId(customerId);
+      setSessionId(sessionId);
+      setAccessToken(accessToken);
       if (customerId === '' || sessionId === '' || accessToken === '') {
         if (customerId === '') {
           this.props.setErrorMissingCustomerId('Missing customerId.');
@@ -108,6 +117,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setErrorMissingAccessToken: error =>
     dispatch({ type: 'SET_ERROR_MISSING_ACCESS_TOKEN', error }),
   getStatusInfo: () => dispatch(fetchStatusInfo()),
+  getLatestSoftwareVersion: () => dispatch(fetchLatestSoftwareVersion()),
+  getTechnology: customerId => dispatch(fetchTechnology(customerId)),
   fetchMacAddressByCustomerId: customerId =>
     dispatch(fetchMacAddressByCustomerId(customerId)),
 });
