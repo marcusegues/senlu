@@ -8,11 +8,7 @@ import { withStyles } from 'material-ui/styles';
 import { PaperCard } from '../General/PaperCard';
 import { SoftwareVersionText } from './SoftwareVersionText';
 import { getFetchingStatusInfo, getMacAddress } from '../../selectors';
-import type {
-  SoftwareVersion,
-  Technology,
-  Uptime,
-} from '../../types/reducers/query/statusInfo';
+import type { Technology, Uptime } from '../../types/reducers/query/statusInfo';
 import type { IsFetching, MacAddress } from '../../types/reducers/query';
 import type { AppState } from '../../types/reducers';
 
@@ -27,9 +23,7 @@ const styles = {
 
 type StatusInfoProvidedProps = {
   classes: Object,
-  softwareVersion: SoftwareVersion,
   technology: Technology,
-  latestSoftwareVersion: SoftwareVersion,
   uptime: Uptime,
   fetchingStatusInfo: IsFetching,
   macAddress: MacAddress,
@@ -38,10 +32,8 @@ type StatusInfoProvidedProps = {
 
 const StatusInfoInner = ({
   classes,
-  softwareVersion,
   uptime,
   technology,
-  latestSoftwareVersion,
   fetchingStatusInfo,
   macAddress,
   fetchingMacAddress,
@@ -75,7 +67,7 @@ const StatusInfoInner = ({
             <div>MAC: {macAddress}</div>
           </ListItemText>
           <ListItemText>
-            <SoftwareVersionText softwareVersion={softwareVersion} />
+            <SoftwareVersionText />
           </ListItemText>
           <ListItemText>
             <div>Betriebszeit: {uptime}</div>
@@ -92,9 +84,7 @@ const StatusInfoInner = ({
 const mapStateToProps = (state: AppState) => ({
   fetchingStatusInfo: getFetchingStatusInfo(state),
   fetchingMacAddress: state.query.parameters.fetchingMacAddress,
-  softwareVersion: state.query.statusInfo.softwareVersion,
   technology: state.query.statusInfo.technology,
-  latestSoftwareVersion: state.query.statusInfo.latestSoftwareVersion,
   uptime: state.query.statusInfo.uptime,
   macAddress: getMacAddress(state),
 });
