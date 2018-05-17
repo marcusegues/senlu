@@ -10,7 +10,7 @@ import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import {
   getDegradationNameById,
-  getError,
+  getDegradation,
   getServices,
 } from '../../selectors/index';
 import type {
@@ -20,7 +20,7 @@ import type {
   Proportions,
 } from '../../types/reducers/query/index';
 import type { AppState, Id } from '../../types/reducers/index';
-import type { ErrorListRow } from './ErrorList/ErrorList';
+import type { ErrorListRow } from './DegradationList/DegradationList';
 
 const uuidv4 = require('uuid/v4');
 
@@ -123,7 +123,7 @@ const mapStateToProps = (
   state: AppState,
   ownProps: ErrorListRowDetailOwnProps
 ) => ({
-  error: getError(state, ownProps.serviceId, ownProps.row.id),
+  error: getDegradation(state, ownProps.serviceId, ownProps.row.id),
   services: getServices(state),
   getDegradationNameById: degradationId =>
     getDegradationNameById(state, degradationId),

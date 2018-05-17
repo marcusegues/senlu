@@ -11,8 +11,8 @@ import type {
 import type { Dispatch, GetState } from '../types';
 import type { Action } from '../types/actions/actions';
 
-export const setFetchingErrorsByService = (fetching: IsFetching): Action => ({
-  type: 'SET_FETCHING_ERRORS_BY_SERVICE',
+export const setFetchingFrontendDegradationsByService = (fetching: IsFetching): Action => ({
+  type: 'SET_FETCHING_FRONTEND_DEGRADATIONS_BY_SERVICE',
   fetching,
 });
 
@@ -21,8 +21,8 @@ export const setFetchingDegradationNames = (fetching: IsFetching): Action => ({
   fetching,
 });
 
-export const setErrorsByService = (data: DegradationsByService): Action => ({
-  type: 'SET_ERRORS_BY_SERVICE',
+export const setFrontendDegradationsByService = (data: DegradationsByService): Action => ({
+  type: 'SET_FRONTEND_DEGRADATIONS_BY_SERVICE',
   data,
 });
 
@@ -39,8 +39,8 @@ export const fetchFrontendDegradations = () => (
   const macAddress = getMacAddress(state);
   const timeSpanStart = getTimeSpanStart(state);
   const timeSpanEnd = getTimeSpanEnd(state);
-  dispatch(setFetchingErrorsByService(true));
-  dispatch(setErrorsByService({})); // reset the data so UI does not show stale data
+  dispatch(setFetchingFrontendDegradationsByService(true));
+  dispatch(setFrontendDegradationsByService({})); // reset the data so UI does not show stale data
   return hermioneApi
     .getDegradationsByMac(
       macAddress,
@@ -48,13 +48,13 @@ export const fetchFrontendDegradations = () => (
       getHermioneTimeSpanFormat(timeSpanEnd)
     )
     .then(data => {
-      dispatch(setFetchingErrorsByService(false));
+      dispatch(setFetchingFrontendDegradationsByService(false));
       // eslint-disable-next-line no-console
       console.log('Hermione data is', data);
       return data;
     })
     .catch(e => {
-      dispatch(setFetchingErrorsByService(false));
+      dispatch(setFetchingFrontendDegradationsByService(false));
       dispatch({ type: 'SET_ERROR_FETCH_ERRORS_BY_SERVICE', error: e.message }); // add error to redux no matter what
       throw e;
     });
@@ -68,8 +68,8 @@ export const fetchBackendDegradations = () => (
     const macAddress = getMacAddress(state);
     const timeSpanStart = getTimeSpanStart(state);
     const timeSpanEnd = getTimeSpanEnd(state);
-    dispatch(setFetchingErrorsByService(true));
-    dispatch(setErrorsByService({})); // reset the data so UI does not show stale data
+    dispatch(setFetchingFrontendDegradationsByService(true));
+    dispatch(setFrontendDegradationsByService({})); // reset the data so UI does not show stale data
     return hermioneApi
         .getDegradationsByMac(
             macAddress,
@@ -77,13 +77,13 @@ export const fetchBackendDegradations = () => (
             getHermioneTimeSpanFormat(timeSpanEnd)
         )
         .then(data => {
-            dispatch(setFetchingErrorsByService(false));
+            dispatch(setFetchingFrontendDegradationsByService(false));
             // eslint-disable-next-line no-console
             console.log('Hermione data is', data);
             return data;
         })
         .catch(e => {
-            dispatch(setFetchingErrorsByService(false));
+            dispatch(setFetchingFrontendDegradationsByService(false));
             dispatch({ type: 'SET_ERROR_FETCH_ERRORS_BY_SERVICE', error: e.message }); // add error to redux no matter what
             throw e;
         });

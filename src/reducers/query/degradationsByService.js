@@ -1,29 +1,29 @@
 // @flow
-import type { ErrorsByServiceState } from '../../types/reducers/query/errorsByService';
+import type { DegradationsByServiceState } from '../../types/reducers/query/degradationsByService';
 import {
-  initialErrorsByService,
+  initialDegradationsByService,
   initialSelectedDegradation,
-} from '../../types/reducers/query/errorsByService';
+} from '../../types/reducers/query/degradationsByService';
 import type { Action } from '../../types/actions/actions';
 import { initialDegradationNames } from '../../types/reducers/query';
 
-const initialState: ErrorsByServiceState = {
-  fetchingErrorsByService: false,
-  errorsByService: initialErrorsByService,
+const initialState: DegradationsByServiceState = {
+  fetchingFrontendDegradationsByService: false,
+  frontendDegradationsByService: initialDegradationsByService,
   fetchingDegradationNames: false,
   degradationNames: initialDegradationNames,
   selectedDegradation: initialSelectedDegradation,
 };
 
-export const errorsByService = (
-  state: ErrorsByServiceState = initialState,
+export const degradationsByService = (
+  state: DegradationsByServiceState = initialState,
   action: Action
 ) => {
   switch (action.type) {
-    case 'SET_FETCHING_ERRORS_BY_SERVICE': {
+    case 'SET_FETCHING_FRONTEND_DEGRADATIONS_BY_SERVICE': {
       return {
         ...state,
-        fetchingErrorsByService: action.fetching,
+        fetchingFrontendDegradationsByService: action.fetching,
       };
     }
     case 'SET_FETCHING_DEGRADATION_NAMES': {
@@ -32,10 +32,10 @@ export const errorsByService = (
         fetchingDegradationNames: action.fetching,
       };
     }
-    case 'SET_ERRORS_BY_SERVICE': {
+    case 'SET_FRONTEND_DEGRADATIONS_BY_SERVICE': {
       return {
         ...state,
-        errorsByService: action.data,
+        frontendDegradationsByService: action.data,
       };
     }
     case 'SET_DEGRADATION_NAMES': {

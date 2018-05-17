@@ -6,16 +6,17 @@ import type { Action } from '../../types/actions/actions';
 const moment = require('moment');
 
 const now: Moment = moment();
-const nowMinusOneDay: Moment = moment(now).subtract(1, 'day');
+const startDateTime: Moment = moment(now).subtract(30, 'day');
+const endDateTime: Moment = moment(now).subtract(20, 'day');
 
 const initialState: ParametersState = {
   timeSpanStart: {
-    date: nowMinusOneDay.format('YYYY-MM-DD'),
-    time: nowMinusOneDay.format('HH:mm:ss'),
+    date: startDateTime.format('YYYY-MM-DD'),
+    time: startDateTime.format('HH:mm:ss'),
   },
   timeSpanEnd: {
-    date: now.format('YYYY-MM-DD'),
-    time: now.format('HH:mm:ss'),
+    date: endDateTime.format('YYYY-MM-DD'),
+    time: endDateTime.format('HH:mm:ss'),
   },
   customerId: '',
   macAddress: '',

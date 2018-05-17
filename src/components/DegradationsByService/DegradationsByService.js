@@ -18,8 +18,8 @@ import type {
   MacAddress,
 } from '../../types/reducers/query';
 import {
-  getErrorsByService,
-  getFetchingErrorsByService,
+  getFrontendDegradationsByService,
+  getFetchingFrontendDegradationsByService,
   getFetchingServices,
   getSessionId,
   getTimeSpanEnd,
@@ -28,9 +28,9 @@ import {
   getMacAddress,
   getCustomerId,
 } from '../../selectors';
-import { fetchDegradationNames } from '../../actions/errorsByService';
-import type { SelectedDegradation } from '../../types/reducers/query/errorsByService';
-import { initialSelectedDegradation } from '../../types/reducers/query/errorsByService';
+import { fetchDegradationNames } from '../../actions/degradationsByService';
+import type { SelectedDegradation } from '../../types/reducers/query/degradationsByService';
+import { initialSelectedDegradation } from '../../types/reducers/query/degradationsByService';
 import type {
   DegradationId,
   Index,
@@ -42,12 +42,13 @@ import { getHermioneTimeSpanFormat } from '../../utils/hermione';
 
 const moment = require('moment');
 
-type ErrorListCardProps = {
-  errorsByService: Object,
+type DegradationsByServiceProps = {
+  macAddress: MacAddress,
+  frontendDegradationsByService: Object,
   services: Services,
   updateUIData: () => void,
   fetchingServices: IsFetching,
-  fetchingErrorsByService: IsFetching,
+  fetchingFrontendDegradationsByService: IsFetching,
   fetchDegradationNames: () => void,
   fetchBackendDegradationsByMac: (macAddress: MacAddress) => void,
   selectedDegradation: SelectedDegradation,
@@ -59,7 +60,7 @@ type ErrorListCardProps = {
   classes: Object,
 };
 
-export type OnSelectServiceError = (
+export type OnSelectServiceDegradation = (
   selectedServiceId: ServiceId,
   degradationId: DegradationId,
   selectRowIndex: Index
@@ -72,7 +73,10 @@ const styles = {
   },
 };
 
-class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
+class DegradationsByServiceInner extends React.Component<
+  DegradationsByServiceProps,
+  {}
+> {
   componentDidMount() {
     this.props.updateUIData();
     const mockedTimeSpanStart = moment('2018-04-27 01:22:16');
@@ -91,18 +95,22 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
     this.props.fetchDegradationNames();
   }
 
-  orderServicesByErrors() {
-    const { errorsByService } = this.props;
+  orderServicesByDegradations() {
+    const { frontendDegradationsByService } = this.props;
 
     const res = Object.keys(this.props.services).sort(
       (a, b) =>
-        ((errorsByService[b] && errorsByService[b].length) || 0) -
-        ((errorsByService[a] && errorsByService[a].length) || 0)
+        ((frontendDegradationsByService[b] &&
+          frontendDegradationsByService[b].length) ||
+          0) -
+        ((frontendDegradationsByService[a] &&
+          frontendDegradationsByService[a].length) ||
+          0)
     );
     return res;
   }
 
-  handleSelectError(
+  handleSelectDegradation(
     serviceId: ServiceId,
     degradationId: DegradationId,
     selectRowIndex: SelectedRowIndex
@@ -165,7 +173,10 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
   }
 
   fetchingData() {
-    return this.props.fetchingServices || this.props.fetchingErrorsByService;
+    return (
+      this.props.fetchingServices ||
+      this.props.fetchingFrontendDegradationsByService
+    );
   }
 
   render() {
@@ -197,19 +208,21 @@ class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
         >
           {fetchingData
             ? null
-            : this.orderServicesByErrors().map(serviceId => (
+            : this.orderServicesByDegradations().map(serviceId => (
                 <ServiceRow
                   key={serviceId}
                   selectedDegradation={this.props.selectedDegradation}
                   serviceId={serviceId}
                   service={this.props.services[serviceId]}
-                  errors={this.props.errorsByService[serviceId] || []}
-                  onSelectError={(
+                  degradations={
+                    this.props.frontendDegradationsByService[serviceId] || []
+                  }
+                  onSelectDegradation={(
                     selectedServiceId: ServiceId,
                     degradationId: DegradationId,
                     selectRowIndex: SelectedRowIndex
                   ) =>
-                    this.handleSelectError(
+                    this.handleSelectDegradation(
                       selectedServiceId,
                       degradationId,
                       selectRowIndex
@@ -229,22 +242,31 @@ const mapStateToProps = state => ({
   sessionId: getSessionId(state),
   timeSpanStart: getTimeSpanStart(state),
   timeSpanEnd: getTimeSpanEnd(state),
-  fetchingErrorsByService: getFetchingErrorsByService(state),
+  fetchingFrontendDegradationsByService: getFetchingFrontendDegradationsByService(
+    state
+  ),
   fetchingServices: getFetchingServices(state),
-  errorsByService: getErrorsByService(state),
+  frontendDegradationsByService: getFrontendDegradationsByService(state),
   services: getServices(state),
-  selectedDegradation: state.query.errorsByService.selectedDegradation,
+  selectedDegradation: state.query.degradationsByService.selectedDegradation,
 });
 
 const mapDispatchToProps = dispatch => ({
   updateUIData: () => dispatch(updateUIData()),
   fetchDegradationNames: () => dispatch(fetchDegradationNames()),
-  fetchBackendDegradationsByMac: (macAddress: MacAddress) =>
-    dispatch(getBackendDegradationsByMac(macAddress)),
+  fetchBackendDegradationsByMac: (
+    macAddress: MacAddress,
+    timeSpanStart: string,
+    timeSpanEnd: string
+  ) =>
+    dispatch(
+      getBackendDegradationsByMac(macAddress, timeSpanStart, timeSpanEnd)
+    ),
   setSelectedDegradation: selectedDegradation =>
     dispatch({ type: 'SET_SELECTED_DEGRADATION', selectedDegradation }),
 });
 
-export const ErrorsByUserService = connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(ErrorsByUserServiceInner)
-);
+export const DegradationsByService = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(DegradationsByServiceInner));

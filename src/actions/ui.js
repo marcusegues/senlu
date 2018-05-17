@@ -6,9 +6,9 @@ import {
 } from './services';
 import {
   fetchFrontendDegradations,
-  setErrorsByService,
-} from './errorsByService';
-import { initialErrorsByService } from '../types/reducers/query/errorsByService';
+  setFrontendDegradationsByService,
+} from './degradationsByService';
+import { initialDegradationsByService } from '../types/reducers/query/degradationsByService';
 import type { Dispatch } from '../types';
 
 export const updateUIData = () => (dispatch: Dispatch) => {
@@ -19,11 +19,11 @@ export const updateUIData = () => (dispatch: Dispatch) => {
     .then(([degradations, services]) => {
       // if both calls succeed, then set the data from their responses
       dispatch(setServices(services));
-      dispatch(setErrorsByService(degradations));
+      dispatch(setFrontendDegradationsByService(degradations));
     })
     .catch(() => {
       // if either of the calls fails, reset the data for both of the calls
-      dispatch(setErrorsByService(initialErrorsByService));
+      dispatch(setFrontendDegradationsByService(initialDegradationsByService));
       dispatch(resetServices());
     });
 };

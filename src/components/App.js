@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import CssBaseline from 'material-ui/CssBaseline';
 import { NavBar } from './NavBar/NavBar';
 import { ApiErrors } from './ErrorHandling/ApiErrors';
-import { ErrorsByUserService } from './ErrorsByUserService/ErrorsByUserService';
+import { DegradationsByService } from './DegradationsByService/DegradationsByService';
 import { StatusInfo } from './StatusInfo/StatusInfo';
 import { getQueryStringValue } from '../utils';
 import { getMacAddress, getSessionId } from '../selectors';
@@ -93,7 +93,7 @@ class AppInner extends React.Component<AppProvidedProps, null> {
         <NavBar />
         <StatusInfo />
         <ApiErrors />
-        {this.allParamsPresent() ? <ErrorsByUserService /> : null}
+        {this.allParamsPresent() ? <DegradationsByService /> : null}
       </React.Fragment>
     );
   }

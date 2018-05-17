@@ -10,7 +10,7 @@ import type {
   SessionId,
   TimeSpanDelimiter,
 } from '../reducers/query';
-import type { SelectedDegradation } from '../reducers/query/errorsByService';
+import type { SelectedDegradation } from '../reducers/query/degradationsByService';
 import type {
   SoftwareVersion,
   Technology,
@@ -21,7 +21,7 @@ import type { FetchError } from '../reducers/query/fetchErrors';
 export type Action =
   // errorsByService
   | {
-    type: 'SET_FETCHING_ERRORS_BY_SERVICE',
+    type: 'SET_FETCHING_FRONTEND_DEGRADATIONS_BY_SERVICE',
     fetching: IsFetching,
   }
   | {
@@ -29,7 +29,7 @@ export type Action =
     fetching: IsFetching,
   }
   | {
-    type: 'SET_ERRORS_BY_SERVICE',
+    type: 'SET_FRONTEND_DEGRADATIONS_BY_SERVICE',
     data: DegradationsByService,
   }
   | {

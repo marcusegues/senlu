@@ -1,6 +1,6 @@
 // @flow
 import type { ParametersState } from './parameters';
-import type { ErrorsByServiceState } from './errorsByService';
+import type { DegradationsByServiceState } from './degradationsByService';
 import type { ServicesState } from './services';
 import type { Id } from '../index';
 import type { FetchErrorsState } from './fetchErrors';
@@ -97,7 +97,7 @@ export const initialDegradationNames = [];
 
 export type QueryState = {
   parameters: ParametersState,
-  errorsByService: ErrorsByServiceState,
+  degradationsByService: DegradationsByServiceState,
   services: ServicesState,
   fetchErrors: FetchErrorsState,
   statusInfo: StatusInfoState,

@@ -14,14 +14,14 @@ export type SelectedDegradation =
     }
   | 'noSelection';
 
-export type ErrorsByServiceState = {
-  fetchingErrorsByService: IsFetching,
-  errorsByService: DegradationsByService,
+export type DegradationsByServiceState = {
+  fetchingFrontendDegradationsByService: IsFetching,
+  frontendDegradationsByService: DegradationsByService,
   fetchingDegradationNames: IsFetching,
   selectedDegradation: SelectedDegradation,
   degradationNames: DegradationNames,
 };
 
-export const initialErrorsByService = {};
+export const initialDegradationsByService = {};
 
 export const initialSelectedDegradation: SelectedDegradation = 'noSelection';

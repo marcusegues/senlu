@@ -1,6 +1,6 @@
 // @flow
 import * as parametersApi from './parameters';
-import * as errorsByServiceApi from './errorsByService';
+import * as degradationsByServiceApi from './degradationsByService';
 import * as servicesApi from './services';
 import * as fetchErrorsApi from './fetchErrors';
 import * as statusInfoApi from './statusInfo';
@@ -32,24 +32,24 @@ export const getTimeSpanEnd = (state: QueryState): TimeSpanDelimiter =>
   parametersApi.getTimeSpanEnd(state.parameters);
 
 // errorsByService
-export const getFetchingErrorsByService = (state: QueryState): IsFetching =>
-  errorsByServiceApi.getFetchingErrorsByService(state.errorsByService);
+export const getFetchingFrontendDegradationsByService = (state: QueryState): IsFetching =>
+  degradationsByServiceApi.getFetchingFrontendDegradationsByService(state.degradationsByService);
 
-export const getErrorsByService = (state: QueryState): DegradationsByService =>
-  errorsByServiceApi.getErrorsByService(state.errorsByService);
+export const getFrontendDegradationsByService = (state: QueryState): DegradationsByService =>
+  degradationsByServiceApi.getFrontendDegradationsByService(state.degradationsByService);
 
-export const getError = (
+export const getDegradation = (
   state: QueryState,
   serviceId: ServiceId,
   idx: Index
 ): Degradation =>
-  errorsByServiceApi.getError(state.errorsByService, serviceId, idx);
+  degradationsByServiceApi.getDegradation(state.degradationsByService, serviceId, idx);
 
 export const getDegradationNameById = (
   state: QueryState,
   idx: Index
 ): DegradationName =>
-  errorsByServiceApi.getDegradationNameById(state.errorsByService, idx);
+  degradationsByServiceApi.getDegradationNameById(state.degradationsByService, idx);
 
 // services
 export const getFetchingServices = (state: QueryState): IsFetching =>

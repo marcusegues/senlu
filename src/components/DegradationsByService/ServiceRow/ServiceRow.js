@@ -5,17 +5,17 @@ import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import Collapse from 'material-ui/transitions/Collapse';
 import { TrafficLight } from '../../../svg/TrafficLight';
-import { ErrorList } from '../ErrorList/ErrorList';
+import { DegradationList } from '../DegradationList/DegradationList';
 import type { ServiceId } from '../../../types/reducers/index';
-import type { OnSelectServiceError } from '../ErrorsByUserService';
+import type { OnSelectServiceDegradation } from '../DegradationsByService';
 import type { Degradation, Service } from '../../../types/reducers/query/index';
 import { getColor } from './util';
 
 type ServiceRowOwnProps = {
   service: Service,
   serviceId: ServiceId,
-  errors: Array<Degradation>,
-  onSelectError: OnSelectServiceError,
+  degradations: Array<Degradation>,
+  onSelectDegradation: OnSelectServiceDegradation,
   selectedDegradation: any,
 };
 
@@ -39,19 +39,19 @@ export class ServiceRow extends React.Component<
     const {
       service,
       serviceId,
-      errors,
-      onSelectError,
+      degradations,
+      onSelectDegradation,
       selectedDegradation,
     } = this.props;
 
     return (
       <div>
         <ListItem button onClick={() => this.handleToggleExpand()}>
-          <TrafficLight color={getColor(errors)} />
+          <TrafficLight color={getColor(degradations)} />
           <ListItemText primary={service} />
 
           {/* eslint-disable-next-line no-nested-ternary */}
-          {errors.length ? (
+          {degradations.length ? (
             this.state.expanded ? (
               <ExpandLess />
             ) : (
@@ -60,15 +60,15 @@ export class ServiceRow extends React.Component<
           ) : null}
         </ListItem>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          {errors.length ? (
-            <ErrorList
-              errors={errors}
+          {degradations.length ? (
+            <DegradationList
+              degradations={degradations}
               selectedDegradationRowIndex={
                 selectedDegradation.serviceId === serviceId
                   ? [selectedDegradation.selectedRowIndex]
                   : []
               }
-              onSelectError={onSelectError}
+              onSelectDegradation={onSelectDegradation}
               serviceId={serviceId}
             />
           ) : null}

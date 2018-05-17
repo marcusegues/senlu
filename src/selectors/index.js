@@ -20,15 +20,15 @@ export const getTimeSpanStart = (state: AppState): TimeSpanDelimiter =>
 export const getTimeSpanEnd = (state: AppState): TimeSpanDelimiter =>
   queryApi.getTimeSpanEnd(state.query);
 
-// query.errorsByService
-export const getFetchingErrorsByService = (state: AppState) =>
-  queryApi.getFetchingErrorsByService(state.query);
+// query.degradationsByService
+export const getFetchingFrontendDegradationsByService = (state: AppState) =>
+  queryApi.getFetchingFrontendDegradationsByService(state.query);
 
-export const getErrorsByService = (state: AppState) =>
-  queryApi.getErrorsByService(state.query);
+export const getFrontendDegradationsByService = (state: AppState) =>
+  queryApi.getFrontendDegradationsByService(state.query);
 
-export const getError = (state: AppState, serviceId: ServiceId, idx: Index) =>
-  queryApi.getError(state.query, serviceId, idx);
+export const getDegradation = (state: AppState, serviceId: ServiceId, idx: Index) =>
+  queryApi.getDegradation(state.query, serviceId, idx);
 
 export const getDegradationNameById = (state: AppState, idx: Index) =>
   queryApi.getDegradationNameById(state.query, idx);

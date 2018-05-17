@@ -33,7 +33,7 @@ import type {
   SelectedRowIndex,
   ServiceId,
 } from '../../../types/reducers';
-import type { OnSelectServiceError } from '../ErrorsByUserService';
+import type { OnSelectServiceDegradation } from '../DegradationsByService';
 
 type Column = {
   name: string,
@@ -54,27 +54,27 @@ type ColumnExtension = {
   width: number,
 };
 
-type ErrorListState = {
+type DegradationListState = {
   columns: Array<Column>,
   rows: Array<ErrorListRow>,
   columnExtensions: Array<ColumnExtension>,
   selectedRowIndex: Array<SelectedRowIndex>,
 };
 
-type ErrorListProvidedProps = {
+type DegradationListProvidedProps = {
   getDegradationNameById: (degradationId: DegradationId) => DegradationName,
 };
 
-type ErrorListOwnProps = {
+type DegradationListOwnProps = {
   selectedDegradationRowIndex: Array<Index>,
   serviceId: ServiceId,
-  errors: DegradationArray,
-  onSelectError: OnSelectServiceError,
+  degradations: DegradationArray,
+  onSelectDegradation: OnSelectServiceDegradation,
 };
 
-class ErrorListInner extends React.Component<
-  ErrorListProvidedProps & ErrorListOwnProps,
-  ErrorListState
+class DegradationListInner extends React.Component<
+  DegradationListProvidedProps & DegradationListOwnProps,
+  DegradationListState
 > {
   constructor(props) {
     super(props);
@@ -90,7 +90,7 @@ class ErrorListInner extends React.Component<
         { columnName: 'degradation', width: 200 },
         { columnName: 'count', width: 100 },
       ],
-      rows: this.generateRows(this.props.errors),
+      rows: this.generateRows(this.props.degradations),
       selectedRowIndex: this.props.selectedDegradationRowIndex,
       // pendingSelectionChange: false,
     };
@@ -103,17 +103,17 @@ class ErrorListInner extends React.Component<
   }
 
   getErrorById(id) {
-    return this.state.rows.find(error => error.id === id);
+    return this.state.rows.find(degradation => degradation.id === id);
   }
 
-  generateRows(errors: Array<Degradation>): Array<ErrorListRow> {
-    return errors.map((error, idx) => ({
+  generateRows(degradations: Array<Degradation>): Array<ErrorListRow> {
+    return degradations.map((degradation, idx) => ({
       id: idx,
-      degradation: this.props.getDegradationNameById(error.degradation),
-      count: error.count,
-      timeStart: error.timeStart,
-      timeEnd: error.timeEnd,
-      version: error.version,
+      degradation: this.props.getDegradationNameById(degradation.degradation),
+      count: degradation.count,
+      timeStart: degradation.timeStart,
+      timeEnd: degradation.timeEnd,
+      version: degradation.version,
     }));
   }
 
@@ -127,7 +127,7 @@ class ErrorListInner extends React.Component<
     // this.setState({
     //   pendingSelectionChange: true,
     // });
-    this.props.onSelectError(
+    this.props.onSelectDegradation(
       serviceId,
       this.state.rows[
         selectRowIndex !== -1 ? selectRowIndex : selectedDegradationRowIndex[0]
@@ -187,4 +187,4 @@ const mapStateToProps = state => ({
     getDegradationNameById(state, degradationId),
 });
 
-export const ErrorList = connect(mapStateToProps, null)(ErrorListInner);
+export const DegradationList = connect(mapStateToProps, null)(DegradationListInner);
