@@ -11,11 +11,11 @@ const nowMinusOneDay: Moment = moment(now).subtract(1, 'day');
 const initialState: ParametersState = {
   timeSpanStart: {
     date: nowMinusOneDay.format('YYYY-MM-DD'),
-    time: nowMinusOneDay.format('HH:mm'),
+    time: nowMinusOneDay.format('HH:mm:ss'),
   },
   timeSpanEnd: {
     date: now.format('YYYY-MM-DD'),
-    time: now.format('HH:mm'),
+    time: now.format('HH:mm:ss'),
   },
   customerId: '',
   macAddress: '',

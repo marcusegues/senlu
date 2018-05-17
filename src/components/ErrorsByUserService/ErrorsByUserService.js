@@ -15,6 +15,7 @@ import type {
   SessionId,
   CustomerId,
   Services,
+  MacAddress,
 } from '../../types/reducers/query';
 import {
   getErrorsByService,
@@ -36,6 +37,10 @@ import type {
   SelectedRowIndex,
   ServiceId,
 } from '../../types/reducers';
+import { getBackendDegradationsByMac } from '../../api/harry';
+import { getHermioneTimeSpanFormat } from '../../utils/hermione';
+
+const moment = require('moment');
 
 type ErrorListCardProps = {
   errorsByService: Object,
@@ -44,6 +49,7 @@ type ErrorListCardProps = {
   fetchingServices: IsFetching,
   fetchingErrorsByService: IsFetching,
   fetchDegradationNames: () => void,
+  fetchBackendDegradationsByMac: (macAddress: MacAddress) => void,
   selectedDegradation: SelectedDegradation,
   setSelectedDegradation: SelectedDegradation => void,
   timeSpanStart: TimeSpanDelimiter,
@@ -69,6 +75,19 @@ const styles = {
 class ErrorsByUserServiceInner extends React.Component<ErrorListCardProps, {}> {
   componentDidMount() {
     this.props.updateUIData();
+    const mockedTimeSpanStart = moment('2018-04-27 01:22:16');
+    const mockedTimeSpanEnd = moment('2018-04-27 02:34:29');
+    getBackendDegradationsByMac(
+      this.props.macAddress,
+      getHermioneTimeSpanFormat({
+        date: mockedTimeSpanStart.format('YYYY-MM-DD'),
+        time: mockedTimeSpanStart.format('HH:mm:ss'),
+      }),
+      getHermioneTimeSpanFormat({
+        date: mockedTimeSpanEnd.format('YYYY-MM-DD'),
+        time: mockedTimeSpanEnd.format('HH:mm:ss'),
+      })
+    ).then(data => console.log('HARRY DATA', data));
     this.props.fetchDegradationNames();
   }
 
@@ -220,6 +239,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateUIData: () => dispatch(updateUIData()),
   fetchDegradationNames: () => dispatch(fetchDegradationNames()),
+  fetchBackendDegradationsByMac: (macAddress: MacAddress) =>
+    dispatch(getBackendDegradationsByMac(macAddress)),
   setSelectedDegradation: selectedDegradation =>
     dispatch({ type: 'SET_SELECTED_DEGRADATION', selectedDegradation }),
 });

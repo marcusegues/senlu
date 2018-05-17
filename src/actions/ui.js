@@ -5,7 +5,7 @@ import {
   setServices,
 } from './services';
 import {
-  fetchHermioneDegradations,
+  fetchFrontendDegradations,
   setErrorsByService,
 } from './errorsByService';
 import { initialErrorsByService } from '../types/reducers/query/errorsByService';
@@ -13,7 +13,7 @@ import type { Dispatch } from '../types';
 
 export const updateUIData = () => (dispatch: Dispatch) => {
   Promise.all([
-    dispatch(fetchHermioneDegradations()),
+    dispatch(fetchFrontendDegradations()),
     dispatch(fetchDumbledoreUserServices()),
   ])
     .then(([degradations, services]) => {
