@@ -16,7 +16,6 @@ export const SelectionCell = ({
     <td
       className="MuiTableCell-root-214 MuiTableCell-body-216 MuiTableCell-paddingCheckbox-220 TableSelectCell-cell-263"
       style={{
-        display: 'flex',
         alignItems: 'center',
         width: 125,
         display: 'table-cell',

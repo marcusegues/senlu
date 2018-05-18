@@ -15,7 +15,6 @@ import type {
   SessionId,
   CustomerId,
   Services,
-  MacAddress,
 } from '../../types/reducers/query';
 import {
   getFrontendDegradationsByService,
@@ -49,7 +48,6 @@ type DegradationsByServiceProps = {
   fetchingServices: IsFetching,
   fetchingFrontendDegradationsByService: IsFetching,
   fetchDegradationNames: () => void,
-  fetchBackendDegradationsByMac: (macAddress: MacAddress) => void,
   getBackendDegradations: () => void,
   selectedDegradation: SelectedDegradation,
   setSelectedDegradation: SelectedDegradation => void,
@@ -151,7 +149,6 @@ class DegradationsByServiceInner extends React.Component<
   render() {
     const { classes } = this.props;
     const fetchingData = this.fetchingData();
-    console.log('Backend deg', this.props.backendDegradationsByService);
     return (
       <PaperCard>
         <List
