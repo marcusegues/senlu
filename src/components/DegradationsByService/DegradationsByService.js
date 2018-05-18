@@ -131,10 +131,11 @@ class DegradationsByServiceInner extends React.Component<
               selectedRowIndex,
             });
           } else {
-            this.props.setSelectedDegradation(selectedDegradation);
+            this.props.setSelectedDegradation(initialSelectedDegradation);
           }
           return true;
         }
+        this.props.setSelectedDegradation(selectedDegradation);
         return false;
       });
   }

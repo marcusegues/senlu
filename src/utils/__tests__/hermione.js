@@ -3,11 +3,11 @@ import { getHermioneTimeSpanFormat } from '../hermione';
 
 const moment = require('moment');
 
-const dateTime = moment('2013-02-08 09:30');
+const dateTime = moment('2013-02-08 09:30:00');
 
 const timeSpan1 = {
   date: dateTime.format('YYYY-MM-DD'),
-  time: dateTime.format('HH:mm'),
+  time: dateTime.format('HH:mm:ss'),
 };
 
 describe('getHermioneTimeSpanFormat', () => {
