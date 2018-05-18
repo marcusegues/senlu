@@ -16,7 +16,9 @@ export type SelectedDegradation =
 
 export type DegradationsByServiceState = {
   fetchingFrontendDegradationsByService: IsFetching,
+  fetchingBackendDegradationsByService: IsFetching,
   frontendDegradationsByService: DegradationsByService,
+  backendDegradationsByService: DegradationsByService,
   fetchingDegradationNames: IsFetching,
   selectedDegradation: SelectedDegradation,
   degradationNames: DegradationNames,

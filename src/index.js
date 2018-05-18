@@ -7,6 +7,7 @@ import { configureStore } from './configureStore';
 import type { Store } from './types';
 
 const store: Store = configureStore();
+window.myStore = store;
 const root = document.getElementById('root');
 if (root !== null) {
   // flowcheck

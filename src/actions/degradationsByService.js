@@ -1,6 +1,7 @@
 // @flow
 import { getHermioneTimeSpanFormat } from '../utils/hermione';
 import * as hermioneApi from '../api/hermione';
+import * as harryApi from '../api/harry';
 import * as dumbledoreApi from '../api/dumbledore';
 import { getMacAddress, getTimeSpanEnd, getTimeSpanStart } from '../selectors';
 import type {
@@ -11,8 +12,19 @@ import type {
 import type { Dispatch, GetState } from '../types';
 import type { Action } from '../types/actions/actions';
 
-export const setFetchingFrontendDegradationsByService = (fetching: IsFetching): Action => ({
+const moment = require('moment');
+
+export const setFetchingFrontendDegradationsByService = (
+  fetching: IsFetching
+): Action => ({
   type: 'SET_FETCHING_FRONTEND_DEGRADATIONS_BY_SERVICE',
+  fetching,
+});
+
+export const setFetchingBackendDegradationsByService = (
+  fetching: IsFetching
+): Action => ({
+  type: 'SET_FETCHING_BACKEND_DEGRADATIONS_BY_SERVICE',
   fetching,
 });
 
@@ -21,8 +33,17 @@ export const setFetchingDegradationNames = (fetching: IsFetching): Action => ({
   fetching,
 });
 
-export const setFrontendDegradationsByService = (data: DegradationsByService): Action => ({
+export const setFrontendDegradationsByService = (
+  data: DegradationsByService
+): Action => ({
   type: 'SET_FRONTEND_DEGRADATIONS_BY_SERVICE',
+  data,
+});
+
+export const setBackendDegradationsByService = (
+  data: DegradationsByService
+): Action => ({
+  type: 'SET_BACKEND_DEGRADATIONS_BY_SERVICE',
   data,
 });
 
@@ -61,32 +82,39 @@ export const fetchFrontendDegradations = () => (
 };
 
 export const fetchBackendDegradations = () => (
-    dispatch: Dispatch,
-    getState: GetState
+  dispatch: Dispatch,
+  getState: GetState
 ) => {
-    const state = getState();
-    const macAddress = getMacAddress(state);
-    const timeSpanStart = getTimeSpanStart(state);
-    const timeSpanEnd = getTimeSpanEnd(state);
-    dispatch(setFetchingFrontendDegradationsByService(true));
-    dispatch(setFrontendDegradationsByService({})); // reset the data so UI does not show stale data
-    return hermioneApi
-        .getDegradationsByMac(
-            macAddress,
-            getHermioneTimeSpanFormat(timeSpanStart),
-            getHermioneTimeSpanFormat(timeSpanEnd)
-        )
-        .then(data => {
-            dispatch(setFetchingFrontendDegradationsByService(false));
-            // eslint-disable-next-line no-console
-            console.log('Hermione data is', data);
-            return data;
-        })
-        .catch(e => {
-            dispatch(setFetchingFrontendDegradationsByService(false));
-            dispatch({ type: 'SET_ERROR_FETCH_ERRORS_BY_SERVICE', error: e.message }); // add error to redux no matter what
-            throw e;
-        });
+  const state = getState();
+  const macAddress = getMacAddress(state);
+  const timeSpanStart = moment('2018-05-16 01:22:16');
+  const timeSpanEnd = moment('2018-05-18 02:34:29');
+  dispatch(setFetchingBackendDegradationsByService(true));
+  dispatch(setBackendDegradationsByService({})); // reset the data so UI does not show stale data
+  return harryApi
+    .getBackendDegradationsByMac(
+      macAddress,
+      getHermioneTimeSpanFormat({
+        date: timeSpanStart.format('YYYY-MM-DD'),
+        time: timeSpanStart.format('HH:mm:ss'),
+      }),
+      getHermioneTimeSpanFormat({
+        date: timeSpanEnd.format('YYYY-MM-DD'),
+        time: timeSpanEnd.format('HH:mm:ss'),
+      })
+    )
+    .then(data => {
+      dispatch(setFetchingBackendDegradationsByService(false));
+      // eslint-disable-next-line no-console
+      console.log('Harry data is', data);
+      dispatch(setBackendDegradationsByService(data));
+      return data;
+    })
+    .catch(e => {
+      dispatch(setFetchingBackendDegradationsByService(false));
+      dispatch({ type: 'SET_ERROR_FETCH_ERRORS_BY_SERVICE', error: e.message }); // add error to redux no matter what
+      throw e;
+    });
 };
 
 export const fetchDegradationNames = () => (dispatch: Dispatch) => {

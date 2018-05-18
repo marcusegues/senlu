@@ -6,8 +6,8 @@ import type { Action } from '../../types/actions/actions';
 const moment = require('moment');
 
 const now: Moment = moment();
-const startDateTime: Moment = moment(now).subtract(30, 'day');
-const endDateTime: Moment = moment(now).subtract(20, 'day');
+const startDateTime: Moment = moment(now).subtract(1, 'day');
+const endDateTime: Moment = moment(now);
 
 const initialState: ParametersState = {
   timeSpanStart: {

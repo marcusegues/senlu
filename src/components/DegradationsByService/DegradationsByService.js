@@ -28,7 +28,10 @@ import {
   getMacAddress,
   getCustomerId,
 } from '../../selectors';
-import { fetchDegradationNames } from '../../actions/degradationsByService';
+import {
+  fetchBackendDegradations,
+  fetchDegradationNames,
+} from '../../actions/degradationsByService';
 import type { SelectedDegradation } from '../../types/reducers/query/degradationsByService';
 import { initialSelectedDegradation } from '../../types/reducers/query/degradationsByService';
 import type {
@@ -37,13 +40,8 @@ import type {
   SelectedRowIndex,
   ServiceId,
 } from '../../types/reducers';
-import { getBackendDegradationsByMac } from '../../api/harry';
-import { getHermioneTimeSpanFormat } from '../../utils/hermione';
-
-const moment = require('moment');
 
 type DegradationsByServiceProps = {
-  macAddress: MacAddress,
   frontendDegradationsByService: Object,
   services: Services,
   updateUIData: () => void,
@@ -51,6 +49,7 @@ type DegradationsByServiceProps = {
   fetchingFrontendDegradationsByService: IsFetching,
   fetchDegradationNames: () => void,
   fetchBackendDegradationsByMac: (macAddress: MacAddress) => void,
+  getBackendDegradations: () => void,
   selectedDegradation: SelectedDegradation,
   setSelectedDegradation: SelectedDegradation => void,
   timeSpanStart: TimeSpanDelimiter,
@@ -63,7 +62,8 @@ type DegradationsByServiceProps = {
 export type OnSelectServiceDegradation = (
   selectedServiceId: ServiceId,
   degradationId: DegradationId,
-  selectRowIndex: Index
+  selectedRowIndex: Index,
+  selected: boolean
 ) => Promise<boolean>;
 
 const styles = {
@@ -79,19 +79,7 @@ class DegradationsByServiceInner extends React.Component<
 > {
   componentDidMount() {
     this.props.updateUIData();
-    const mockedTimeSpanStart = moment('2018-04-27 01:22:16');
-    const mockedTimeSpanEnd = moment('2018-04-27 02:34:29');
-    getBackendDegradationsByMac(
-      this.props.macAddress,
-      getHermioneTimeSpanFormat({
-        date: mockedTimeSpanStart.format('YYYY-MM-DD'),
-        time: mockedTimeSpanStart.format('HH:mm:ss'),
-      }),
-      getHermioneTimeSpanFormat({
-        date: mockedTimeSpanEnd.format('YYYY-MM-DD'),
-        time: mockedTimeSpanEnd.format('HH:mm:ss'),
-      })
-    ).then(data => console.log('HARRY DATA', data));
+    this.props.getBackendDegradations();
     this.props.fetchDegradationNames();
   }
 
@@ -113,63 +101,37 @@ class DegradationsByServiceInner extends React.Component<
   handleSelectDegradation(
     serviceId: ServiceId,
     degradationId: DegradationId,
-    selectRowIndex: SelectedRowIndex
+    selectedRowIndex: Index,
+    selected: boolean
   ) {
-    const selected = selectRowIndex !== -1;
-    const {
-      timeSpanStart,
-      timeSpanEnd,
-      customerId,
-      sessionId,
-      selectedDegradation,
-    } = this.props;
-    const needToUnselectOther = !!(
-      selectedDegradation.serviceId &&
-      selectedDegradation.degradationId &&
-      (serviceId !== selectedDegradation.serviceId ||
-        degradationId !== selectedDegradation.degradationId)
-    );
-    const unselect =
-      needToUnselectOther && selectedDegradation !== 'noSelection'
-        ? dumbledoreApi
-            .selectCustomerDegradation(
-              customerId,
-              sessionId,
-              timeSpanStart,
-              timeSpanEnd,
-              selectedDegradation.serviceId,
-              selectedDegradation.degradationId,
-              false
-            )
-            .then(response => response && response.status === 200)
-        : Promise.resolve(true);
+    const { timeSpanStart, timeSpanEnd, customerId, sessionId } = this.props;
 
-    return Promise.all([
-      unselect,
-      dumbledoreApi
-        .selectCustomerDegradation(
-          customerId,
-          sessionId,
-          timeSpanStart,
-          timeSpanEnd,
-          serviceId,
-          degradationId,
-          selected
-        )
-        .then(response => response && response.status === 200),
-    ]).then(([successUnselectOther, successCurrent]) => {
-      if (successUnselectOther && successCurrent) {
-        this.props.setSelectedDegradation(
-          selected
-            ? { serviceId, degradationId, selectedRowIndex: selectRowIndex }
-            : initialSelectedDegradation
-        );
-        return true;
-      }
-      // something went wrong with checking or unchecking so handle this (actually request a simpler API so
-      // two requests don't have to be made and this whole logic can be refactored
-      return false;
-    });
+    return dumbledoreApi
+      .selectCustomerDegradation(
+        customerId,
+        sessionId,
+        timeSpanStart,
+        timeSpanEnd,
+        serviceId,
+        degradationId,
+        selected
+      )
+      .then(response => response && response.status === 200)
+      .then(success => {
+        if (success) {
+          if (selected) {
+            this.props.setSelectedDegradation({
+              serviceId,
+              degradationId,
+              selectedRowIndex,
+            });
+          } else {
+            this.props.setSelectedDegradation(initialSelectedDegradation);
+          }
+          return true;
+        }
+        return false;
+      });
   }
 
   fetchingData() {
@@ -220,12 +182,14 @@ class DegradationsByServiceInner extends React.Component<
                   onSelectDegradation={(
                     selectedServiceId: ServiceId,
                     degradationId: DegradationId,
-                    selectRowIndex: SelectedRowIndex
+                    selectedRowIndex: SelectedRowIndex,
+                    selected: boolean
                   ) =>
                     this.handleSelectDegradation(
                       selectedServiceId,
                       degradationId,
-                      selectRowIndex
+                      selectedRowIndex,
+                      selected
                     )
                   }
                 />
@@ -254,14 +218,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateUIData: () => dispatch(updateUIData()),
   fetchDegradationNames: () => dispatch(fetchDegradationNames()),
-  fetchBackendDegradationsByMac: (
-    macAddress: MacAddress,
-    timeSpanStart: string,
-    timeSpanEnd: string
-  ) =>
-    dispatch(
-      getBackendDegradationsByMac(macAddress, timeSpanStart, timeSpanEnd)
-    ),
+  getBackendDegradations: () => dispatch(fetchBackendDegradations()),
   setSelectedDegradation: selectedDegradation =>
     dispatch({ type: 'SET_SELECTED_DEGRADATION', selectedDegradation }),
 });

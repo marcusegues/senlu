@@ -58,7 +58,7 @@ type DegradationListState = {
   columns: Array<Column>,
   rows: Array<ErrorListRow>,
   columnExtensions: Array<ColumnExtension>,
-  selectedRowIndex: Array<SelectedRowIndex>,
+  selectedRowIndex: SelectedRowIndex,
 };
 
 type DegradationListProvidedProps = {
@@ -66,7 +66,7 @@ type DegradationListProvidedProps = {
 };
 
 type DegradationListOwnProps = {
-  selectedDegradationRowIndex: Array<Index>,
+  selectedDegradationRowIndex: Index,
   serviceId: ServiceId,
   degradations: DegradationArray,
   onSelectDegradation: OnSelectServiceDegradation,
@@ -119,20 +119,28 @@ class DegradationListInner extends React.Component<
 
   changeSelection = newSelection => {
     const { serviceId, selectedDegradationRowIndex } = this.props;
-    const selectRowIndex =
-      newSelection[newSelection.length - 1] !== undefined
-        ? newSelection[newSelection.length - 1]
-        : -1;
+    let selectedRowIndex;
+    let selected;
+    if (newSelection.length) {
+      // something was selected
+      selectedRowIndex = newSelection[newSelection.length - 1];
+      selected = true;
+    } else {
+      // something was unselected
+      selectedRowIndex = selectedDegradationRowIndex;
+      selected = false;
+    }
+
+    const degradationId = this.state.rows[selectedRowIndex].degradation;
 
     // this.setState({
     //   pendingSelectionChange: true,
     // });
     this.props.onSelectDegradation(
       serviceId,
-      this.state.rows[
-        selectRowIndex !== -1 ? selectRowIndex : selectedDegradationRowIndex[0]
-      ].degradation,
-      selectRowIndex
+      degradationId,
+      selectedRowIndex,
+      selected
     );
     // .then(success => {
     //   if (success) {
@@ -187,4 +195,6 @@ const mapStateToProps = state => ({
     getDegradationNameById(state, degradationId),
 });
 
-export const DegradationList = connect(mapStateToProps, null)(DegradationListInner);
+export const DegradationList = connect(mapStateToProps, null)(
+  DegradationListInner
+);

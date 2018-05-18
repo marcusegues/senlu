@@ -25,11 +25,19 @@ export type Action =
     fetching: IsFetching,
   }
   | {
+    type: 'SET_FETCHING_BACKEND_DEGRADATIONS_BY_SERVICE',
+    fetching: IsFetching,
+  }
+  | {
     type: 'SET_FETCHING_DEGRADATION_NAMES',
     fetching: IsFetching,
   }
   | {
     type: 'SET_FRONTEND_DEGRADATIONS_BY_SERVICE',
+    data: DegradationsByService,
+  }
+  | {
+    type: 'SET_BACKEND_DEGRADATIONS_BY_SERVICE',
     data: DegradationsByService,
   }
   | {

@@ -65,8 +65,8 @@ export class ServiceRow extends React.Component<
               degradations={degradations}
               selectedDegradationRowIndex={
                 selectedDegradation.serviceId === serviceId
-                  ? [selectedDegradation.selectedRowIndex]
-                  : []
+                  ? selectedDegradation.selectedRowIndex
+                  : -1
               }
               onSelectDegradation={onSelectDegradation}
               serviceId={serviceId}
