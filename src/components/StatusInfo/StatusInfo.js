@@ -73,7 +73,7 @@ const StatusInfoInner = ({
             <div>Betriebszeit: {uptime}</div>
           </ListItemText>
           <ListItemText>
-            <div>Technology: {technology}</div>
+            <div>Anschlussart: {technology}</div>
           </ListItemText>
         </ListItem>
       )}
