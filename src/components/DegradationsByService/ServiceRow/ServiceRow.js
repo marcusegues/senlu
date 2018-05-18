@@ -14,7 +14,8 @@ import { getColor } from './util';
 type ServiceRowOwnProps = {
   service: Service,
   serviceId: ServiceId,
-  degradations: Array<Degradation>,
+  frontendDegradations: Array<Degradation>,
+  backendDegradations: Array<Degradation>,
   onSelectDegradation: OnSelectServiceDegradation,
   selectedDegradation: any,
 };
@@ -39,7 +40,8 @@ export class ServiceRow extends React.Component<
     const {
       service,
       serviceId,
-      degradations,
+      frontendDegradations,
+      backendDegradations,
       onSelectDegradation,
       selectedDegradation,
     } = this.props;
@@ -47,11 +49,13 @@ export class ServiceRow extends React.Component<
     return (
       <div>
         <ListItem button onClick={() => this.handleToggleExpand()}>
-          <TrafficLight color={getColor(degradations)} />
+          <TrafficLight
+            color={getColor(frontendDegradations, backendDegradations)}
+          />
           <ListItemText primary={service} />
 
           {/* eslint-disable-next-line no-nested-ternary */}
-          {degradations.length ? (
+          {frontendDegradations.length || backendDegradations.length ? (
             this.state.expanded ? (
               <ExpandLess />
             ) : (
@@ -60,9 +64,9 @@ export class ServiceRow extends React.Component<
           ) : null}
         </ListItem>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          {degradations.length ? (
+          {frontendDegradations.length || backendDegradations.length ? (
             <DegradationList
-              degradations={degradations}
+              degradations={[...frontendDegradations, ...backendDegradations]}
               selectedDegradationRowIndex={
                 selectedDegradation.serviceId === serviceId
                   ? selectedDegradation.selectedRowIndex

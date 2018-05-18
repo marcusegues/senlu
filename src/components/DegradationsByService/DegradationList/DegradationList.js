@@ -59,6 +59,7 @@ type DegradationListState = {
   rows: Array<ErrorListRow>,
   columnExtensions: Array<ColumnExtension>,
   selectedRowIndex: SelectedRowIndex,
+  pendingSelectionChange: Index,
 };
 
 type DegradationListProvidedProps = {
@@ -92,13 +93,14 @@ class DegradationListInner extends React.Component<
       ],
       rows: this.generateRows(this.props.degradations),
       selectedRowIndex: this.props.selectedDegradationRowIndex,
-      // pendingSelectionChange: false,
+      pendingSelectionChange: -1,
     };
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       selectedRowIndex: nextProps.selectedDegradationRowIndex,
+      rows: this.generateRows(nextProps.degradations),
     });
   }
 
@@ -118,7 +120,7 @@ class DegradationListInner extends React.Component<
   }
 
   changeSelection = newSelection => {
-    const { serviceId, selectedDegradationRowIndex } = this.props;
+    const { serviceId, selectedDegradationRowIndex, degradations } = this.props;
     let selectedRowIndex;
     let selected;
     if (newSelection.length) {
@@ -130,29 +132,29 @@ class DegradationListInner extends React.Component<
       selectedRowIndex = selectedDegradationRowIndex;
       selected = false;
     }
+    const degradationId = degradations[selectedRowIndex].degradation;
 
-    const degradationId = this.state.rows[selectedRowIndex].degradation;
-
-    // this.setState({
-    //   pendingSelectionChange: true,
-    // });
-    this.props.onSelectDegradation(
-      serviceId,
-      degradationId,
-      selectedRowIndex,
-      selected
-    );
-    // .then(success => {
-    //   if (success) {
-    //     this.setState({
-    //       pendingSelectionChange: false,
-    //     });
-    //   }
-    // });
+    this.setState({
+      pendingSelectionChange: selectedRowIndex,
+    });
+    this.props
+      .onSelectDegradation(serviceId, degradationId, selectedRowIndex, selected)
+      .then(() => {
+        this.setState({
+          pendingSelectionChange: -1,
+        });
+      });
   };
 
   render() {
-    const { rows, columns, selectedRowIndex, columnExtensions } = this.state;
+    const {
+      rows,
+      columns,
+      selectedRowIndex,
+      columnExtensions,
+      pendingSelectionChange,
+    } = this.state;
+
     return (
       <Grid rows={rows} columns={columns}>
         <RowDetailState />
@@ -174,6 +176,7 @@ class DegradationListInner extends React.Component<
         <TableSelection
           cellComponent={({ tableRow, onToggle }) =>
             SelectionCell({
+              pending: pendingSelectionChange === tableRow.rowId,
               selected: selectedRowIndex === tableRow.rowId,
               onToggle,
             })

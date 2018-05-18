@@ -43,6 +43,7 @@ import type {
 
 type DegradationsByServiceProps = {
   frontendDegradationsByService: Object,
+  backendDegradationsByService: Object,
   services: Services,
   updateUIData: () => void,
   fetchingServices: IsFetching,
@@ -104,8 +105,14 @@ class DegradationsByServiceInner extends React.Component<
     selectedRowIndex: Index,
     selected: boolean
   ) {
-    const { timeSpanStart, timeSpanEnd, customerId, sessionId } = this.props;
-
+    const {
+      timeSpanStart,
+      timeSpanEnd,
+      customerId,
+      sessionId,
+      selectedDegradation,
+    } = this.props;
+    this.props.setSelectedDegradation(initialSelectedDegradation);
     return dumbledoreApi
       .selectCustomerDegradation(
         customerId,
@@ -126,7 +133,7 @@ class DegradationsByServiceInner extends React.Component<
               selectedRowIndex,
             });
           } else {
-            this.props.setSelectedDegradation(initialSelectedDegradation);
+            this.props.setSelectedDegradation(selectedDegradation);
           }
           return true;
         }
@@ -144,6 +151,7 @@ class DegradationsByServiceInner extends React.Component<
   render() {
     const { classes } = this.props;
     const fetchingData = this.fetchingData();
+    console.log('Backend deg', this.props.backendDegradationsByService);
     return (
       <PaperCard>
         <List
@@ -176,8 +184,11 @@ class DegradationsByServiceInner extends React.Component<
                   selectedDegradation={this.props.selectedDegradation}
                   serviceId={serviceId}
                   service={this.props.services[serviceId]}
-                  degradations={
+                  frontendDegradations={
                     this.props.frontendDegradationsByService[serviceId] || []
+                  }
+                  backendDegradations={
+                    this.props.backendDegradationsByService[serviceId] || []
                   }
                   onSelectDegradation={(
                     selectedServiceId: ServiceId,
@@ -211,6 +222,8 @@ const mapStateToProps = state => ({
   ),
   fetchingServices: getFetchingServices(state),
   frontendDegradationsByService: getFrontendDegradationsByService(state),
+  backendDegradationsByService:
+    state.query.degradationsByService.backendDegradationsByService,
   services: getServices(state),
   selectedDegradation: state.query.degradationsByService.selectedDegradation,
 });
