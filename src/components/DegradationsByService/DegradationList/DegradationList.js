@@ -21,7 +21,6 @@ import { getDegradationNameById } from '../../../selectors';
 import { ErrorListRowDetail } from '../ErrorListRowDetail';
 import type {
   Count,
-  Degradation,
   DegradationArray,
   DegradationName,
   TimeString,
@@ -108,7 +107,7 @@ class DegradationListInner extends React.Component<
     return this.state.rows.find(degradation => degradation.id === id);
   }
 
-  generateRows(degradations: Array<Degradation>): Array<ErrorListRow> {
+  generateRows(degradations: DegradationArray): Array<ErrorListRow> {
     return degradations.map((degradation, idx) => ({
       id: idx,
       degradation: this.props.getDegradationNameById(degradation.degradation),
@@ -116,6 +115,9 @@ class DegradationListInner extends React.Component<
       timeStart: degradation.timeStart,
       timeEnd: degradation.timeEnd,
       version: degradation.version,
+      uptime: degradation.uptime,
+      logs: degradation.logs,
+      proportions: degradation.proportions,
     }));
   }
 
@@ -185,7 +187,13 @@ class DegradationListInner extends React.Component<
         <TableHeaderRow showSortingControls />
         <TableRowDetail
           contentComponent={({ row }) => (
-            <ErrorListRowDetail serviceId={this.props.serviceId} row={row} />
+            <ErrorListRowDetail
+              serviceId={this.props.serviceId}
+              version={row.version}
+              uptime={row.uptime}
+              logs={row.logs}
+              proportions={row.proportions}
+            />
           )}
         />
       </Grid>

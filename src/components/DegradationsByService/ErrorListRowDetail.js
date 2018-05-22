@@ -8,19 +8,16 @@ import {
 } from '@devexpress/dx-react-grid-material-ui';
 import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import {
-  getDegradationNameById,
-  getDegradation,
-  getServices,
-} from '../../selectors/index';
+import { getDegradationNameById, getServices } from '../../selectors/index';
 import type {
   DegradationName,
-  Degradation,
   Services,
   Proportions,
-} from '../../types/reducers/query/index';
+  Logs,
+  Version,
+} from '../../types/reducers/query';
 import type { AppState, Id } from '../../types/reducers/index';
-import type { ErrorListRow } from './DegradationList/DegradationList';
+import type { Uptime } from '../../types/reducers/query/statusInfo';
 
 const uuidv4 = require('uuid/v4');
 
@@ -41,7 +38,6 @@ type ColumnExtension = {
 };
 
 type ErrorListRowDetailProvidedProps = {
-  error: Degradation,
   services: Services,
   getDegradationNameById: (degradationId: Id) => DegradationName,
 };
@@ -50,7 +46,10 @@ type ErrorListRowDetailOwnProps = {
   // eslint-disable-next-line react/no-unused-prop-types
   serviceId: Id,
   // eslint-disable-next-line react/no-unused-prop-types
-  row: ErrorListRow,
+  version: Version,
+  uptime: Uptime,
+  logs: Logs,
+  proportions: Proportions,
 };
 
 type ErrorListRowDetailState = {
@@ -71,10 +70,7 @@ class ErrorListRowDetailInner extends React.Component<
         { name: 'service', title: 'Service' },
         { name: 'proportion', title: 'Anteil' },
       ],
-      rows: this.generateRows(
-        this.props.error.proportions,
-        this.props.services
-      ),
+      rows: this.generateRows(this.props.proportions, this.props.services),
       columnExtensions: [{ columnName: 'degradation', width: 275 }],
     };
   }
@@ -91,19 +87,19 @@ class ErrorListRowDetailInner extends React.Component<
   }
 
   render() {
-    const { error } = this.props;
+    const { version, uptime, logs } = this.props;
     const { rows, columns, columnExtensions } = this.state;
     return (
       <List>
         <ListSubheader>Informationen</ListSubheader>
         <ListItem key={uuidv4()}>
-          <ListItemText primary={`Version: ${error.version}`} />
-          <ListItemText primary={`Uptime: ${error.uptime}`} />
+          <ListItemText primary={`Version: ${version}`} />
+          <ListItemText primary={`Uptime: ${uptime}`} />
         </ListItem>
         <Divider />
         <ListSubheader>Logs</ListSubheader>
 
-        {error.logs.map(log => (
+        {logs.map(log => (
           <ListItem key={uuidv4()}>
             <ListItemText primary={log} />
           </ListItem>
@@ -119,11 +115,7 @@ class ErrorListRowDetailInner extends React.Component<
   }
 }
 
-const mapStateToProps = (
-  state: AppState,
-  ownProps: ErrorListRowDetailOwnProps
-) => ({
-  error: getDegradation(state, ownProps.serviceId, ownProps.row.id),
+const mapStateToProps = (state: AppState) => ({
   services: getServices(state),
   getDegradationNameById: degradationId =>
     getDegradationNameById(state, degradationId),

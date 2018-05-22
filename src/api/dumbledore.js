@@ -9,14 +9,17 @@ import type {
 } from '../types/reducers/query';
 import type { Id } from '../types/reducers';
 import { dumbledoreUrl } from './utils/urls';
-import type {SoftwareVersion, Technology} from '../types/reducers/query/statusInfo';
+import type {
+  SoftwareVersion,
+  Technology,
+} from '../types/reducers/query/statusInfo';
 
 export const getDegradationNames = (): Promise<DegradationNames> =>
-  fetch(`${dumbledoreUrl()}/errorCode/`).then(response => {
+  fetch(`${dumbledoreUrl()}/errorCode`).then(response => {
     // eslint-disable-next-line no-console
     console.log('Dumbledore response', response);
     if (response.status !== 200) {
-      throw new Error('Error obtaining user services.');
+      throw new Error('Error obtaining degradation names.');
     }
     return response.json();
   });
@@ -56,7 +59,9 @@ export const getLatestSoftwareVersion = (): Promise<{
     return response.json();
   });
 
-export const getTechnology = (customerId: CustomerId): Promise<{ technology: Technology }> =>
+export const getTechnology = (
+  customerId: CustomerId
+): Promise<{ technology: Technology }> =>
   fetch(`${dumbledoreUrl()}/customerInfo/${customerId}`).then(response => {
     if (response.status !== 200) {
       throw new Error('Error obtaining technology.');
