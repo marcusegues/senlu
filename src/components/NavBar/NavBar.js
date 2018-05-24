@@ -20,6 +20,9 @@ const styles: Object = {
     color: 'primary',
     background: '#2096ba',
   },
+  flex: {
+    flex: 1,
+  },
 };
 
 type NavBarProvidedProps = {
@@ -85,9 +88,10 @@ class NavBarInner extends React.Component<NavBarProvidedProps, NavBarState> {
         }}
       >
         <Toolbar>
-          <Typography variant="title" color="inherit">
+          <Typography variant="title" color="inherit" className={classes.flex}>
             Sentinel
           </Typography>
+          <Typography color="inherit">Version 0.10.0</Typography>
         </Toolbar>
         {this.props.macAddress !== '' ? (
           <div

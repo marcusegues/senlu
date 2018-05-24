@@ -17,8 +17,8 @@ export const SoftwareVersionTextInner = ({
   <div
     style={{
       color: isSoftwareVersionUpdated(softwareVersion, latestSoftwareVersion)
-        ? 'black'
-        : 'red',
+        ? 'rgba(0, 0, 0, 0.87)'
+        : 'rgba(0, 0, 0, 0.87)',
     }}
   >
     Softwareversion: {softwareVersion}
