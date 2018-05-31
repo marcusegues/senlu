@@ -14,6 +14,7 @@ import {
   getTimeSpanStart,
 } from '../../selectors';
 import type { MacAddress, TimeSpanDelimiter } from '../../types/reducers/query';
+import { version } from '../../../package.json';
 
 const styles: Object = {
   root: {
@@ -91,7 +92,7 @@ class NavBarInner extends React.Component<NavBarProvidedProps, NavBarState> {
           <Typography variant="title" color="inherit" className={classes.flex}>
             Sentinel
           </Typography>
-          <Typography color="inherit">Version 0.10.0</Typography>
+          <Typography color="inherit">Version {version}</Typography>
         </Toolbar>
         {this.props.macAddress !== '' ? (
           <div

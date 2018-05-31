@@ -82,7 +82,7 @@ class DegradationsByServiceInner extends React.Component<
   orderServicesByDegradations() {
     const { frontendDegradationsByService } = this.props;
 
-    const res = Object.keys(this.props.services).sort(
+    return Object.keys(this.props.services).sort(
       (a, b) =>
         ((frontendDegradationsByService[b] &&
           frontendDegradationsByService[b].length) ||
@@ -91,7 +91,6 @@ class DegradationsByServiceInner extends React.Component<
           frontendDegradationsByService[a].length) ||
           0)
     );
-    return res;
   }
 
   handleSelectDegradation(
