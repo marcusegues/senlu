@@ -1,5 +1,8 @@
 // @flow
-import { getHermioneTimeSpanFormat } from '../utils/hermione';
+import {
+  getHarryTimeSpanFormat,
+  getHermioneTimeSpanFormat,
+} from '../utils/hermione';
 import * as hermioneApi from '../api/hermione';
 import * as harryApi from '../api/harry';
 import * as dumbledoreApi from '../api/dumbledore';
@@ -11,8 +14,6 @@ import type {
 } from '../types/reducers/query';
 import type { Dispatch, GetState } from '../types';
 import type { Action } from '../types/actions/actions';
-
-const moment = require('moment');
 
 export const setFetchingFrontendDegradationsByService = (
   fetching: IsFetching
@@ -87,21 +88,15 @@ export const fetchBackendDegradations = () => (
 ) => {
   const state = getState();
   const macAddress = getMacAddress(state);
-  const timeSpanStart = moment('2018-05-16 01:22:16');
-  const timeSpanEnd = moment('2018-05-18 02:34:29');
+  const timeSpanStart = getTimeSpanStart(state);
+  const timeSpanEnd = getTimeSpanEnd(state);
   dispatch(setFetchingBackendDegradationsByService(true));
   dispatch(setBackendDegradationsByService({})); // reset the data so UI does not show stale data
   return harryApi
     .getBackendDegradationsByMac(
       macAddress,
-      getHermioneTimeSpanFormat({
-        date: timeSpanStart.format('YYYY-MM-DD'),
-        time: timeSpanStart.format('HH:mm:ss'),
-      }),
-      getHermioneTimeSpanFormat({
-        date: timeSpanEnd.format('YYYY-MM-DD'),
-        time: timeSpanEnd.format('HH:mm:ss'),
-      })
+      getHarryTimeSpanFormat(timeSpanStart),
+      getHarryTimeSpanFormat(timeSpanEnd)
     )
     .then(data => {
       dispatch(setFetchingBackendDegradationsByService(false));

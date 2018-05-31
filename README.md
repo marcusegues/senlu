@@ -5,7 +5,10 @@ Luna
 - and optionally add key 'access_token' to the query params
 
 * Deploy to cloud
-- `npm run deploy`
+
+Depending on the env you want to build:
+- `npm run deploy:stag`
+- `npm run deploy:prod`
 
 Luna is a UI showing quality of experience degradations.
 
