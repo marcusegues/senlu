@@ -9,6 +9,9 @@ Icon
 .Spotlight-V100
 .Trashes
 
+# Flow
+flow-coverage/**/*
+
 # --------------------
 # IntelliJ Files
 # --------------------
