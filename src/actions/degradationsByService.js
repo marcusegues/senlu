@@ -1,5 +1,8 @@
 // @flow
-import { getHermioneTimeSpanFormat } from '../utils/hermione';
+import {
+  getHarryTimeSpanFormat,
+  getHermioneTimeSpanFormat,
+} from '../utils/hermione';
 import * as hermioneApi from '../api/hermione';
 import * as harryApi from '../api/harry';
 import * as dumbledoreApi from '../api/dumbledore';
@@ -11,8 +14,6 @@ import type {
 } from '../types/reducers/query';
 import type { Dispatch, GetState } from '../types';
 import type { Action } from '../types/actions/actions';
-
-const moment = require('moment');
 
 export const setFetchingFrontendDegradationsByService = (
   fetching: IsFetching
@@ -94,8 +95,8 @@ export const fetchBackendDegradations = () => (
   return harryApi
     .getBackendDegradationsByMac(
       macAddress,
-      getHermioneTimeSpanFormat(timeSpanStart),
-      getHermioneTimeSpanFormat(timeSpanEnd)
+      getHarryTimeSpanFormat(timeSpanStart),
+      getHarryTimeSpanFormat(timeSpanEnd)
     )
     .then(data => {
       dispatch(setFetchingBackendDegradationsByService(false));
