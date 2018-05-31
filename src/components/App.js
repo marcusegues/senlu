@@ -36,19 +36,22 @@ type AppProvidedProps = {
   getLatestSoftwareVersion: () => void,
   getTechnology: (customerId: CustomerId) => void,
   fetchMacAddressByCustomerId: (
-    customerId: CustomerId
+    customerId: CustomerId,
+    accessToken: string
   ) => Promise<{ device_address: string }>,
 };
 
 class AppInner extends React.Component<AppProvidedProps, null> {
   componentDidMount() {
     this.checkQueryParams()
-      .then(({ customerId }) => {
-        this.props.fetchMacAddressByCustomerId(customerId).then(() => {
-          this.props.getStatusInfo();
-          this.props.getLatestSoftwareVersion();
-          this.props.getTechnology(customerId);
-        });
+      .then(({ customerId, accessToken }) => {
+        this.props
+          .fetchMacAddressByCustomerId(customerId, accessToken)
+          .then(() => {
+            this.props.getStatusInfo();
+            this.props.getLatestSoftwareVersion();
+            this.props.getTechnology(customerId);
+          });
       })
       .catch(e => {
         // eslint-disable-next-line no-console
@@ -119,8 +122,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   getStatusInfo: () => dispatch(fetchStatusInfo()),
   getLatestSoftwareVersion: () => dispatch(fetchLatestSoftwareVersion()),
   getTechnology: customerId => dispatch(fetchTechnology(customerId)),
-  fetchMacAddressByCustomerId: customerId =>
-    dispatch(fetchMacAddressByCustomerId(customerId)),
+  fetchMacAddressByCustomerId: (customerId, accessToken) =>
+    dispatch(fetchMacAddressByCustomerId(customerId, accessToken)),
 });
 
 export const App = connect(mapStateToProps, mapDispatchToProps)(AppInner);
