@@ -36,7 +36,8 @@ type AppProvidedProps = {
   getLatestSoftwareVersion: () => void,
   getTechnology: (customerId: CustomerId) => void,
   fetchMacAddressByCustomerId: (
-    customerId: CustomerId
+    customerId: CustomerId,
+    accessToken: string
   ) => Promise<{ device_address: string }>,
 };
 

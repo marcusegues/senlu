@@ -36,7 +36,7 @@ export const userServices = (): Promise<Services> =>
 
 export const getMacAddressByCustomerId = (
   customerId: CustomerId,
-  accessToken: number = 123
+  accessToken: string = '123'
 ): Promise<{ device_address: string }> =>
   fetch(`${dumbledoreUrl()}/deviceAddress/${customerId}/${accessToken}`).then(
     response => {
