@@ -24,11 +24,17 @@ export const getTimeSpanEnd = (state: AppState): TimeSpanDelimiter =>
 export const getFetchingFrontendDegradationsByService = (state: AppState) =>
   queryApi.getFetchingFrontendDegradationsByService(state.query);
 
+export const getFetchingBackendDegradationsByService = (state: AppState) =>
+  queryApi.getFetchingBackendDegradationsByService(state.query);
+
 export const getFrontendDegradationsByService = (state: AppState) =>
   queryApi.getFrontendDegradationsByService(state.query);
 
-export const getDegradation = (state: AppState, serviceId: ServiceId, idx: Index) =>
-  queryApi.getDegradation(state.query, serviceId, idx);
+export const getDegradation = (
+  state: AppState,
+  serviceId: ServiceId,
+  idx: Index
+) => queryApi.getDegradation(state.query, serviceId, idx);
 
 export const getDegradationNameById = (state: AppState, idx: Index) =>
   queryApi.getDegradationNameById(state.query, idx);

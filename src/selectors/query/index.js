@@ -35,6 +35,9 @@ export const getTimeSpanEnd = (state: QueryState): TimeSpanDelimiter =>
 export const getFetchingFrontendDegradationsByService = (state: QueryState): IsFetching =>
   degradationsByServiceApi.getFetchingFrontendDegradationsByService(state.degradationsByService);
 
+export const getFetchingBackendDegradationsByService = (state: QueryState): IsFetching =>
+    degradationsByServiceApi.getFetchingBackendDegradationsByService(state.degradationsByService);
+
 export const getFrontendDegradationsByService = (state: QueryState): DegradationsByService =>
   degradationsByServiceApi.getFrontendDegradationsByService(state.degradationsByService);
 

@@ -19,6 +19,7 @@ import type {
 import {
   getFrontendDegradationsByService,
   getFetchingFrontendDegradationsByService,
+  getFetchingBackendDegradationsByService,
   getFetchingServices,
   getSessionId,
   getTimeSpanEnd,
@@ -27,10 +28,7 @@ import {
   getMacAddress,
   getCustomerId,
 } from '../../selectors';
-import {
-  fetchBackendDegradations,
-  fetchDegradationNames,
-} from '../../actions/degradationsByService';
+import { fetchDegradationNames } from '../../actions/degradationsByService';
 import type { SelectedDegradation } from '../../types/reducers/query/degradationsByService';
 import { initialSelectedDegradation } from '../../types/reducers/query/degradationsByService';
 import type {
@@ -47,8 +45,8 @@ type DegradationsByServiceProps = {
   updateUIData: () => void,
   fetchingServices: IsFetching,
   fetchingFrontendDegradationsByService: IsFetching,
+  fetchingBackendDegradationsByService: IsFetching,
   fetchDegradationNames: () => void,
-  getBackendDegradations: () => void,
   selectedDegradation: SelectedDegradation,
   setSelectedDegradation: SelectedDegradation => void,
   timeSpanStart: TimeSpanDelimiter,
@@ -78,7 +76,6 @@ class DegradationsByServiceInner extends React.Component<
 > {
   componentDidMount() {
     this.props.updateUIData();
-    this.props.getBackendDegradations();
     this.props.fetchDegradationNames();
   }
 
@@ -143,7 +140,8 @@ class DegradationsByServiceInner extends React.Component<
   fetchingData() {
     return (
       this.props.fetchingServices ||
-      this.props.fetchingFrontendDegradationsByService
+      this.props.fetchingFrontendDegradationsByService ||
+      this.props.fetchingBackendDegradationsByService
     );
   }
 
@@ -218,6 +216,9 @@ const mapStateToProps = state => ({
   fetchingFrontendDegradationsByService: getFetchingFrontendDegradationsByService(
     state
   ),
+  fetchingBackendDegradationsByService: getFetchingBackendDegradationsByService(
+    state
+  ),
   fetchingServices: getFetchingServices(state),
   frontendDegradationsByService: getFrontendDegradationsByService(state),
   backendDegradationsByService:
@@ -229,7 +230,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateUIData: () => dispatch(updateUIData()),
   fetchDegradationNames: () => dispatch(fetchDegradationNames()),
-  getBackendDegradations: () => dispatch(fetchBackendDegradations()),
   setSelectedDegradation: selectedDegradation =>
     dispatch({ type: 'SET_SELECTED_DEGRADATION', selectedDegradation }),
 });

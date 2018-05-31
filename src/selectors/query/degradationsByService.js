@@ -12,6 +12,10 @@ export const getFetchingFrontendDegradationsByService = (
   state: DegradationsByServiceState
 ): IsFetching => state.fetchingFrontendDegradationsByService;
 
+export const getFetchingBackendDegradationsByService = (
+    state: DegradationsByServiceState
+): IsFetching => state.fetchingBackendDegradationsByService;
+
 export const getFrontendDegradationsByService = (
   state: DegradationsByServiceState
 ): DegradationsByService => state.frontendDegradationsByService;
