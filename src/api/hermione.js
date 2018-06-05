@@ -19,11 +19,25 @@ export const getDegradationsByMac = (
       timespan_start: timeSpanStart,
       timespan_end: timeSpanEnd,
     })
-  ).then(response => {
-    // eslint-disable-next-line no-console
-    console.log('Hermione response is', response);
-    return response.json();
-  });
+  )
+    .then(response => {
+      // eslint-disable-next-line no-console
+      console.log('Hermione response is', response);
+      if (response.status !== 200) {
+        response.json().then(data => {
+          debugger;
+          throw new Error(data.message);
+        });
+      } else {
+        debugger;
+        return response.json();
+      }
+      debugger;
+    })
+    .catch(e => {
+      debugger;
+      throw e;
+    });
 };
 
 export const getCurrentStatus = (macAddress: MacAddress): Promise<StatusInfo> =>

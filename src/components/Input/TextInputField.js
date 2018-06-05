@@ -17,9 +17,9 @@ export const TextInputField = ({
   type,
   style,
 }: TextInputFieldProps) => (
-  <form noValidate style={{ margin: 10, marginRight: 40, ...style }}>
+  <div style={{ margin: 10, marginRight: 40, ...style, position: 'relative' }}>
     <TextField type={type} label={label} value={value} onChange={onChange} />
-  </form>
+  </div>
 );
 
 TextInputField.defaultProps = {
