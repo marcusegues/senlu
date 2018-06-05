@@ -17,7 +17,7 @@ export const TextInputField = ({
   type,
   style,
 }: TextInputFieldProps) => (
-  <div style={{ margin: 10, marginRight: 40, ...style, position: 'relative' }}>
+  <div style={{ margin: 10, marginRight: 40, ...style }}>
     <TextField type={type} label={label} value={value} onChange={onChange} />
   </div>
 );
