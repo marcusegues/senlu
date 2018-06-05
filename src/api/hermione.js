@@ -7,38 +7,29 @@ import type {
 import { StatusInfo } from '../components/StatusInfo/StatusInfo';
 import { hermioneUrl } from './utils/urls';
 
-export const getDegradationsByMac = (
+export async function getDegradationsByMac(
   macAddress: MacAddress,
   timeSpanStart: string,
   timeSpanEnd: string
-): Promise<DegradationsByService> => {
+): Promise<DegradationsByService> {
   const macNoDots = removeDotsFromMacAddress(macAddress);
-  return fetch(
+  const response = await fetch(
     addParamsToUrl(`${hermioneUrl()}/get_degradations`, {
       mac: macNoDots,
       timespan_start: timeSpanStart,
       timespan_end: timeSpanEnd,
     })
-  )
-    .then(response => {
-      // eslint-disable-next-line no-console
-      console.log('Hermione response is', response);
-      if (response.status !== 200) {
-        response.json().then(data => {
-          debugger;
-          throw new Error(data.message);
-        });
-      } else {
-        debugger;
-        return response.json();
-      }
-      debugger;
-    })
-    .catch(e => {
-      debugger;
-      throw e;
+  );
+  if (response.status !== 200) {
+    await response.json().then(data => {
+      throw new Error(data.message);
     });
-};
+    return {}; // Flow fix
+  }
+  // eslint-disable-next-line no-console
+  console.log('Hermione response: ', response);
+  return response.json();
+}
 
 export const getCurrentStatus = (macAddress: MacAddress): Promise<StatusInfo> =>
   fetch(

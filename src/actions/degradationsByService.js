@@ -70,16 +70,15 @@ export const fetchFrontendDegradations = () => (
       getHermioneTimeSpanFormat(timeSpanEnd)
     )
     .then(data => {
-      debugger;
       dispatch(setFetchingFrontendDegradationsByService(false));
       // eslint-disable-next-line no-console
       console.log('Hermione data is', data);
       return data;
     })
     .catch(e => {
-      debugger;
       dispatch(setFetchingFrontendDegradationsByService(false));
       dispatch({ type: 'SET_ERROR_FETCH_ERRORS_BY_SERVICE', error: e.message }); // add error to redux no matter what
+      throw e;
     });
 };
 

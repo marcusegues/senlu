@@ -1,27 +1,32 @@
 // @flow
 
-import {addParamsToUrl, removeDotsFromMacAddress} from './utils';
+import { addParamsToUrl, removeDotsFromMacAddress } from './utils';
 import { harryUrl } from './utils/urls';
 import type {
   DegradationsByService,
   MacAddress,
 } from '../types/reducers/query';
 
-export const getBackendDegradationsByMac = (
+export async function getBackendDegradationsByMac(
   macAddress: MacAddress,
   timeSpanStart: string,
   timeSpanEnd: string
-): Promise<DegradationsByService> => {
+): Promise<DegradationsByService> {
   const macNoDots = removeDotsFromMacAddress(macAddress);
-  return fetch(
+  const response = await fetch(
     addParamsToUrl(`${harryUrl()}/get_degradations`, {
       mac: macNoDots,
       timespan_start: timeSpanStart,
       timespan_end: timeSpanEnd,
     })
-  ).then(response => {
-    // eslint-disable-next-line no-console
-    console.log('Harry response is', response);
-    return response.json();
-  });
-};
+  );
+  if (response.status !== 200) {
+    await response.json().then(data => {
+      throw new Error(data.message);
+    });
+    return {}; // Flow fix
+  }
+  // eslint-disable-next-line no-console
+  console.log('Harry response: ', response);
+  return response.json();
+}
